@@ -130,9 +130,9 @@ const Box = (props: AllProps) => {
             </tr>
 
             {props.viajar_junto.split(/\s*;\s*/).map((nome, index) => (
-              <tr>
+              <tr key={index}>
                 <th>Viajar junto : </th>
-                <td key={index}>{nome}</td>
+                <td>{nome}</td>
               </tr>
             ))}
 
@@ -165,9 +165,9 @@ const Box = (props: AllProps) => {
               <td>{props.passaporte_recusado}</td>
             </tr>
             {props.parentes_nos_eua.split(/\s*;\s*/).map((nome, index) => (
-              <tr>
+              <tr key={index}>
                 <th>Parentes nos USA : </th>
-                <td key={index}>{nome}</td>
+                <td>{nome}</td>
               </tr>
             ))}
             <tr>
