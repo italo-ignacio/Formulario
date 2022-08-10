@@ -2,54 +2,54 @@ import { prisma } from "./prisma";
 
 export interface Data {
   id: number;
-  nome: String;
-  data_nascimento: String;
-  cpf: String;
-  endereco: String;
-  telefone: String;
-  email: String;
-  estado_civil: String;
-  nome_antigo: String;
-  nacionalidades: String;
-  serviu_exercito: String;
-  estado_deseja: String;
-  data_deseja: String;
-  tempo_deseja: String;
-  hotel: String;
-  viajar_junto: String;
-  pagar_viagem: String;
-  possui_visto: String;
-  foi_para_eua: String;
-  visto_per_o_rou: String;
-  visto_recusado: String;
-  passaporte_per_o_rou: String;
-  passaporte_recusado: String;
-  parentes_nos_eua: String;
-  nome_pai: String;
-  data_nasc_pai: String;
-  pai_mora_eua: String;
-  nome_mae: String;
-  data_nasc_mae: String;
-  mae_mora_eua: String;
-  instagram: String;
-  facebook: String;
-  linkedin: String;
-  trabalho: String;
-  nome_empresa: String;
-  endereco_empresa: String;
-  telefone_empresa: String;
-  data_inicio_empresa: String;
-  trabalho_antigo: String;
-  nome_empresa_antigo: String;
-  endereco_empresa_antigo: String;
-  telefone_empresa_antigo: String;
-  data_ini_ter_empresa_antigo: String;
-  facul_escola: String;
-  nome_facul_escola: String;
-  endereco_facul_escola: String;
-  telefone_facul_escola: String;
-  curso_facul: String;
-  ini_ter_facul_escola: String;
+  nome: string;
+  data_nascimento: string;
+  cpf: string;
+  endereco: string;
+  telefone: string;
+  email: string;
+  estado_civil: string;
+  nome_antigo: string;
+  nacionalidades: string;
+  serviu_exercito: string;
+  estado_deseja: string;
+  data_deseja: string;
+  tempo_deseja: string;
+  hotel: string;
+  viajar_junto: string;
+  pagar_viagem: string;
+  possui_visto: string;
+  foi_para_eua: string;
+  visto_per_o_rou: string;
+  visto_recusado: string;
+  passaporte_per_o_rou: string;
+  passaporte_recusado: string;
+  parentes_nos_eua: string;
+  nome_pai: string;
+  data_nasc_pai: string;
+  pai_mora_eua: string;
+  nome_mae: string;
+  data_nasc_mae: string;
+  mae_mora_eua: string;
+  instagram: string;
+  facebook: string;
+  linkedin: string;
+  trabalho: string;
+  nome_empresa: string;
+  endereco_empresa: string;
+  telefone_empresa: string;
+  data_inicio_empresa: string;
+  trabalho_antigo: string;
+  nome_empresa_antigo: string;
+  endereco_empresa_antigo: string;
+  telefone_empresa_antigo: string;
+  data_ini_ter_empresa_antigo: string;
+  facul_escola: string;
+  nome_facul_escola: string;
+  endereco_facul_escola: string;
+  telefone_facul_escola: string;
+  curso_facul: string;
+  ini_ter_facul_escola: string;
 }
 
 export async function getAllDatas() {
@@ -58,7 +58,7 @@ export async function getAllDatas() {
 }
 
 export async function getDatas(nome: string) {
-  const data = await prisma.data.findUnique({
+  const data = await prisma.data.findFirst({
     where: {
       nome,
     },
