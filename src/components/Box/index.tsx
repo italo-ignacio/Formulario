@@ -61,11 +61,7 @@ const Box = (props: AllProps) => {
     setVisible(!visible);
   };
 
-  const handleclick = () => {
-    try {
-      deleteData(props.id);
-    } catch (error) {}
-  };
+  const handleclick = () => {};
 
   return (
     <Container>
