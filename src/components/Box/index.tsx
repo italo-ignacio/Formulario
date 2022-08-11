@@ -64,15 +64,16 @@ const Box = (props: AllProps) => {
     setVisible(!visible);
   };
 
-  const changeConfirm = () => {
-    setConfirm(!confirm);
-  };
-
   const handleclick = async () => {
     if (confirm) {
-      await fetch(`/api/data/${props.id.toString()}`, {
-        method: "DELETE",
-      });
+      try {
+        await fetch(`/api/data/${props.id.toString()}`, {
+          method: "DELETE",
+        });
+        setDeleted(true);
+      } catch (error) {
+        alert(`Erro ao deletar\n\nErro : ${error}`);
+      }
     } else {
       setConfirm(true);
     }
