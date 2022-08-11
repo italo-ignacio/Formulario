@@ -36,7 +36,6 @@ model data{
   visto_per_o_rou String? @db.Text()
   visto_recusado String? @db.Text()
   passaporte_per_o_rou String? @db.Text()
-  passaporte_recusado String? @db.Text()
   parentes_nos_eua String? @db.Text()
   nome_pai String? @db.Text()
   data_nasc_pai String? @db.Text()
@@ -57,7 +56,7 @@ model data{
   endereco_empresa_antigo String? @db.Text()
   telefone_empresa_antigo String? @db.Text()
   data_ini_ter_empresa_antigo String? @db.Text()
-  facul_escola String? @db.Text()
+
   nome_facul_escola String? @db.Text()
   endereco_facul_escola String? @db.Text()
   telefone_facul_escola String? @db.Text()

@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { deleteData, updateData } from "../../lib/db";
+import { deleteData, getDatas, updateData } from "../../../lib/db";
 
 export default async function handler(
   req: NextApiRequest,
@@ -33,6 +33,15 @@ export default async function handler(
         break;
       }
 
+    case "GET":
+      try {
+        const dados = await getDatas(String(id));
+        res.status(200).json(dados);
+      } catch (error) {
+        res.status(400).json({ error: true, msg: error });
+      }
+
+      break;
     default:
       res.status(400).json({ error: true, msg: "URL does not exist" });
       break;

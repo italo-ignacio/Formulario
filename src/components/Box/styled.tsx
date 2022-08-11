@@ -15,17 +15,22 @@ export const Container = styled.section`
     border-radius: 4px;
     cursor: pointer;
   }
-  @media (max-width: 900px) {
-    width: 90%;
-  }
+
   .separar {
     display: grid;
-    grid-template-columns: 94% 6%;
+    grid-template-columns: 90% 10%;
     label {
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: space-around;
       cursor: pointer;
+    }
+  }
+  @media (max-width: 900px) {
+    width: 90%;
+    .separar {
+      display: grid;
+      grid-template-columns: 80% 20%;
     }
   }
 `;
