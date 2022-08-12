@@ -181,12 +181,12 @@ const Home: NextPage = () => {
         )}
         {pag == 2 ? (
           <>
-            <Pag2 />
+            <Pag2 next={next} setNext={setNext} />
             <Buttons
               pag={pag}
               setPag={setPag}
               text={"Etapa 2 de 9"}
-              next={true}
+              next={next}
               setNext={setNext}
             />
           </>

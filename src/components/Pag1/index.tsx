@@ -24,10 +24,6 @@ interface AllProps {
 
 const Pag1 = (props: AllProps) => {
   const [nomeSolteito, setNomeSolteiro] = useState("nao");
-  const now = new Date();
-  const data = `${now.getFullYear()}-${
-    now.getMonth() >= 10 ? now.getMonth() : `0` + now.getMonth()
-  }-${now.getDate()}`;
 
   const cpfMask = (value: string) => {
     return value
@@ -93,10 +89,8 @@ const Pag1 = (props: AllProps) => {
         <label>Data de nacimento</label>
         <StyledInput
           alt={"Data de nacimento"}
+          type={"tel"}
           value={props.data_nascimento}
-          pattern={"d{2}/d{2}/d{4}"}
-          max={data}
-          min={"1900-01-01"}
           onChange={(e) => props.setData_nascimento(dataMask(e.target.value))}
         />
         <br />

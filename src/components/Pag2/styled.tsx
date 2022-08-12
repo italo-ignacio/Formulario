@@ -1,16 +1,14 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  label {
-    font-size: 1.5rem;
-  }
-  input {
-    min-width: 70%;
-  }
+export const Botao = styled.button`
+  margin-top: 1.45rem;
+  max-width: 30%;
+  max-height: 50%;
+
   @media (max-width: 900px) {
-    flex-direction: column;
+    max-width: 100%;
+    max-height: 100%;
+    margin-top: 0;
+    margin-bottom: 2rem;
   }
 `;
