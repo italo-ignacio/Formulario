@@ -22,7 +22,7 @@ model data{
   telefone String? @db.Text()
   email String? @db.Text()  
   estado_civil String? @db.Text()  
-  nome_antigo String? @db.Text() 
+  nome_solteiro String? @db.Text() 
   nacionalidades String? @db.Text() 
   serviu_exercito String? @db.Text() 
   estado_deseja  String? @db.Text() 
@@ -56,7 +56,7 @@ model data{
   endereco_empresa_antigo String? @db.Text()
   telefone_empresa_antigo String? @db.Text()
   data_ini_ter_empresa_antigo String? @db.Text()
-
+  idiomas String? @db.Text()
   nome_facul_escola String? @db.Text()
   endereco_facul_escola String? @db.Text()
   telefone_facul_escola String? @db.Text()

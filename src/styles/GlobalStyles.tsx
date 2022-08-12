@@ -41,6 +41,17 @@ export default createGlobalStyle`
       border: 2px solid ${primaryColor};
     }
   }
+  select {
+    font-size: 1.2rem;
+    border: 2px solid #ddd;
+    padding: 0.5rem;
+    border-radius: 4px;
+    margin-left: 1rem;
+    &:focus {
+      border: 2px solid ${primaryColor};
+    }
+  }
+ 
 `;
 
 export const Container = styled.section`

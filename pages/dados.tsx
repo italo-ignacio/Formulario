@@ -29,7 +29,7 @@ const Dados = ({ dados }: DataProps) => {
           telefone={dado.telefone}
           email={dado.email}
           estado_civil={dado.estado_civil}
-          nome_antigo={dado.nome_antigo}
+          nome_solteiro={dado.nome_solteiro}
           nacionalidades={dado.nacionalidades}
           serviu_exercito={dado.serviu_exercito}
           estado_deseja={dado.estado_deseja}
@@ -43,7 +43,6 @@ const Dados = ({ dados }: DataProps) => {
           visto_per_o_rou={dado.visto_per_o_rou}
           visto_recusado={dado.visto_recusado}
           passaporte_per_o_rou={dado.passaporte_per_o_rou}
-          passaporte_recusado={dado.passaporte_recusado}
           parentes_nos_eua={dado.parentes_nos_eua}
           nome_pai={dado.nome_pai}
           data_nasc_pai={dado.data_nasc_pai}
@@ -64,7 +63,7 @@ const Dados = ({ dados }: DataProps) => {
           endereco_empresa_antigo={dado.endereco_empresa_antigo}
           telefone_empresa_antigo={dado.telefone_empresa_antigo}
           data_ini_ter_empresa_antigo={dado.data_ini_ter_empresa_antigo}
-          facul_escola={dado.facul_escola}
+          idiomas={dado.idiomas}
           nome_facul_escola={dado.nome_facul_escola}
           endereco_facul_escola={dado.endereco_facul_escola}
           telefone_facul_escola={dado.telefone_facul_escola}

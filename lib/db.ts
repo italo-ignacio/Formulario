@@ -9,7 +9,7 @@ export interface Data {
   telefone: string;
   email: string;
   estado_civil: string;
-  nome_antigo: string;
+  nome_solteiro: string;
   nacionalidades: string;
   serviu_exercito: string;
   estado_deseja: string;
@@ -23,7 +23,6 @@ export interface Data {
   visto_per_o_rou: string;
   visto_recusado: string;
   passaporte_per_o_rou: string;
-  passaporte_recusado: string;
   parentes_nos_eua: string;
   nome_pai: string;
   data_nasc_pai: string;
@@ -44,7 +43,7 @@ export interface Data {
   endereco_empresa_antigo: string;
   telefone_empresa_antigo: string;
   data_ini_ter_empresa_antigo: string;
-  facul_escola: string;
+  idiomas: string;
   nome_facul_escola: string;
   endereco_facul_escola: string;
   telefone_facul_escola: string;

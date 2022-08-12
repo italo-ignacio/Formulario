@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { TiDelete } from "react-icons/ti";
 import { FaExclamation, FaAngleDoubleLeft } from "react-icons/fa";
 import { Container, Table } from "./styled";
+import Loading from "../Loading";
 
 interface AllProps {
   id: number;
@@ -12,7 +13,7 @@ interface AllProps {
   telefone: string;
   email: string;
   estado_civil: string;
-  nome_antigo: string;
+  nome_solteiro: string;
   nacionalidades: string;
   serviu_exercito: string;
   estado_deseja: string;
@@ -26,7 +27,6 @@ interface AllProps {
   visto_per_o_rou: string;
   visto_recusado: string;
   passaporte_per_o_rou: string;
-  passaporte_recusado: string;
   parentes_nos_eua: string;
   nome_pai: string;
   data_nasc_pai: string;
@@ -47,7 +47,7 @@ interface AllProps {
   endereco_empresa_antigo: string;
   telefone_empresa_antigo: string;
   data_ini_ter_empresa_antigo: string;
-  facul_escola: string;
+  idiomas: string;
   nome_facul_escola: string;
   endereco_facul_escola: string;
   telefone_facul_escola: string;
@@ -59,6 +59,7 @@ const Box = (props: AllProps) => {
   const [visible, setVisible] = useState(false);
   const [confirm, setConfirm] = useState(false);
   const [deleted, setDeleted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const changeVisibility = () => {
     setVisible(!visible);
@@ -67,6 +68,7 @@ const Box = (props: AllProps) => {
   const handleclick = async () => {
     if (confirm) {
       try {
+        setLoading(true);
         await fetch(`/api/data/${props.id.toString()}`, {
           method: "DELETE",
         });
@@ -74,10 +76,15 @@ const Box = (props: AllProps) => {
       } catch (error) {
         alert(`Erro ao deletar\n\nErro : ${error}`);
       }
+      setLoading(false);
     } else {
       setConfirm(true);
     }
   };
+
+  if (loading) {
+    return <Loading text="Deletando" />;
+  }
 
   return (
     <>
@@ -139,7 +146,7 @@ const Box = (props: AllProps) => {
                 </tr>
                 <tr>
                   <th>Nome de solteiro(a) : </th>
-                  <td>{props.nome_antigo}</td>
+                  <td>{props.nome_solteiro}</td>
                 </tr>
                 <tr>
                   <th>Outras nacionalidades : </th>
@@ -197,12 +204,6 @@ const Box = (props: AllProps) => {
                   <th>Passaporte perdido ou roubado : </th>
                   <td>{props.passaporte_per_o_rou}</td>
                 </tr>
-                {/*
-              <tr>
-                <th>Passaporte recusado : </th>
-                <td>{props.passaporte_recusado}</td>
-              </tr>
-              */}
 
                 {props.parentes_nos_eua.split(/\s*;\s*/).map((nome, index) => (
                   <tr key={index}>
@@ -286,12 +287,11 @@ const Box = (props: AllProps) => {
                   <th>Período na empresa antiga : </th>
                   <td>{props.data_ini_ter_empresa_antigo}</td>
                 </tr>
-                {/*
-               <tr>
-                <th>Faculdade ou escola : </th>
-                <td>{props.facul_escola}</td>
+
+                <tr>
+                  <th>Idiomas fluente: </th>
+                  <td>{props.idiomas}</td>
                 </tr>
-              */}
 
                 <tr>
                   <th>Nome da faculdade ou escola : </th>

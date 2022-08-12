@@ -1,17 +1,28 @@
 import type { NextPage } from "next";
 import { useState } from "react";
 import { Container } from "../src/styles/GlobalStyles";
-import { Buttons, Inputs } from "../src/styles/styled";
+
+import Loading from "../src/components/Loading";
+import Buttons from "../src/components/Buttons";
+import Pag1 from "../src/components/Pag1";
+import Pag2 from "../src/components/Pag2";
+import Pag3 from "../src/components/Pag3";
+import Pag4 from "../src/components/Pag4";
+import Pag5 from "../src/components/Pag5";
+import Pag6 from "../src/components/Pag6";
+import Pag7 from "../src/components/Pag7";
+import Pag8 from "../src/components/Pag8";
+import Pag9 from "../src/components/Pag9";
 
 const Home: NextPage = () => {
-  const [nome, setNome] = useState("");
+  const [nome, setNome] = useState("marcos");
   const [data_nascimento, setData_nascimento] = useState("");
   const [cpf, setCpf] = useState("");
   const [endereco, setEndereco] = useState("");
   const [telefone, setTelefone] = useState("");
   const [email, setEmail] = useState("");
   const [estado_civil, setEstado_civil] = useState("");
-  const [nome_antigo, setNome_antigo] = useState("");
+  const [nome_solteiro, setNome_solteiro] = useState("");
   const [nacionalidades, setNacionalidades] = useState("");
   const [serviu_exercito, setServiu_exercito] = useState("");
   const [estado_deseja, setEstado_deseja] = useState("");
@@ -25,7 +36,6 @@ const Home: NextPage = () => {
   const [visto_per_o_rou, setVisto_per_o_rou] = useState("");
   const [visto_recusado, setVisto_recusado] = useState("");
   const [passaporte_per_o_rou, setPassaporte_per_o_rou] = useState("");
-  const [passaporte_recusado, setPassaporte_recusado] = useState("");
   const [parentes_nos_eua, setParentes_nos_eua] = useState("");
   const [nome_pai, setNome_pai] = useState("");
   const [data_nasc_pai, setData_nasc_pai] = useState("");
@@ -47,84 +57,168 @@ const Home: NextPage = () => {
   const [telefone_empresa_antigo, setTelefone_empresa_antigo] = useState("");
   const [data_ini_ter_empresa_antigo, setData_ini_ter_empresa_antigo] =
     useState("");
-  const [facul_escola, setFacul_escola] = useState("");
+  const [idiomas, setIdiomas] = useState("");
   const [nome_facul_escola, setNome_facul_escola] = useState("");
   const [endereco_facul_escola, setEndereco_facul_escola] = useState("");
   const [telefone_facul_escola, setTelefone_facul_escola] = useState("");
   const [curso_facul, setCurso_facul] = useState("");
   const [ini_ter_facul_escola, setIni_ter_facul_escola] = useState("");
 
+  const [pag, setPag] = useState(0);
+  const [loading, setLoading] = useState(false);
+
   const handleClick = async () => {
-    await fetch("/api/data", {
-      method: "POST",
-      body: JSON.stringify({
-        nome: nome,
-        data_nascimento: data_nascimento,
-        cpf: cpf,
-        endereco: endereco,
-        telefone: telefone,
-        email: email,
-        estado_civil: estado_civil,
-        nome_antigo: nome_antigo,
-        nacionalidades: nacionalidades,
-        serviu_exercito: serviu_exercito,
-        estado_deseja: estado_deseja,
-        data_deseja: data_deseja,
-        tempo_deseja: tempo_deseja,
-        hotel: hotel,
-        viajar_junto: viajar_junto,
-        pagar_viagem: pagar_viagem,
-        possui_visto: possui_visto,
-        foi_para_eua: foi_para_eua,
-        visto_per_o_rou: visto_per_o_rou,
-        visto_recusado: visto_recusado,
-        passaporte_per_o_rou: passaporte_per_o_rou,
-        passaporte_recusado: passaporte_recusado,
-        parentes_nos_eua: parentes_nos_eua,
-        nome_pai: nome_pai,
-        data_nasc_pai: data_nasc_pai,
-        pai_mora_eua: pai_mora_eua,
-        nome_mae: nome_mae,
-        data_nasc_mae: data_nasc_mae,
-        mae_mora_eua: mae_mora_eua,
-        instagram: instagram,
-        facebook: facebook,
-        linkedin: linkedin,
-        trabalho: trabalho,
-        nome_empresa: nome_empresa,
-        endereco_empresa: endereco_empresa,
-        telefone_empresa: telefone_empresa,
-        data_inicio_empresa: data_inicio_empresa,
-        trabalho_antigo: trabalho_antigo,
-        nome_empresa_antigo: nome_empresa_antigo,
-        endereco_empresa_antigo: endereco_empresa_antigo,
-        telefone_empresa_antigo: telefone_empresa_antigo,
-        data_ini_ter_empresa_antigo: data_ini_ter_empresa_antigo,
-        facul_escola: facul_escola,
-        nome_facul_escola: nome_facul_escola,
-        endereco_facul_escola: endereco_facul_escola,
-        telefone_facul_escola: telefone_facul_escola,
-        curso_facul: curso_facul,
-        ini_ter_facul_escola: ini_ter_facul_escola,
-      }),
-    });
+    try {
+      setLoading(true);
+      await fetch("/api/data", {
+        method: "POST",
+        body: JSON.stringify({
+          nome: nome,
+          data_nascimento: data_nascimento,
+          cpf: cpf,
+          endereco: endereco,
+          telefone: telefone,
+          email: email,
+          estado_civil: estado_civil,
+          nome_solteiro: nome_solteiro,
+          nacionalidades: nacionalidades,
+          serviu_exercito: serviu_exercito,
+          estado_deseja: estado_deseja,
+          data_deseja: data_deseja,
+          tempo_deseja: tempo_deseja,
+          hotel: hotel,
+          viajar_junto: viajar_junto,
+          pagar_viagem: pagar_viagem,
+          possui_visto: possui_visto,
+          foi_para_eua: foi_para_eua,
+          visto_per_o_rou: visto_per_o_rou,
+          visto_recusado: visto_recusado,
+          passaporte_per_o_rou: passaporte_per_o_rou,
+          parentes_nos_eua: parentes_nos_eua,
+          nome_pai: nome_pai,
+          data_nasc_pai: data_nasc_pai,
+          pai_mora_eua: pai_mora_eua,
+          nome_mae: nome_mae,
+          data_nasc_mae: data_nasc_mae,
+          mae_mora_eua: mae_mora_eua,
+          instagram: instagram,
+          facebook: facebook,
+          linkedin: linkedin,
+          trabalho: trabalho,
+          nome_empresa: nome_empresa,
+          endereco_empresa: endereco_empresa,
+          telefone_empresa: telefone_empresa,
+          data_inicio_empresa: data_inicio_empresa,
+          trabalho_antigo: trabalho_antigo,
+          nome_empresa_antigo: nome_empresa_antigo,
+          endereco_empresa_antigo: endereco_empresa_antigo,
+          telefone_empresa_antigo: telefone_empresa_antigo,
+          data_ini_ter_empresa_antigo: data_ini_ter_empresa_antigo,
+          idiomas: idiomas,
+          nome_facul_escola: nome_facul_escola,
+          endereco_facul_escola: endereco_facul_escola,
+          telefone_facul_escola: telefone_facul_escola,
+          curso_facul: curso_facul,
+          ini_ter_facul_escola: ini_ter_facul_escola,
+        }),
+      });
+    } catch (error) {
+      alert(`Erro ao salvar\n\nErro: ${error}`);
+    }
+    setLoading(false);
   };
 
   return (
     <>
+      {loading ? <Loading text="Salvando" /> : <></>}
       <Container>
-        <Inputs>
-          <label>Nome:</label>
-          <input
-            value={nome}
-            onChange={(e) => setNome(e.currentTarget.value)}
-          />
-        </Inputs>
-
-        <Buttons>
-          <button>voltar</button>
-          <button>avancar</button>
-        </Buttons>
+        {pag == 0 ? (
+          <>
+            <Buttons pag={pag} setPag={setPag} text={""} />
+          </>
+        ) : (
+          <></>
+        )}
+        {pag == 1 ? (
+          <>
+            <Pag1 cpf={cpf} setCpf={setCpf} />
+            <Buttons pag={pag} setPag={setPag} text={"Página 1 de 9"} />
+          </>
+        ) : (
+          <></>
+        )}
+        {pag == 2 ? (
+          <>
+            <Pag2 />
+            <Buttons pag={pag} setPag={setPag} text={"Página 2 de 9"} />
+          </>
+        ) : (
+          <></>
+        )}
+        {pag == 3 ? (
+          <>
+            <Pag3 />
+            <Buttons pag={pag} setPag={setPag} text={"Página 3 de 9"} />
+          </>
+        ) : (
+          <></>
+        )}
+        {pag == 4 ? (
+          <>
+            <Pag4 />
+            <Buttons pag={pag} setPag={setPag} text={"Página 4 de 9"} />
+          </>
+        ) : (
+          <></>
+        )}
+        {pag == 5 ? (
+          <>
+            <Pag5 />
+            <Buttons pag={pag} setPag={setPag} text={"Página 5 de 9"} />
+          </>
+        ) : (
+          <></>
+        )}
+        {pag == 6 ? (
+          <>
+            <Pag6 />
+            <Buttons pag={pag} setPag={setPag} text={"Página 6 de 9"} />
+          </>
+        ) : (
+          <></>
+        )}
+        {pag == 7 ? (
+          <>
+            <Pag7 />
+            <Buttons pag={pag} setPag={setPag} text={"Página 7 de 9"} />
+          </>
+        ) : (
+          <></>
+        )}
+        {pag == 8 ? (
+          <>
+            <Pag8 />
+            <Buttons pag={pag} setPag={setPag} text={"Página 8 de 9"} />
+          </>
+        ) : (
+          <></>
+        )}
+        {pag == 9 ? (
+          <>
+            <Pag9 />
+            <Buttons
+              pag={pag}
+              setPag={setPag}
+              text={"Página 9 de 9"}
+              /*
+              save={true}
+              saveOnDB={handleClick}
+              */
+            />
+          </>
+        ) : (
+          <></>
+        )}
       </Container>
     </>
   );
