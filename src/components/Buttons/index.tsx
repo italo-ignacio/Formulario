@@ -7,24 +7,29 @@ interface Allprops {
   save?: boolean;
   saveOnDB?: Function;
   text: string;
+  next?: boolean;
+  setNext: Function;
 }
+
 const Buttons = (props: Allprops) => {
+  const handleClick = () => {
+    props.setPag(props.pag > 0 ? props.pag - 1 : props.pag);
+    props.setNext(false);
+  };
   return (
     <>
       <DivButtons>
-        <button
-          onClick={() =>
-            props.setPag(props.pag > 0 ? props.pag - 1 : props.pag)
-          }
-        >
-          Voltar
-        </button>
+        <button onClick={handleClick}>Voltar</button>
         {props.save ? (
-          <button onClick={() => (props.saveOnDB ? props.saveOnDB() : <></>)}>
+          <button
+            disabled={props.next}
+            onClick={() => (props.saveOnDB ? props.saveOnDB() : <></>)}
+          >
             Salvar
           </button>
         ) : (
           <button
+            disabled={props.next}
             onClick={() =>
               props.setPag(props.pag < 9 ? props.pag + 1 : props.pag)
             }

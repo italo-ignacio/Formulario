@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import { useState } from "react";
-import { Container } from "../src/styles/GlobalStyles";
+import { Container, Text } from "../src/styles/GlobalStyles";
 
 import Loading from "../src/components/Loading";
 import Buttons from "../src/components/Buttons";
@@ -15,14 +15,14 @@ import Pag8 from "../src/components/Pag8";
 import Pag9 from "../src/components/Pag9";
 
 const Home: NextPage = () => {
-  const [nome, setNome] = useState("marcos");
+  const [nome, setNome] = useState("");
   const [data_nascimento, setData_nascimento] = useState("");
   const [cpf, setCpf] = useState("");
   const [endereco, setEndereco] = useState("");
   const [telefone, setTelefone] = useState("");
   const [email, setEmail] = useState("");
-  const [estado_civil, setEstado_civil] = useState("");
-  const [nome_solteiro, setNome_solteiro] = useState("");
+  const [estado_civil, setEstado_civil] = useState("Solteiro (a)");
+  const [nome_solteiro, setNome_solteiro] = useState("Não possui");
   const [nacionalidades, setNacionalidades] = useState("");
   const [serviu_exercito, setServiu_exercito] = useState("");
   const [estado_deseja, setEstado_deseja] = useState("");
@@ -66,6 +66,7 @@ const Home: NextPage = () => {
 
   const [pag, setPag] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [next, setNext] = useState(false);
 
   const handleClick = async () => {
     try {
@@ -131,18 +132,49 @@ const Home: NextPage = () => {
   return (
     <>
       {loading ? <Loading text="Salvando" /> : <></>}
+
       <Container>
         {pag == 0 ? (
           <>
-            <Buttons pag={pag} setPag={setPag} text={""} />
+            <Buttons
+              pag={pag}
+              setPag={setPag}
+              text={""}
+              next={next}
+              setNext={setNext}
+            />
           </>
         ) : (
           <></>
         )}
         {pag == 1 ? (
           <>
-            <Pag1 cpf={cpf} setCpf={setCpf} />
-            <Buttons pag={pag} setPag={setPag} text={"Página 1 de 9"} />
+            <Text>Preencha todos os dados</Text>
+            <Pag1
+              nome={nome}
+              setNome={setNome}
+              email={email}
+              setEmail={setEmail}
+              data_nascimento={data_nascimento}
+              setData_nascimento={setData_nascimento}
+              cpf={cpf}
+              setCpf={setCpf}
+              telefone={telefone}
+              setTelefone={setTelefone}
+              estado_civil={estado_civil}
+              setEstado_civil={setEstado_civil}
+              nome_solteiro={nome_solteiro}
+              setNome_solteiro={setNome_solteiro}
+              next={next}
+              setNext={setNext}
+            />
+            <Buttons
+              pag={pag}
+              setPag={setPag}
+              text={"Etapa 1 de 9"}
+              next={next}
+              setNext={setNext}
+            />
           </>
         ) : (
           <></>
@@ -150,7 +182,13 @@ const Home: NextPage = () => {
         {pag == 2 ? (
           <>
             <Pag2 />
-            <Buttons pag={pag} setPag={setPag} text={"Página 2 de 9"} />
+            <Buttons
+              pag={pag}
+              setPag={setPag}
+              text={"Etapa 2 de 9"}
+              next={true}
+              setNext={setNext}
+            />
           </>
         ) : (
           <></>
@@ -158,7 +196,13 @@ const Home: NextPage = () => {
         {pag == 3 ? (
           <>
             <Pag3 />
-            <Buttons pag={pag} setPag={setPag} text={"Página 3 de 9"} />
+            <Buttons
+              pag={pag}
+              setPag={setPag}
+              text={"Etapa 3 de 9"}
+              next={next}
+              setNext={setNext}
+            />
           </>
         ) : (
           <></>
@@ -166,7 +210,13 @@ const Home: NextPage = () => {
         {pag == 4 ? (
           <>
             <Pag4 />
-            <Buttons pag={pag} setPag={setPag} text={"Página 4 de 9"} />
+            <Buttons
+              pag={pag}
+              setPag={setPag}
+              text={"Etapa 4 de 9"}
+              next={next}
+              setNext={setNext}
+            />
           </>
         ) : (
           <></>
@@ -174,7 +224,13 @@ const Home: NextPage = () => {
         {pag == 5 ? (
           <>
             <Pag5 />
-            <Buttons pag={pag} setPag={setPag} text={"Página 5 de 9"} />
+            <Buttons
+              pag={pag}
+              setPag={setPag}
+              text={"Etapa 5 de 9"}
+              next={next}
+              setNext={setNext}
+            />
           </>
         ) : (
           <></>
@@ -182,7 +238,13 @@ const Home: NextPage = () => {
         {pag == 6 ? (
           <>
             <Pag6 />
-            <Buttons pag={pag} setPag={setPag} text={"Página 6 de 9"} />
+            <Buttons
+              pag={pag}
+              setPag={setPag}
+              text={"Etapa 6 de 9"}
+              next={next}
+              setNext={setNext}
+            />
           </>
         ) : (
           <></>
@@ -190,7 +252,13 @@ const Home: NextPage = () => {
         {pag == 7 ? (
           <>
             <Pag7 />
-            <Buttons pag={pag} setPag={setPag} text={"Página 7 de 9"} />
+            <Buttons
+              pag={pag}
+              setPag={setPag}
+              text={"Etapa 7 de 9"}
+              next={next}
+              setNext={setNext}
+            />
           </>
         ) : (
           <></>
@@ -198,7 +266,13 @@ const Home: NextPage = () => {
         {pag == 8 ? (
           <>
             <Pag8 />
-            <Buttons pag={pag} setPag={setPag} text={"Página 8 de 9"} />
+            <Buttons
+              pag={pag}
+              setPag={setPag}
+              text={"Etapa 8 de 9"}
+              next={next}
+              setNext={setNext}
+            />
           </>
         ) : (
           <></>
@@ -209,7 +283,9 @@ const Home: NextPage = () => {
             <Buttons
               pag={pag}
               setPag={setPag}
-              text={"Página 9 de 9"}
+              text={"Etapa 9 de 9"}
+              next={next}
+              setNext={setNext}
               /*
               save={true}
               saveOnDB={handleClick}
@@ -220,6 +296,7 @@ const Home: NextPage = () => {
           <></>
         )}
       </Container>
+      <br />
     </>
   );
 };

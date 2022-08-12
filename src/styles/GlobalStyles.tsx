@@ -1,57 +1,68 @@
 import styled, { createGlobalStyle } from "styled-components";
-import { linkColor, primaryColor, textColor } from "../config/colors";
+import { linkColor, primaryColor, textDarkColor } from "../config/colors";
 
 export default createGlobalStyle`
-    *{
-        margin:0;
-        padding:0;
-        outline:none;
-        box-sizing:border-box;
-    }
-    body{
-        font-family: 'Bitter', serif;
-        line-height: 1.5;
-    }
-    html,body,#root{
-        height:100%;
-        background: "#fff" ;
+  *{
+    margin:0;
+    padding:0;
+    outline:none;
+    box-sizing:border-box;
+  }
+  body{
+    font-family: 'Bitter', serif;
+    line-height: 1.5;
+    background-color: #ebebeb;
+  }
+  html,body,#root{
+    height:100%; 
+  }
+  button:hover:disabled{
+      filter: none;
+  }
+  button:disabled{
+    background-color: #ebebeb;
+    color: ${linkColor};
+    cursor:default;
+  }
+
+  button{
+    cursor:pointer;
+    background: ${primaryColor};
+    border: none;
+    color: ${linkColor};
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: 700;
+    transition: all 300ms;
+  }
+
+  button:hover{
+      filter: brightness(75%);
+  }
+
+  input {
+    font-size: 1.2rem;
+    border: 2px solid #ddd;
+    padding: 0.5rem;
+    border-radius: 4px;
+    
+    &:focus {
+      border: 2px solid ${primaryColor};
     }
 
-    button{
-        cursor:pointer;
-        background: ${primaryColor};
-        border: none;
-        color: ${linkColor};
-        padding: 10px 20px;
-        border-radius: 4px;
-        font-weight: 700;
-        transition: all 300ms;
-    }
-    button:hover{
-        filter: brightness(75%);
-    }
-  
-    input {
+
+  }
+  select { 
     font-size: 1.2rem;
     border: 2px solid #ddd;
     padding: 0.5rem;
     border-radius: 4px;
-    margin-left: 1rem;
+    color:${textDarkColor};
     &:focus {
       border: 2px solid ${primaryColor};
     }
   }
-  select {
-    font-size: 1.2rem;
-    border: 2px solid #ddd;
-    padding: 0.5rem;
-    border-radius: 4px;
-    margin-left: 1rem;
-    &:focus {
-      border: 2px solid ${primaryColor};
-    }
-  }
- 
+
 `;
 
 export const Container = styled.section`
@@ -74,4 +85,8 @@ export const Container = styled.section`
     width: 90%;
     padding: 1rem;
   }
+`;
+
+export const Text = styled.h2`
+  text-align: center;
 `;
