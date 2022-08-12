@@ -18,7 +18,7 @@ const Pag2 = (props: AllProps) => {
   const hadleClick = async () => {
     try {
       if (cep.length == 8) {
-        fetch(`https://viacep.com.br/ws/06539110/json/`, {
+        fetch(`https://viacep.com.br/ws/${cep}/json/`, {
           method: "GET",
         })
           .then((T) => T.json())
