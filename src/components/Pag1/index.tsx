@@ -56,7 +56,7 @@ const Pag1 = (props: AllProps) => {
   if (
     props.nome == "" ||
     !validator.isEmail(props.email) ||
-    !validator.isDate(props.data_nascimento) ||
+    props.data_nascimento.length != 10 ||
     props.cpf.length != 14 ||
     props.telefone.length != 15 ||
     props.estado_civil == "" ||
