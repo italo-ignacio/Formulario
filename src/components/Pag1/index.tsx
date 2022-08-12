@@ -46,6 +46,13 @@ const Pag1 = (props: AllProps) => {
       .replace(/(-\d{4})\d+?$/, "$1"); // captura 2 numeros seguidos de um traço e não deixa ser digitado mais nada
   };
 
+  const dataMask = (value: string) => {
+    return value
+      .replace(/\D/g, "")
+      .replace(/(\d{2})(\d)/, "$1/$2") // captura 2 grupos de numero o primeiro de 3 e o segundo de 1, apos capturar o primeiro grupo ele adiciona um ponto antes do segundo grupo de numero
+      .replace(/(\d{2})(\d)/, "$1/$2")
+      .replace(/(\d{4})\d+?$/, "$1"); // captura 2 numeros seguidos de um traço e não deixa ser digitado mais nada
+  };
   if (
     props.nome == "" ||
     !validator.isEmail(props.email) ||
@@ -85,13 +92,12 @@ const Pag1 = (props: AllProps) => {
       <Junta>
         <label>Data de nacimento</label>
         <StyledInput
-          type={"date"}
           alt={"Data de nacimento"}
           value={props.data_nascimento}
           pattern={"d{2}/d{2}/d{4}"}
           max={data}
           min={"1900-01-01"}
-          onChange={(e) => props.setData_nascimento(e.target.value)}
+          onChange={(e) => props.setData_nascimento(dataMask(e.target.value))}
         />
         <br />
       </Junta>
