@@ -1,125 +1,161 @@
 import React, { useState } from "react";
 import { Junta, Container } from "../../styles/pageStyled";
+import Loading from "../Loading";
 import { Botao } from "./styled";
 
 interface AllProps {
+  endereco: string;
+  setEndereco: Function;
   next: boolean;
   setNext: Function;
+  cep: string;
+  setCep: Function;
+  rua: string;
+  setRua: Function;
+  cidade: string;
+  setCidade: Function;
+  bairro: string;
+  setBairro: Function;
+  complemento: string;
+  setComplemento: Function;
+  uf: string;
+  setUf: Function;
+  numero: string;
+  setNumero: Function;
 }
 const Pag2 = (props: AllProps) => {
-  const [cep, setCep] = useState("");
-  const [rua, setRua] = useState("");
-  const [cidade, setCidade] = useState("");
-  const [bairro, setBairro] = useState("");
-  const [complemento, setComplemento] = useState("");
-  const [uf, setUf] = useState("");
-  const [numero, setNumero] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const hadleClick = async () => {
     try {
-      if (cep.length == 8) {
-        fetch(`https://viacep.com.br/ws/${cep}/json/`, {
+      if (props.cep.length == 8) {
+        setLoading(true);
+        fetch(`https://viacep.com.br/ws/${props.cep}/json/`, {
           method: "GET",
         })
           .then((T) => T.json())
           .then((dados) => {
-            setCep(dados.cep);
-            setRua(dados.logradouro);
-            setCidade(dados.localidade);
-            setBairro(dados.bairro);
-            setComplemento(dados.complemento);
-            setUf(dados.uf);
+            props.setCep(dados.cep);
+            props.setRua(dados.logradouro);
+            props.setCidade(dados.localidade);
+            props.setBairro(dados.bairro);
+            props.setComplemento(dados.complemento);
+            props.setUf(dados.uf);
           });
       }
     } catch (error) {
+      props.setRua("");
+      props.setCidade("");
+      props.setBairro("");
+      props.setComplemento("");
+      props.setUf("");
+      props.setNumero("");
       alert("Cep não encontrado");
     }
+    setLoading(false);
   };
 
+  const handleKeyPress = (event: any) => {
+    event.preventDefault();
+    if (event.key === "Enter") {
+      hadleClick();
+    }
+  };
   const cepMask = (value: string) => {
-    return value
-      .replace(/\D/g, "") // substitui qualquer caracter que nao seja numero por nada
-      .replace(/(\d{8})\d+?$/, "$1"); // captura 2 numeros seguidos de um traço e não deixa ser digitado mais nada
+    return value.replace(/\D/g, "").replace(/(\d{8})\d+?$/, "$1");
   };
   if (
-    cep == "" ||
-    rua == "" ||
-    cidade == "" ||
-    bairro == "" ||
-    complemento == "" ||
-    uf == "" ||
-    numero == ""
+    props.cep == "" ||
+    props.rua == "" ||
+    props.cidade == "" ||
+    props.bairro == "" ||
+    props.uf == "" ||
+    props.numero == ""
   ) {
     props.setNext(true);
   } else {
+    props.setEndereco(
+      `${props.cep}, ${props.rua}, ${props.numero}, ${props.bairro} ${props.complemento}, ${props.cidade}-${props.uf}`
+    );
     props.setNext(false);
   }
 
   return (
-    <Container>
-      <Junta>
-        <label>Cep</label>
-        <input
-          value={cep}
-          type={"tel"}
-          alt={"Cep"}
-          onChange={(e) => setCep(cepMask(e.target.value))}
-        />
-        <br />
-      </Junta>
-      <Botao onClick={hadleClick}>Buscar</Botao>
+    <>
+      {loading ? <Loading text="Buscando" /> : <></>}
+      <Container>
+        <Junta>
+          <label>Cep</label>
+          <input
+            value={props.cep}
+            type={"tel"}
+            alt={"Cep"}
+            onKeyUp={(e) => {
+              handleKeyPress(e);
+            }}
+            onChange={(e) => props.setCep(cepMask(e.target.value))}
+          />
+          <br />
+        </Junta>
+        <Botao onClick={hadleClick}>Buscar</Botao>
 
-      <Junta>
-        <label>Rua</label>
-        <input
-          value={rua}
-          alt={"Rua"}
-          onChange={(e) => setRua(e.target.value)}
-        />
-        <br />
-      </Junta>
-      <Junta>
-        <label>Complemento</label>
-        <input
-          value={complemento}
-          alt={"Complemento"}
-          onChange={(e) => setComplemento(e.target.value)}
-        />
-        <br />
-      </Junta>
-      <Junta>
-        <label>Bairro</label>
-        <input
-          value={bairro}
-          alt={"Bairro"}
-          onChange={(e) => setBairro(e.target.value)}
-        />
-        <br />
-      </Junta>
-      <Junta>
-        <label>Cidade</label>
-        <input
-          value={cidade}
-          alt={"Cidade"}
-          onChange={(e) => setCidade(e.target.value)}
-        />
-        <br />
-      </Junta>
-      <Junta>
-        <label>UF</label>
-        <input value={uf} alt={"UF"} onChange={(e) => setUf(e.target.value)} />
-        <br />
-      </Junta>
-      <Junta>
-        <label>Numero</label>
-        <input
-          value={numero}
-          alt={"numero"}
-          onChange={(e) => setNumero(e.target.value)}
-        />
-        <br />
-      </Junta>
-    </Container>
+        <Junta>
+          <label>Rua</label>
+          <input
+            value={props.rua}
+            alt={"Rua"}
+            onChange={(e) => props.setRua(e.target.value)}
+          />
+          <br />
+        </Junta>
+        <Junta>
+          <label>Complemento</label>
+          <input
+            value={props.complemento}
+            alt={"Complemento"}
+            onChange={(e) => props.setComplemento(e.target.value)}
+          />
+          <br />
+        </Junta>
+        <Junta>
+          <label>Bairro</label>
+          <input
+            value={props.bairro}
+            alt={"Bairro"}
+            onChange={(e) => props.setBairro(e.target.value)}
+          />
+          <br />
+        </Junta>
+        <Junta>
+          <label>Cidade</label>
+          <input
+            value={props.cidade}
+            alt={"Cidade"}
+            onChange={(e) => props.setCidade(e.target.value)}
+          />
+          <br />
+        </Junta>
+        <Junta>
+          <label>UF</label>
+          <input
+            value={props.uf}
+            alt={"UF"}
+            onChange={(e) => props.setUf(e.target.value)}
+          />
+          <br />
+        </Junta>
+        <Junta>
+          <label>Numero</label>
+          <input
+            type={"tel"}
+            value={props.numero}
+            alt={"numero"}
+            onChange={(e) => props.setNumero(e.target.value)}
+          />
+          <br />
+        </Junta>
+      </Container>
+    </>
   );
 };
 

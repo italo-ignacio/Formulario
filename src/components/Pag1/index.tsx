@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { StyledInput } from "./styled";
 import { Container, Junta } from "../../styles/pageStyled";
 import validator from "validator";
+import { NextPage } from "next";
 
 interface AllProps {
   nome: string;
@@ -18,36 +19,36 @@ interface AllProps {
   setEstado_civil: Function;
   nome_solteiro: string;
   setNome_solteiro: Function;
+  tnome_solteiro: string;
+  settNome_solteiro: Function;
   next: boolean;
   setNext: Function;
 }
 
 const Pag1 = (props: AllProps) => {
-  const [nomeSolteito, setNomeSolteiro] = useState("nao");
-
   const cpfMask = (value: string) => {
     return value
-      .replace(/\D/g, "") // substitui qualquer caracter que nao seja numero por nada
-      .replace(/(\d{3})(\d)/, "$1.$2") // captura 2 grupos de numero o primeiro de 3 e o segundo de 1, apos capturar o primeiro grupo ele adiciona um ponto antes do segundo grupo de numero
+      .replace(/\D/g, "")
+      .replace(/(\d{3})(\d)/, "$1.$2")
       .replace(/(\d{3})(\d)/, "$1.$2")
       .replace(/(\d{3})(\d{1,2})/, "$1-$2")
-      .replace(/(-\d{2})\d+?$/, "$1"); // captura 2 numeros seguidos de um traço e não deixa ser digitado mais nada
+      .replace(/(-\d{2})\d+?$/, "$1");
   };
 
   const telMask = (value: string) => {
     return value
       .replace(/\D/g, "")
-      .replace(/(\d{2})(\d)/, "($1) $2") // captura 2 grupos de numero o primeiro de 3 e o segundo de 1, apos capturar o primeiro grupo ele adiciona um ponto antes do segundo grupo de numero
+      .replace(/(\d{2})(\d)/, "($1) $2")
       .replace(/(\d{5})(\d)/, "$1-$2")
-      .replace(/(-\d{4})\d+?$/, "$1"); // captura 2 numeros seguidos de um traço e não deixa ser digitado mais nada
+      .replace(/(-\d{4})\d+?$/, "$1");
   };
 
   const dataMask = (value: string) => {
     return value
       .replace(/\D/g, "")
-      .replace(/(\d{2})(\d)/, "$1/$2") // captura 2 grupos de numero o primeiro de 3 e o segundo de 1, apos capturar o primeiro grupo ele adiciona um ponto antes do segundo grupo de numero
       .replace(/(\d{2})(\d)/, "$1/$2")
-      .replace(/(\d{4})\d+?$/, "$1"); // captura 2 numeros seguidos de um traço e não deixa ser digitado mais nada
+      .replace(/(\d{2})(\d)/, "$1/$2")
+      .replace(/(\d{4})\d+?$/, "$1");
   };
   if (
     props.nome == "" ||
@@ -135,11 +136,11 @@ const Pag1 = (props: AllProps) => {
         <label>
           <input
             type={"radio"}
-            name={"solteiro"}
             value={"sim"}
-            checked={nomeSolteito === "sim"}
+            alt={"Possui nome de solteiro"}
+            checked={props.tnome_solteiro === "sim"}
             onChange={() => {
-              setNomeSolteiro("sim");
+              props.settNome_solteiro("sim");
               props.setNome_solteiro("");
             }}
           />{" "}
@@ -148,18 +149,18 @@ const Pag1 = (props: AllProps) => {
         <label>
           <input
             type={"radio"}
-            name={"solteiro"}
             value={"nao"}
-            checked={nomeSolteito === "nao"}
+            alt={"Não possui nome de solteiro"}
+            checked={props.tnome_solteiro === "nao"}
             onChange={() => {
-              setNomeSolteiro("nao");
+              props.settNome_solteiro("nao");
               props.setNome_solteiro("Não possui");
             }}
           />{" "}
           Não
         </label>
       </Junta>
-      {nomeSolteito === "sim" ? (
+      {props.tnome_solteiro === "sim" ? (
         <>
           <Junta className="cel">
             <label className="space">Nome de solteiro (a)</label>

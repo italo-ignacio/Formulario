@@ -7,7 +7,7 @@ interface Allprops {
   save?: boolean;
   saveOnDB?: Function;
   text: string;
-  next?: boolean;
+  next: boolean;
   setNext: Function;
 }
 
@@ -15,7 +15,14 @@ const Buttons = (props: Allprops) => {
   const handleClick = () => {
     props.setPag(props.pag > 0 ? props.pag - 1 : props.pag);
     props.setNext(false);
+    window.scrollTo(0, 0);
   };
+
+  const handleClick2 = () => {
+    window.scrollTo(0, 0);
+    props.setPag(props.pag < 9 ? props.pag + 1 : props.pag);
+  };
+
   return (
     <>
       <DivButtons>
@@ -28,12 +35,7 @@ const Buttons = (props: Allprops) => {
             Salvar
           </button>
         ) : (
-          <button
-            disabled={props.next}
-            onClick={() =>
-              props.setPag(props.pag < 9 ? props.pag + 1 : props.pag)
-            }
-          >
+          <button disabled={props.next} onClick={handleClick2}>
             Avançar
           </button>
         )}

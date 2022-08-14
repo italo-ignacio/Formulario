@@ -22,9 +22,13 @@ const Home: NextPage = () => {
   const [telefone, setTelefone] = useState("");
   const [email, setEmail] = useState("");
   const [estado_civil, setEstado_civil] = useState("Solteiro (a)");
-  const [nome_solteiro, setNome_solteiro] = useState("Não possui");
+  const [nome_solteiro, setNome_solteiro] = useState("");
+  const [tnome_solteiro, settNome_solteiro] = useState("");
   const [nacionalidades, setNacionalidades] = useState("");
+  const [Snacionalidades, setSNacionalidades] = useState("");
+  const [Anacionalidades, setANacionalidades] = useState([]);
   const [serviu_exercito, setServiu_exercito] = useState("");
+  const [Sserviu_exercito, setSServiu_exercito] = useState("");
   const [estado_deseja, setEstado_deseja] = useState("");
   const [data_deseja, setData_deseja] = useState("");
   const [tempo_deseja, setTempo_deseja] = useState("");
@@ -58,11 +62,23 @@ const Home: NextPage = () => {
   const [data_ini_ter_empresa_antigo, setData_ini_ter_empresa_antigo] =
     useState("");
   const [idiomas, setIdiomas] = useState("");
+  const [Sidiomas, setSIdiomas] = useState("");
+  const [Aidiomas, setAIdiomas] = useState([]);
   const [nome_facul_escola, setNome_facul_escola] = useState("");
   const [endereco_facul_escola, setEndereco_facul_escola] = useState("");
   const [telefone_facul_escola, setTelefone_facul_escola] = useState("");
   const [curso_facul, setCurso_facul] = useState("");
   const [ini_ter_facul_escola, setIni_ter_facul_escola] = useState("");
+
+  //////////////////////////////
+  const [cep, setCep] = useState("");
+  const [rua, setRua] = useState("");
+  const [cidade, setCidade] = useState("");
+  const [bairro, setBairro] = useState("");
+  const [complemento, setComplemento] = useState("");
+  const [uf, setUf] = useState("");
+  const [numero, setNumero] = useState("");
+  //////////////////////////
 
   const [pag, setPag] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -130,7 +146,7 @@ const Home: NextPage = () => {
   };
 
   return (
-    <>
+    <main id={"top"}>
       {loading ? <Loading text="Salvando" /> : <></>}
 
       <Container>
@@ -165,6 +181,8 @@ const Home: NextPage = () => {
               setEstado_civil={setEstado_civil}
               nome_solteiro={nome_solteiro}
               setNome_solteiro={setNome_solteiro}
+              tnome_solteiro={tnome_solteiro}
+              settNome_solteiro={settNome_solteiro}
               next={next}
               setNext={setNext}
             />
@@ -181,7 +199,27 @@ const Home: NextPage = () => {
         )}
         {pag == 2 ? (
           <>
-            <Pag2 next={next} setNext={setNext} />
+            <Text>Preencha o endereço</Text>
+            <Pag2
+              next={next}
+              setNext={setNext}
+              endereco={endereco}
+              setEndereco={setEndereco}
+              cep={cep}
+              setCep={setCep}
+              rua={rua}
+              setRua={setRua}
+              cidade={cidade}
+              setCidade={setCidade}
+              bairro={bairro}
+              setBairro={setBairro}
+              complemento={complemento}
+              setComplemento={setComplemento}
+              uf={uf}
+              setUf={setUf}
+              numero={numero}
+              setNumero={setNumero}
+            />
             <Buttons
               pag={pag}
               setPag={setPag}
@@ -195,7 +233,26 @@ const Home: NextPage = () => {
         )}
         {pag == 3 ? (
           <>
-            <Pag3 />
+            <Pag3
+              next={next}
+              setNext={setNext}
+              idiomas={idiomas}
+              setIdiomas={setIdiomas}
+              Sidiomas={Sidiomas}
+              setSIdiomas={setSIdiomas}
+              nacionalidades={nacionalidades}
+              setNacionalidades={setNacionalidades}
+              Snacionalidades={Snacionalidades}
+              setSNacionalidades={setSNacionalidades}
+              serviu_exercito={serviu_exercito}
+              setServiu_exercito={setServiu_exercito}
+              Sserviu_exercito={Sserviu_exercito}
+              setSServiu_exercito={setSServiu_exercito}
+              Anacionalidades={Anacionalidades}
+              setANacionalidades={setANacionalidades}
+              Aidiomas={Aidiomas}
+              setAIdiomas={setAIdiomas}
+            />
             <Buttons
               pag={pag}
               setPag={setPag}
@@ -209,7 +266,7 @@ const Home: NextPage = () => {
         )}
         {pag == 4 ? (
           <>
-            <Pag4 />
+            <Pag4 next={next} setNext={setNext} />
             <Buttons
               pag={pag}
               setPag={setPag}
@@ -223,7 +280,7 @@ const Home: NextPage = () => {
         )}
         {pag == 5 ? (
           <>
-            <Pag5 />
+            <Pag5 next={next} setNext={setNext} />
             <Buttons
               pag={pag}
               setPag={setPag}
@@ -237,7 +294,7 @@ const Home: NextPage = () => {
         )}
         {pag == 6 ? (
           <>
-            <Pag6 />
+            <Pag6 next={next} setNext={setNext} />
             <Buttons
               pag={pag}
               setPag={setPag}
@@ -251,7 +308,7 @@ const Home: NextPage = () => {
         )}
         {pag == 7 ? (
           <>
-            <Pag7 />
+            <Pag7 next={next} setNext={setNext} />
             <Buttons
               pag={pag}
               setPag={setPag}
@@ -265,7 +322,7 @@ const Home: NextPage = () => {
         )}
         {pag == 8 ? (
           <>
-            <Pag8 />
+            <Pag8 next={next} setNext={setNext} />
             <Buttons
               pag={pag}
               setPag={setPag}
@@ -279,7 +336,7 @@ const Home: NextPage = () => {
         )}
         {pag == 9 ? (
           <>
-            <Pag9 />
+            <Pag9 next={next} setNext={setNext} />
             <Buttons
               pag={pag}
               setPag={setPag}
@@ -297,7 +354,7 @@ const Home: NextPage = () => {
         )}
       </Container>
       <br />
-    </>
+    </main>
   );
 };
 

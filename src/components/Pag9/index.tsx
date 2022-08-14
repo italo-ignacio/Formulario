@@ -1,11 +1,20 @@
 import React from "react";
-import { Container } from "./styled";
+import { Junta, Container } from "../../styles/pageStyled";
 
-const Pag9 = () => {
+interface AllProps {
+  next: boolean;
+  setNext: Function;
+}
+
+const Pag9 = (props: AllProps) => {
   return (
     <Container>
-      <label>Pag9</label>
-      <input />
+      {props.setNext(true)}
+      <Junta>
+        <label>Pag</label>
+        <input value={""} alt={""} onChange={(e) => console.log()} />
+        <br />
+      </Junta>
     </Container>
   );
 };
