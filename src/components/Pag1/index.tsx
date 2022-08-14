@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyledInput } from "./styled";
 import { Container, Junta } from "../../styles/pageStyled";
 import validator from "validator";
-import { NextPage } from "next";
+import {
+  dataMask,
+  verificarDataNascimento,
+  telMask,
+  cpfMask,
+} from "../../config/mask";
 
 interface AllProps {
   nome: string;
@@ -26,36 +31,12 @@ interface AllProps {
 }
 
 const Pag1 = (props: AllProps) => {
-  const cpfMask = (value: string) => {
-    return value
-      .replace(/\D/g, "")
-      .replace(/(\d{3})(\d)/, "$1.$2")
-      .replace(/(\d{3})(\d)/, "$1.$2")
-      .replace(/(\d{3})(\d{1,2})/, "$1-$2")
-      .replace(/(-\d{2})\d+?$/, "$1");
-  };
-
-  const telMask = (value: string) => {
-    return value
-      .replace(/\D/g, "")
-      .replace(/(\d{2})(\d)/, "($1) $2")
-      .replace(/(\d{5})(\d)/, "$1-$2")
-      .replace(/(-\d{4})\d+?$/, "$1");
-  };
-
-  const dataMask = (value: string) => {
-    return value
-      .replace(/\D/g, "")
-      .replace(/(\d{2})(\d)/, "$1/$2")
-      .replace(/(\d{2})(\d)/, "$1/$2")
-      .replace(/(\d{4})\d+?$/, "$1");
-  };
   if (
     props.nome == "" ||
     !validator.isEmail(props.email) ||
-    props.data_nascimento.length != 10 ||
+    !validator.isDate(verificarDataNascimento(props.data_nascimento)) ||
     props.cpf.length != 14 ||
-    props.telefone.length != 15 ||
+    props.telefone.length <= 13 ||
     props.estado_civil == "" ||
     props.nome_solteiro == ""
   ) {
@@ -87,7 +68,13 @@ const Pag1 = (props: AllProps) => {
       </Junta>
 
       <Junta>
-        <label>Data de nacimento</label>
+        {props.data_nascimento.length == 10 &&
+        !validator.isDate(verificarDataNascimento(props.data_nascimento)) ? (
+          <label>Data de nacimento (Data inválida)</label>
+        ) : (
+          <label>Data de nacimento</label>
+        )}
+
         <StyledInput
           alt={"Data de nacimento"}
           type={"tel"}
@@ -107,10 +94,10 @@ const Pag1 = (props: AllProps) => {
         <br />
       </Junta>
       <Junta>
-        <label>Celular</label>
+        <label>Telefone</label>
         <input
           type={"tel"}
-          alt={"Celular"}
+          alt={"Telefone"}
           value={props.telefone}
           onChange={(e) => props.setTelefone(telMask(e.target.value))}
         />
@@ -174,7 +161,7 @@ const Pag1 = (props: AllProps) => {
       ) : (
         <>
           <Junta className="nul">
-            <label>Nome de solteiro (a)</label>
+            <label>(a)</label>
             <input />
           </Junta>
         </>

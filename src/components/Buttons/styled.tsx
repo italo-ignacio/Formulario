@@ -9,6 +9,10 @@ export const DivButtons = styled.div`
     padding: 1rem 2rem;
     margin-top: 0;
   }
+  @media (max-width: 315px) {
+    padding: 0;
+    margin-top: 0;
+  }
 `;
 
 export const Text = styled.h3`

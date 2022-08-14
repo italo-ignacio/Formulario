@@ -32,7 +32,7 @@ const Pag3 = (props: AllProps) => {
     if (nacionalidades != "") {
       props.setANacionalidades((oldArray: any) => [
         ...oldArray,
-        nacionalidades,
+        nacionalidades.replace(",", " "),
       ]);
       setNacionalidades("");
     }
@@ -47,7 +47,10 @@ const Pag3 = (props: AllProps) => {
 
   const addIdioma = () => {
     if (idiomas != "") {
-      props.setAIdiomas((oldArray: any) => [...oldArray, idiomas]);
+      props.setAIdiomas((oldArray: any) => [
+        ...oldArray,
+        idiomas.replace(",", " "),
+      ]);
       setIdiomas("");
     }
   };
@@ -118,7 +121,11 @@ const Pag3 = (props: AllProps) => {
                 onChange={(e) => setNacionalidades(e.target.value)}
               />
               <label>
-                <GrAddCircle fontSize={"1.3rem"} onClick={addNacionalidade} />
+                <GrAddCircle
+                  fontSize={"1.3rem"}
+                  onClick={addNacionalidade}
+                  className="pt"
+                />
               </label>
             </Plus>
             <List>
@@ -128,6 +135,7 @@ const Pag3 = (props: AllProps) => {
                   <p>{nacionalidade}</p>
                   <TiDeleteOutline
                     color="red"
+                    className="pt"
                     onClick={() => {
                       removeNacionalidade(index);
                     }}
@@ -221,7 +229,11 @@ const Pag3 = (props: AllProps) => {
                 onChange={(e) => setIdiomas(e.target.value)}
               />
               <label>
-                <GrAddCircle fontSize={"1.3rem"} onClick={addIdioma} />
+                <GrAddCircle
+                  fontSize={"1.3rem"}
+                  onClick={addIdioma}
+                  className="pt"
+                />
               </label>
             </Plus>
             <List>
@@ -231,6 +243,7 @@ const Pag3 = (props: AllProps) => {
                   <p>{idioma}</p>
                   <TiDeleteOutline
                     color="red"
+                    className="pt"
                     onClick={() => {
                       removeIdioma(index);
                     }}

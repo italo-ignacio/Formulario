@@ -6,7 +6,7 @@ export const StyledInput = styled.input`
   }
   @media (max-width: 900px) {
     justify-content: center;
-    text-align: center;
+
     align-items: center;
   }
 `;

@@ -34,13 +34,20 @@ const Home: NextPage = () => {
   const [tempo_deseja, setTempo_deseja] = useState("");
   const [hotel, setHotel] = useState("");
   const [viajar_junto, setViajar_junto] = useState("");
+  const [Sviajar_junto, setSViajar_junto] = useState("");
+  const [Aviajar_junto, setAViajar_junto] = useState([]);
   const [pagar_viagem, setPagar_viagem] = useState("");
+  const [Spagar_viagem, setSPagar_viagem] = useState("");
+  const [Gpagar_viagem, setGPagar_viagem] = useState("");
+  const [Npagar_viagem, NetGPagar_viagem] = useState("");
   const [possui_visto, setPossui_visto] = useState("");
   const [foi_para_eua, setFoi_para_eua] = useState("");
   const [visto_per_o_rou, setVisto_per_o_rou] = useState("");
   const [visto_recusado, setVisto_recusado] = useState("");
   const [passaporte_per_o_rou, setPassaporte_per_o_rou] = useState("");
   const [parentes_nos_eua, setParentes_nos_eua] = useState("");
+  const [Sparentes_nos_eua, setSParentes_nos_eua] = useState("");
+  const [Aparentes_nos_eua, setAParentes_nos_eua] = useState([]);
   const [nome_pai, setNome_pai] = useState("");
   const [data_nasc_pai, setData_nasc_pai] = useState("");
   const [pai_mora_eua, setPai_mora_eua] = useState("");
@@ -233,6 +240,7 @@ const Home: NextPage = () => {
         )}
         {pag == 3 ? (
           <>
+            <Text>Preencha todos os dados</Text>
             <Pag3
               next={next}
               setNext={setNext}
@@ -266,7 +274,33 @@ const Home: NextPage = () => {
         )}
         {pag == 4 ? (
           <>
-            <Pag4 next={next} setNext={setNext} />
+            <Text>Preencha todos os dados</Text>
+            <Pag4
+              next={next}
+              setNext={setNext}
+              estado_deseja={estado_deseja}
+              setEstado_deseja={setEstado_deseja}
+              data_deseja={data_deseja}
+              setData_deseja={setData_deseja}
+              tempo_deseja={tempo_deseja}
+              setTempo_deseja={setTempo_deseja}
+              hotel={hotel}
+              setHotel={setHotel}
+              viajar_junto={viajar_junto}
+              setViajar_junto={setViajar_junto}
+              pagar_viagem={pagar_viagem}
+              setPagar_viagem={setPagar_viagem}
+              Spagar_viagem={Spagar_viagem}
+              setSPagar_viagem={setSPagar_viagem}
+              Sviajar_junto={Sviajar_junto}
+              setSViajar_junto={setSViajar_junto}
+              Aviajar_junto={Aviajar_junto}
+              setAViajar_junto={setAViajar_junto}
+              Gpagar_viagem={Gpagar_viagem}
+              setGPagar_viagem={setGPagar_viagem}
+              Npagar_viagem={Npagar_viagem}
+              NetGPagar_viagem={NetGPagar_viagem}
+            />
             <Buttons
               pag={pag}
               setPag={setPag}
@@ -280,7 +314,27 @@ const Home: NextPage = () => {
         )}
         {pag == 5 ? (
           <>
-            <Pag5 next={next} setNext={setNext} />
+            <Text>Preencha todos os dados</Text>
+            <Pag5
+              next={next}
+              setNext={setNext}
+              possui_visto={possui_visto}
+              setPossui_visto={setPossui_visto}
+              foi_para_eua={foi_para_eua}
+              setFoi_para_eua={setFoi_para_eua}
+              visto_per_o_rou={visto_per_o_rou}
+              setVisto_per_o_rou={setVisto_per_o_rou}
+              visto_recusado={visto_recusado}
+              setVisto_recusado={setVisto_recusado}
+              passaporte_per_o_rou={passaporte_per_o_rou}
+              setPassaporte_per_o_rou={setPassaporte_per_o_rou}
+              parentes_nos_eua={parentes_nos_eua}
+              setParentes_nos_eua={setParentes_nos_eua}
+              Aparentes_nos_eua={Aparentes_nos_eua}
+              setAParentes_nos_eua={setAParentes_nos_eua}
+              Sparentes_nos_eua={Sparentes_nos_eua}
+              setSParentes_nos_eua={setSParentes_nos_eua}
+            />
             <Buttons
               pag={pag}
               setPag={setPag}
@@ -294,7 +348,23 @@ const Home: NextPage = () => {
         )}
         {pag == 6 ? (
           <>
-            <Pag6 next={next} setNext={setNext} />
+            <Text>Preencha todos os dados</Text>
+            <Pag6
+              next={next}
+              setNext={setNext}
+              nome_pai={nome_pai}
+              setNome_pai={setNome_pai}
+              data_nasc_pai={data_nasc_pai}
+              setData_nasc_pai={setData_nasc_pai}
+              pai_mora_eua={pai_mora_eua}
+              setPai_mora_eua={setPai_mora_eua}
+              nome_mae={nome_mae}
+              setNome_mae={setNome_mae}
+              data_nasc_mae={data_nasc_mae}
+              setData_nasc_mae={setData_nasc_mae}
+              mae_mora_eua={mae_mora_eua}
+              setMae_mora_eua={setMae_mora_eua}
+            />
             <Buttons
               pag={pag}
               setPag={setPag}
@@ -308,12 +378,22 @@ const Home: NextPage = () => {
         )}
         {pag == 7 ? (
           <>
-            <Pag7 next={next} setNext={setNext} />
+            <Text>Preencha todos os dados</Text>
+            <Pag7
+              next={next}
+              setNext={setNext}
+              instagram={instagram}
+              setInstagram={setInstagram}
+              facebook={facebook}
+              setFacebook={setFacebook}
+              linkedin={linkedin}
+              setLinkedin={setLinkedin}
+            />
             <Buttons
               pag={pag}
               setPag={setPag}
               text={"Etapa 7 de 9"}
-              next={next}
+              next={false}
               setNext={setNext}
             />
           </>
@@ -322,6 +402,7 @@ const Home: NextPage = () => {
         )}
         {pag == 8 ? (
           <>
+            <Text>Preencha todos os dados</Text>
             <Pag8 next={next} setNext={setNext} />
             <Buttons
               pag={pag}
@@ -336,6 +417,7 @@ const Home: NextPage = () => {
         )}
         {pag == 9 ? (
           <>
+            <Text>Preencha todos os dados</Text>
             <Pag9 next={next} setNext={setNext} />
             <Buttons
               pag={pag}
