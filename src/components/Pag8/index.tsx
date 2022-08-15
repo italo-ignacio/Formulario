@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Junta, Container, DuplaG } from "../../styles/pageStyled";
 import InputMask from "react-input-mask";
-import { telMask } from "../../config/mask";
+import { telMask, verificarDataNascimento } from "../../config/mask";
+import validator from "validator";
 
 interface AllProps {
   next: boolean;
@@ -39,22 +40,27 @@ interface AllProps {
 
 const Pag8 = (props: AllProps) => {
   const [mask, setMask] = useState("(99) 99999-9999");
-  // Nunca trabalhou Não trabalha
+
   if (
     props.trabalho == "" ||
     props.nome_empresa == "" ||
     props.endereco_empresa == "" ||
-    props.data_inicio_empresa == "" ||
-    props.telefone_empresa == "" ||
+    !validator.isDate(verificarDataNascimento(props.data_inicio_empresa)) ||
+    props.telefone_empresa.replace(/[^0-9^a-z]+/g, "") == "" ||
     props.trabalho_antigo == "" ||
     props.nome_empresa_antigo == "" ||
     props.endereco_empresa_antigo == "" ||
-    props.data_ini_empresa_antigo == "" ||
-    props.data_ter_empresa_antigo == "" ||
-    props.telefone_empresa_antigo == ""
+    !validator.isDate(verificarDataNascimento(props.data_ini_empresa_antigo)) ||
+    !validator.isDate(verificarDataNascimento(props.data_ter_empresa_antigo)) ||
+    props.telefone_empresa_antigo.replace(/[^0-9^a-z]+/g, "") == ""
   ) {
     props.setNext(true);
   } else {
+    if (props.data_ini_empresa_antigo != "Nunca trabalhou") {
+      props.setData_ini_ter_empresa_antigo(
+        `Inicio: ${props.data_ini_empresa_antigo} // Término: ${props.data_ter_empresa_antigo}`
+      );
+    }
     props.setNext(false);
   }
 
@@ -158,7 +164,15 @@ const Pag8 = (props: AllProps) => {
             </DuplaG>
             <DuplaG>
               <Junta>
-                <label>Data de inicio na empresa</label>
+                {props.data_inicio_empresa.replace("_", "").length == 10 &&
+                !validator.isDate(
+                  verificarDataNascimento(props.data_inicio_empresa)
+                ) ? (
+                  <label>Data de inicio na empresa (Data inválida)</label>
+                ) : (
+                  <label>Data de inicio na empresa</label>
+                )}
+
                 <InputMask
                   mask={"99/99/9999"}
                   value={props.data_inicio_empresa}
@@ -169,7 +183,7 @@ const Pag8 = (props: AllProps) => {
                 <br />
               </Junta>
               <Junta className="nul">
-                <label>Data de saída da empresa</label>
+                <label>Data de saída da empresa (Data inválida)</label>
                 <input />
                 <br />
               </Junta>
@@ -216,6 +230,7 @@ const Pag8 = (props: AllProps) => {
                 props.setData_ter_empresa_antigo("Nunca trabalhou");
                 props.setData_ini_empresa_antigo("Nunca trabalhou");
                 props.setTelefone_empresa_antigo("Nunca trabalhou");
+                props.setData_ini_ter_empresa_antigo("Nunca trabalhou");
               }}
             />{" "}
             Não
@@ -285,7 +300,14 @@ const Pag8 = (props: AllProps) => {
             </DuplaG>
             <DuplaG>
               <Junta>
-                <label>Data de inicio na empresa</label>
+                {props.data_ini_empresa_antigo.replace("_", "").length == 10 &&
+                !validator.isDate(
+                  verificarDataNascimento(props.data_ini_empresa_antigo)
+                ) ? (
+                  <label>Data de inicio na empresa (Data inválida)</label>
+                ) : (
+                  <label>Data de inicio na empresa</label>
+                )}
                 <InputMask
                   mask={"99/99/9999"}
                   value={props.data_ini_empresa_antigo}
@@ -298,7 +320,14 @@ const Pag8 = (props: AllProps) => {
                 <br />
               </Junta>
               <Junta>
-                <label>Data de saída da empresa</label>
+                {props.data_ter_empresa_antigo.replace("_", "").length == 10 &&
+                !validator.isDate(
+                  verificarDataNascimento(props.data_ter_empresa_antigo)
+                ) ? (
+                  <label>Data de saída na empresa (Data inválida)</label>
+                ) : (
+                  <label>Data de saída na empresa</label>
+                )}
                 <InputMask
                   mask={"99/99/9999"}
                   value={props.data_ter_empresa_antigo}

@@ -89,4 +89,5 @@ export const Container = styled.section`
 
 export const Text = styled.h2`
   text-align: center;
+  margin-bottom: 1.5rem;
 `;

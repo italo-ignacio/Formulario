@@ -104,7 +104,7 @@ const Pag4 = (props: AllProps) => {
       </Junta>
 
       <Junta>
-        {props.data_deseja.length == 10 &&
+        {props.data_deseja.replace("_", "").length == 10 &&
         !validator.isDate(verificarDataDeseja(props.data_deseja)) ? (
           <label>Data que pretende viajar (Data inválida)</label>
         ) : (

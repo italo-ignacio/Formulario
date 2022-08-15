@@ -55,6 +55,11 @@ export const Container = styled.div`
     margin-right: auto;
     margin-top: 1rem;
   }
+
+  .des {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 export const Junta = styled.div`
@@ -101,7 +106,6 @@ export const List = styled.div`
   flex-direction: column;
   row-gap: 0.3rem;
   justify-content: center;
-  margin-left: 2rem;
   h3 {
     margin-top: 1rem;
   }

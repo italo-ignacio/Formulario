@@ -290,7 +290,7 @@ const Pag5 = (props: AllProps) => {
           <List>
             <h3>Parentes</h3>
             {props.Aparentes_nos_eua?.map((pessoa, index) => (
-              <Plus key={index} className="centralizar">
+              <Plus key={index} className="centralizar des">
                 <p>{pessoa}</p>
                 <TiDeleteOutline
                   color="red"

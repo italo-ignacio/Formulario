@@ -75,11 +75,14 @@ const Home: NextPage = () => {
   const [idiomas, setIdiomas] = useState("");
   const [Sidiomas, setSIdiomas] = useState("");
   const [Aidiomas, setAIdiomas] = useState([]);
+  const [facul, setFacul] = useState("");
   const [nome_facul_escola, setNome_facul_escola] = useState("");
   const [endereco_facul_escola, setEndereco_facul_escola] = useState("");
   const [telefone_facul_escola, setTelefone_facul_escola] = useState("");
   const [curso_facul, setCurso_facul] = useState("");
   const [ini_ter_facul_escola, setIni_ter_facul_escola] = useState("");
+  const [ter_facul_escola, setTer_facul_escola] = useState("");
+  const [ini_facul_escola, setIni_facul_escola] = useState("");
 
   //////////////////////////////
   const [cep, setCep] = useState("");
@@ -160,6 +163,144 @@ const Home: NextPage = () => {
     <main id={"top"}>
       {loading ? <Loading text="Salvando" /> : <></>}
       <Container>
+        {pag == 9 ? (
+          <>
+            <Text>Preencha todos os dados</Text>
+            <Pag9
+              next={next}
+              setNext={setNext}
+              facul={facul}
+              setFacul={setFacul}
+              ini_ter_facul_escola={ini_ter_facul_escola}
+              setIni_ter_facul_escola={setIni_ter_facul_escola}
+              telefone_facul_escola={telefone_facul_escola}
+              setTelefone_facul_escola={setTelefone_facul_escola}
+              endereco_facul_escola={endereco_facul_escola}
+              setEndereco_facul_escola={setEndereco_facul_escola}
+              nome_facul_escola={nome_facul_escola}
+              setNome_facul_escola={setNome_facul_escola}
+              curso_facul={curso_facul}
+              setCurso_facul={setCurso_facul}
+              ini_facul_escola={ini_facul_escola}
+              setIni_facul_escola={setIni_facul_escola}
+              ter_facul_escola={ter_facul_escola}
+              setTer_facul_escola={setTer_facul_escola}
+            />
+            <Buttons
+              pag={pag}
+              setPag={setPag}
+              text={"Etapa 9 de 9"}
+              next={next}
+              setNext={setNext}
+              /*
+              save={true}
+              saveOnDB={handleClick}
+              */
+            />
+            {!next ? (
+              <>
+                nome: {nome},
+                <br />
+                data_nascimento: {data_nascimento},
+                <br />
+                cpf: {cpf},
+                <br />
+                endereco: {endereco},
+                <br />
+                telefone: {telefone},
+                <br />
+                email: {email},
+                <br />
+                estado_civil: {estado_civil},
+                <br />
+                nome_solteiro: {nome_solteiro},
+                <br />
+                nacionalidades: {nacionalidades},
+                <br />
+                serviu_exercito: {serviu_exercito},
+                <br />
+                estado_deseja: {estado_deseja},
+                <br />
+                data_deseja: {data_deseja},
+                <br />
+                tempo_deseja: {tempo_deseja},
+                <br />
+                hotel: {hotel},
+                <br />
+                viajar_junto: {viajar_junto},
+                <br />
+                pagar_viagem: {pagar_viagem},
+                <br />
+                possui_visto: {possui_visto},
+                <br />
+                foi_para_eua: {foi_para_eua},
+                <br />
+                visto_per_o_rou: {visto_per_o_rou},
+                <br />
+                visto_recusado: {visto_recusado},
+                <br />
+                passaporte_per_o_rou: {passaporte_per_o_rou},
+                <br />
+                parentes_nos_eua: {parentes_nos_eua},
+                <br />
+                nome_pai: {nome_pai},
+                <br />
+                data_nasc_pai: {data_nasc_pai},
+                <br />
+                pai_mora_eua: {pai_mora_eua},
+                <br />
+                nome_mae: {nome_mae},
+                <br />
+                data_nasc_mae: {data_nasc_mae},
+                <br />
+                mae_mora_eua: {mae_mora_eua},
+                <br />
+                instagram: {instagram},
+                <br />
+                facebook: {facebook},
+                <br />
+                linkedin: {linkedin},
+                <br />
+                trabalho: {trabalho},
+                <br />
+                nome_empresa: {nome_empresa},
+                <br />
+                endereco_empresa: {endereco_empresa},
+                <br />
+                telefone_empresa: {telefone_empresa},
+                <br />
+                data_inicio_empresa: {data_inicio_empresa},
+                <br />
+                trabalho_antigo: {trabalho_antigo},
+                <br />
+                nome_empresa_antigo: {nome_empresa_antigo},
+                <br />
+                endereco_empresa_antigo: {endereco_empresa_antigo},
+                <br />
+                telefone_empresa_antigo: {telefone_empresa_antigo},
+                <br />
+                data_ini_ter_empresa_antigo: {data_ini_ter_empresa_antigo},
+                <br />
+                idiomas: {idiomas},
+                <br />
+                nome_facul_escola: {nome_facul_escola},
+                <br />
+                endereco_facul_escola: {endereco_facul_escola},
+                <br />
+                telefone_facul_escola: {telefone_facul_escola},
+                <br />
+                curso_facul: {curso_facul},
+                <br />
+                ini_ter_facul_escola: {ini_ter_facul_escola},
+                <br />
+              </>
+            ) : (
+              <></>
+            )}
+          </>
+        ) : (
+          <></>
+        )}
         {pag == 0 ? (
           <>
             <Buttons
@@ -449,26 +590,6 @@ const Home: NextPage = () => {
         ) : (
           <></>
         )}
-
-        {pag == 9 ? (
-          <>
-            <Text>Preencha todos os dados</Text>
-            <Pag9 next={next} setNext={setNext} />
-            <Buttons
-              pag={pag}
-              setPag={setPag}
-              text={"Etapa 9 de 9"}
-              next={next}
-              setNext={setNext}
-              /*
-              save={true}
-              saveOnDB={handleClick}
-              */
-            />
-          </>
-        ) : (
-          <></>
-        )}
       </Container>
       <br />
     </main>
@@ -477,66 +598,99 @@ const Home: NextPage = () => {
 
 export default Home;
 /*
-
-    const [nome, setNome] = useState("italo");
-  const [data_nascimento, setData_nascimento] = useState("08/05/2001");
-  const [cpf, setCpf] = useState("502.702.168-20");
-  const [endereco, setEndereco] = useState(
-    "Alameda dos anturios 201 Santana de parnaiba SP 06626200"
-  );
-  const [telefone, setTelefone] = useState("(11) 94190-1415");
-  const [email, setEmail] = useState("italo.felipe.ignaico@hotmail.com");
-  const [estado_civil, setEstado_civil] = useState("Solteiro");
-  const [nome_antigo, setNome_antigo] = useState("Não possui");
-  const [nacionalidades, setNacionalidades] = useState("Não possui");
-  const [serviu_exercito, setServiu_exercito] = useState("Não");
-  const [estado_deseja, setEstado_deseja] = useState("Miami");
-  const [data_deseja, setData_deseja] = useState("18/03/2022");
-  const [tempo_deseja, setTempo_deseja] = useState("15 dias");
-  const [hotel, setHotel] = useState("Miame hotel");
-  const [viajar_junto, setViajar_junto] = useState(
-    "Pai - Anderson alexandre ignacio ; Mae - Rute maria de morais "
-  );
-  const [pagar_viagem, setPagar_viagem] = useState("Eu mesmo");
-  const [possui_visto, setPossui_visto] = useState("Sim");
-  const [foi_para_eua, setFoi_para_eua] = useState("Sim");
-  const [visto_per_o_rou, setVisto_per_o_rou] = useState("Não");
-  const [visto_recusado, setVisto_recusado] = useState("Não");
-  const [passaporte_per_o_rou, setPassaporte_per_o_rou] = useState("Não");
-  const [passaporte_recusado, setPassaporte_recusado] = useState("Não");
-  const [parentes_nos_eua, setParentes_nos_eua] = useState("Não");
-  const [nome_pai, setNome_pai] = useState("Anderson alexandre ignacio");
-  const [data_nasc_pai, setData_nasc_pai] = useState("24/06/1980");
-  const [pai_mora_eua, setPai_mora_eua] = useState("Não");
-  const [nome_mae, setNome_mae] = useState("Rute maria de morais");
-  const [data_nasc_mae, setData_nasc_mae] = useState("24/06/1980");
-  const [mae_mora_eua, setMae_mora_eua] = useState("Não");
-  const [instagram, setInstagram] = useState("@iti_ignacio");
-  const [facebook, setFacebook] = useState("Não possui");
-  const [linkedin, setLinkedin] = useState("Italo felipe ignacio");
-  const [trabalho, setTrabalho] = useState("Programador Full-Stack");
-  const [nome_empresa, setNome_empresa] = useState("Senai");
-  const [endereco_empresa, setEndereco_empresa] = useState("jandira");
-  const [telefone_empresa, setTelefone_empresa] = useState("(11) 4707-3695");
-  const [data_inicio_empresa, setData_inicio_empresa] = useState("01/09/2021");
-  const [trabalho_antigo, setTrabalho_antigo] = useState("Não possui");
-  const [nome_empresa_antigo, setNome_empresa_antigo] = useState("Não possui");
-  const [endereco_empresa_antigo, setEndereco_empresa_antigo] =
-    useState("Não possui");
-  const [telefone_empresa_antigo, setTelefone_empresa_antigo] =
-    useState("Não possui");
-  const [data_ini_ter_empresa_antigo, setData_ini_ter_empresa_antigo] =
-    useState("Não possui");
-  const [facul_escola, setFacul_escola] = useState("Sim");
-  const [nome_facul_escola, setNome_facul_escola] = useState("Unip");
-  const [endereco_facul_escola, setEndereco_facul_escola] = useState(
-    "alameda yojirotakaoka 1912"
-  );
-  const [telefone_facul_escola, setTelefone_facul_escola] =
-    useState("(11) 4536-8214");
-  const [curso_facul, setCurso_facul] = useState("Ciencia da computacao");
-  const [ini_ter_facul_escola, setIni_ter_facul_escola] = useState(
-    "Inicio: 01/01/2019 - Termino 30/12/2022 "
-  );
+nome: {nome},
+            <br />
+            data_nascimento: {data_nascimento},
+            <br />
+            cpf: {cpf},
+            <br />
+            endereco: {endereco},
+            <br />
+            telefone: {telefone},
+            <br />
+            email: {email},
+            <br />
+            estado_civil: {estado_civil},
+            <br />
+            nome_solteiro: {nome_solteiro},
+            <br />
+            nacionalidades: {nacionalidades},
+            <br />
+            serviu_exercito: {serviu_exercito},
+            <br />
+            estado_deseja: {estado_deseja},
+            <br />
+            data_deseja: {data_deseja},
+            <br />
+            tempo_deseja: {tempo_deseja},
+            <br />
+            hotel: {hotel},
+            <br />
+            viajar_junto: {viajar_junto},
+            <br />
+            pagar_viagem: {pagar_viagem},
+            <br />
+            possui_visto: {possui_visto},
+            <br />
+            foi_para_eua: {foi_para_eua},
+            <br />
+            visto_per_o_rou: {visto_per_o_rou},
+            <br />
+            visto_recusado: {visto_recusado},
+            <br />
+            passaporte_per_o_rou: {passaporte_per_o_rou},
+            <br />
+            parentes_nos_eua: {parentes_nos_eua},
+            <br />
+            nome_pai: {nome_pai},
+            <br />
+            data_nasc_pai: {data_nasc_pai},
+            <br />
+            pai_mora_eua: {pai_mora_eua},
+            <br />
+            nome_mae: {nome_mae},
+            <br />
+            data_nasc_mae: {data_nasc_mae},
+            <br />
+            mae_mora_eua: {mae_mora_eua},
+            <br />
+            instagram: {instagram},
+            <br />
+            facebook: {facebook},
+            <br />
+            linkedin: {linkedin},
+            <br />
+            trabalho: {trabalho},
+            <br />
+            nome_empresa: {nome_empresa},
+            <br />
+            endereco_empresa: {endereco_empresa},
+            <br />
+            telefone_empresa: {telefone_empresa},
+            <br />
+            data_inicio_empresa: {data_inicio_empresa},
+            <br />
+            trabalho_antigo: {trabalho_antigo},
+            <br />
+            nome_empresa_antigo: {nome_empresa_antigo},
+            <br />
+            endereco_empresa_antigo: {endereco_empresa_antigo},
+            <br />
+            telefone_empresa_antigo: {telefone_empresa_antigo},
+            <br />
+            data_ini_ter_empresa_antigo: {data_ini_ter_empresa_antigo},
+            <br />
+            idiomas: {idiomas},
+            <br />
+            nome_facul_escola: {nome_facul_escola},
+            <br />
+            endereco_facul_escola: {endereco_facul_escola},
+            <br />
+            telefone_facul_escola: {telefone_facul_escola},
+            <br />
+            curso_facul: {curso_facul},
+            <br />
+            ini_ter_facul_escola: {ini_ter_facul_escola},
+            <br />
 
 */

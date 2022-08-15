@@ -27,12 +27,13 @@ interface AllProps {
 
 const Pag1 = (props: AllProps) => {
   const [mask, setMask] = useState("(99) 99999-9999");
+
   if (
     props.nome == "" ||
     !validator.isEmail(props.email) ||
     !validator.isDate(verificarDataNascimento(props.data_nascimento)) ||
-    props.cpf.length != 14 ||
-    props.telefone.length <= 13 ||
+    props.cpf.replace(/[^0-9]+/g, "").length != 11 ||
+    props.telefone.replace(/[^0-9]+/g, "").length <= 9 ||
     props.estado_civil == "" ||
     props.nome_solteiro == ""
   ) {
@@ -64,7 +65,7 @@ const Pag1 = (props: AllProps) => {
       </Junta>
 
       <Junta>
-        {props.data_nascimento.length == 10 &&
+        {props.data_nascimento.replace("_", "").length == 10 &&
         !validator.isDate(verificarDataNascimento(props.data_nascimento)) ? (
           <label>Data de nacimento (Data inválida)</label>
         ) : (
@@ -76,7 +77,9 @@ const Pag1 = (props: AllProps) => {
           alt={"Data de nacimento"}
           type={"tel"}
           value={props.data_nascimento}
-          onChange={(e) => props.setData_nascimento(e.target.value)}
+          onChange={(e) => {
+            props.setData_nascimento(e.target.value);
+          }}
         />
         <br />
       </Junta>
