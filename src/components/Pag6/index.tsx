@@ -1,7 +1,8 @@
 import React from "react";
-import { dataMask, verificarDataNascimento } from "../../config/mask";
+import { verificarDataNascimento } from "../../config/mask";
 import { Junta, Container } from "../../styles/pageStyled";
 import validator from "validator";
+import InputMask from "react-input-mask";
 
 interface AllProps {
   next: boolean;
@@ -51,11 +52,12 @@ const Pag6 = (props: AllProps) => {
           <label>Data de nascimento do pai</label>
         )}
 
-        <input
+        <InputMask
+          mask={"99/99/9999"}
           value={props.data_nasc_pai}
           type={"tel"}
           alt={"Data de nascimento do pai"}
-          onChange={(e) => props.setData_nasc_pai(dataMask(e.target.value))}
+          onChange={(e) => props.setData_nasc_pai(e.target.value)}
         />
         <br />
         <label>Seu pai mora nos Estados Unidos ?</label>
@@ -100,11 +102,12 @@ const Pag6 = (props: AllProps) => {
         ) : (
           <label>Data de nascimento da mãe</label>
         )}
-        <input
+        <InputMask
+          mask={"99/99/9999"}
           value={props.data_nasc_mae}
           type={"tel"}
           alt={"Data de nascimento da mãe"}
-          onChange={(e) => props.setData_nasc_mae(dataMask(e.target.value))}
+          onChange={(e) => props.setData_nasc_mae(e.target.value)}
         />
         <br />
         <label>Sua mãe mora nos Estados Unidos ?</label>

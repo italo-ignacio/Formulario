@@ -1,13 +1,8 @@
-import React from "react";
-import { StyledInput } from "./styled";
+import React, { useState } from "react";
 import { Container, Junta } from "../../styles/pageStyled";
 import validator from "validator";
-import {
-  dataMask,
-  verificarDataNascimento,
-  telMask,
-  cpfMask,
-} from "../../config/mask";
+import { verificarDataNascimento, telMask } from "../../config/mask";
+import InputMask from "react-input-mask";
 
 interface AllProps {
   nome: string;
@@ -31,6 +26,7 @@ interface AllProps {
 }
 
 const Pag1 = (props: AllProps) => {
+  const [mask, setMask] = useState("(99) 99999-9999");
   if (
     props.nome == "" ||
     !validator.isEmail(props.email) ||
@@ -75,31 +71,45 @@ const Pag1 = (props: AllProps) => {
           <label>Data de nacimento</label>
         )}
 
-        <StyledInput
+        <InputMask
+          mask={"99/99/9999"}
           alt={"Data de nacimento"}
           type={"tel"}
           value={props.data_nascimento}
-          onChange={(e) => props.setData_nascimento(dataMask(e.target.value))}
+          onChange={(e) => props.setData_nascimento(e.target.value)}
         />
         <br />
       </Junta>
       <Junta>
         <label>CPF</label>
-        <input
+        <InputMask
+          mask={"999.999.999-99"}
           value={props.cpf}
           type={"tel"}
           alt={"CPF"}
-          onChange={(e) => props.setCpf(cpfMask(e.target.value))}
+          onChange={(e) => props.setCpf(e.target.value)}
         />
         <br />
       </Junta>
       <Junta>
         <label>Telefone</label>
-        <input
+        <InputMask
+          mask={mask}
+          onBlur={(e) => {
+            if (e.target.value.replace("_", "").length === 14) {
+              setMask("(99) 9999-9999");
+              props.setTelefone(telMask(e.target.value));
+            }
+          }}
+          onFocus={(e) => {
+            if (e.target.value.replace("_", "").length === 14) {
+              setMask("(99) 99999-9999");
+            }
+          }}
           type={"tel"}
           alt={"Telefone"}
           value={props.telefone}
-          onChange={(e) => props.setTelefone(telMask(e.target.value))}
+          onChange={(e) => props.setTelefone(e.target.value)}
         />
         <br />
       </Junta>

@@ -1,11 +1,3 @@
-export const dataMask = (value: string) => {
-  return value
-    .replace(/\D/g, "")
-    .replace(/(\d{2})(\d)/, "$1/$2")
-    .replace(/(\d{2})(\d)/, "$1/$2")
-    .replace(/(\d{4})\d+?$/, "$1");
-};
-
 export const verificarDataNascimento = (data: string) => {
   var dia = data.split("/")[0];
   var mes = data.split("/")[1];
@@ -33,7 +25,7 @@ export const verificarDataDeseja = (data: string) => {
 };
 
 export const telMask = (value: string) => {
-  if (value.length >= 15) {
+  if (value.replace("_", "").length >= 15) {
     return value
       .replace(/\D/g, "")
       .replace(/(\d{2})(\d)/, "($1) $2")
@@ -46,13 +38,4 @@ export const telMask = (value: string) => {
       .replace(/(\d{4})(\d)/, "$1-$2")
       .replace(/(-\d{4})\d+?$/, "$1");
   }
-};
-
-export const cpfMask = (value: string) => {
-  return value
-    .replace(/\D/g, "")
-    .replace(/(\d{3})(\d)/, "$1.$2")
-    .replace(/(\d{3})(\d)/, "$1.$2")
-    .replace(/(\d{3})(\d{1,2})/, "$1-$2")
-    .replace(/(-\d{2})\d+?$/, "$1");
 };

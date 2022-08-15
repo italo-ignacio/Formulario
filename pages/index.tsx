@@ -58,16 +58,20 @@ const Home: NextPage = () => {
   const [facebook, setFacebook] = useState("");
   const [linkedin, setLinkedin] = useState("");
   const [trabalho, setTrabalho] = useState("");
+  const [Strabalho, setSTrabalho] = useState("");
   const [nome_empresa, setNome_empresa] = useState("");
   const [endereco_empresa, setEndereco_empresa] = useState("");
   const [telefone_empresa, setTelefone_empresa] = useState("");
   const [data_inicio_empresa, setData_inicio_empresa] = useState("");
   const [trabalho_antigo, setTrabalho_antigo] = useState("");
+  const [Strabalho_antigo, setSTrabalho_antigo] = useState("");
   const [nome_empresa_antigo, setNome_empresa_antigo] = useState("");
   const [endereco_empresa_antigo, setEndereco_empresa_antigo] = useState("");
   const [telefone_empresa_antigo, setTelefone_empresa_antigo] = useState("");
   const [data_ini_ter_empresa_antigo, setData_ini_ter_empresa_antigo] =
     useState("");
+  const [data_ter_empresa_antigo, setData_ter_empresa_antigo] = useState("");
+  const [data_ini_empresa_antigo, setData_ini_empresa_antigo] = useState("");
   const [idiomas, setIdiomas] = useState("");
   const [Sidiomas, setSIdiomas] = useState("");
   const [Aidiomas, setAIdiomas] = useState([]);
@@ -155,7 +159,6 @@ const Home: NextPage = () => {
   return (
     <main id={"top"}>
       {loading ? <Loading text="Salvando" /> : <></>}
-
       <Container>
         {pag == 0 ? (
           <>
@@ -403,7 +406,38 @@ const Home: NextPage = () => {
         {pag == 8 ? (
           <>
             <Text>Preencha todos os dados</Text>
-            <Pag8 next={next} setNext={setNext} />
+            <Pag8
+              next={next}
+              setNext={setNext}
+              trabalho={trabalho}
+              setTrabalho={setTrabalho}
+              Strabalho={Strabalho}
+              setSTrabalho={setSTrabalho}
+              nome_empresa={nome_empresa}
+              setNome_empresa={setNome_empresa}
+              endereco_empresa={endereco_empresa}
+              setEndereco_empresa={setEndereco_empresa}
+              telefone_empresa={telefone_empresa}
+              setTelefone_empresa={setTelefone_empresa}
+              data_inicio_empresa={data_inicio_empresa}
+              setData_inicio_empresa={setData_inicio_empresa}
+              trabalho_antigo={trabalho_antigo}
+              setTrabalho_antigo={setTrabalho_antigo}
+              Strabalho_antigo={Strabalho_antigo}
+              setSTrabalho_antigo={setSTrabalho_antigo}
+              nome_empresa_antigo={nome_empresa_antigo}
+              setNome_empresa_antigo={setNome_empresa_antigo}
+              endereco_empresa_antigo={endereco_empresa_antigo}
+              setEndereco_empresa_antigo={setEndereco_empresa_antigo}
+              telefone_empresa_antigo={telefone_empresa_antigo}
+              setTelefone_empresa_antigo={setTelefone_empresa_antigo}
+              data_ini_ter_empresa_antigo={data_ini_ter_empresa_antigo}
+              setData_ini_ter_empresa_antigo={setData_ini_ter_empresa_antigo}
+              data_ini_empresa_antigo={data_ini_empresa_antigo}
+              setData_ini_empresa_antigo={setData_ini_empresa_antigo}
+              data_ter_empresa_antigo={data_ter_empresa_antigo}
+              setData_ter_empresa_antigo={setData_ter_empresa_antigo}
+            />
             <Buttons
               pag={pag}
               setPag={setPag}
@@ -415,6 +449,7 @@ const Home: NextPage = () => {
         ) : (
           <></>
         )}
+
         {pag == 9 ? (
           <>
             <Text>Preencha todos os dados</Text>

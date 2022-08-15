@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { dataMask, verificarDataDeseja } from "../../config/mask";
+import { verificarDataDeseja } from "../../config/mask";
 import { Junta, Container, Plus, Dupla, List } from "../../styles/pageStyled";
 import validator from "validator";
 import { TiDeleteOutline } from "react-icons/ti";
+import InputMask from "react-input-mask";
 
 interface AllProps {
   next: boolean;
@@ -110,11 +111,12 @@ const Pag4 = (props: AllProps) => {
           <label>Data que pretende viajar</label>
         )}
 
-        <input
+        <InputMask
+          mask={"99/99/9999"}
           type={"tel"}
           alt={"Data que pretende viajar"}
           value={props.data_deseja}
-          onChange={(e) => props.setData_deseja(dataMask(e.target.value))}
+          onChange={(e) => props.setData_deseja(e.target.value)}
         />
         <br />
       </Junta>
