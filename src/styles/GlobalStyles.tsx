@@ -65,6 +65,23 @@ export default createGlobalStyle`
 
 `;
 
+export const Container2 = styled.section`
+  min-height: 50vh;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1rem;
+  width: 60%;
+  background: #fff;
+  padding: 30px;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+  .red {
+    background-color: red;
+  }
+`;
+
 export const Container = styled.section`
   display: flex;
   flex-direction: column;
@@ -90,4 +107,31 @@ export const Container = styled.section`
 export const Text = styled.h2`
   text-align: center;
   margin-bottom: 1.5rem;
+`;
+
+export const Initial = styled.div`
+  min-height: 50vh;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1rem;
+  h1 {
+    background-color: #fff;
+
+    border-radius: 4px;
+  }
+  button {
+    margin-top: 50%;
+  }
+`;
+
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
 `;

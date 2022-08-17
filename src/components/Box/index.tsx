@@ -24,6 +24,7 @@ interface AllProps {
   pagar_viagem: string;
   possui_visto: string;
   foi_para_eua: string;
+  foi_para_outro_pais: string;
   visto_per_o_rou: string;
   visto_recusado: string;
   passaporte_per_o_rou: string;
@@ -173,7 +174,7 @@ const Box = (props: AllProps) => {
                   <td>{props.hotel}</td>
                 </tr>
 
-                {props.viajar_junto.split(/\s*;\s*/).map((nome, index) => (
+                {props.viajar_junto.split(/\s*,\s*/).map((nome, index) => (
                   <tr key={index}>
                     <th>Viajar junto : </th>
                     <td>{nome}</td>
@@ -193,6 +194,10 @@ const Box = (props: AllProps) => {
                   <td>{props.foi_para_eua}</td>
                 </tr>
                 <tr>
+                  <th>Foi para outro pais nos últimos 5 anos : </th>
+                  <td>{props.foi_para_outro_pais}</td>
+                </tr>
+                <tr>
                   <th>Visto perdido ou roubado : </th>
                   <td>{props.visto_per_o_rou}</td>
                 </tr>
@@ -205,7 +210,7 @@ const Box = (props: AllProps) => {
                   <td>{props.passaporte_per_o_rou}</td>
                 </tr>
 
-                {props.parentes_nos_eua.split(/\s*;\s*/).map((nome, index) => (
+                {props.parentes_nos_eua.split(/\s*,\s*/).map((nome, index) => (
                   <tr key={index}>
                     <th>Parentes nos USA : </th>
                     <td>{nome}</td>

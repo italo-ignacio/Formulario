@@ -20,17 +20,20 @@ const Buttons = (props: Allprops) => {
 
   const handleClick2 = () => {
     window.scrollTo(0, 0);
-    props.setPag(props.pag < 9 ? props.pag + 1 : props.pag);
+    props.setPag(props.pag < 10 ? props.pag + 1 : props.pag);
   };
 
   return (
     <>
       <DivButtons>
         <button onClick={handleClick}>Voltar</button>
+
         {props.save ? (
           <button
             disabled={props.next}
-            onClick={() => (props.saveOnDB ? props.saveOnDB() : <></>)}
+            onClick={() => {
+              props.saveOnDB ? props.saveOnDB() : <></>;
+            }}
           >
             Salvar
           </button>

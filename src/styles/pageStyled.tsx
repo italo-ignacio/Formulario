@@ -17,6 +17,12 @@ export const Container = styled.div`
       margin-top: 1rem;
     }
   }
+  .nulo {
+    visibility: hidden;
+    @media (max-width: 900px) {
+      display: none;
+    }
+  }
   .cel {
     @media (max-width: 900px) {
       margin-top: 1rem;
@@ -60,6 +66,19 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
   }
+  .ajsM {
+    display: grid;
+    grid-template-columns: 40% 40%;
+  }
+
+  .mei {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
 `;
 
 export const Junta = styled.div`
@@ -88,6 +107,7 @@ export const Dupla = styled.div`
   @media (max-width: 1008px) {
     display: flex;
     flex-direction: column;
+    column-gap: 0.5rem;
   }
 `;
 

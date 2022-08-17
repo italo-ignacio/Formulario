@@ -20,6 +20,7 @@ export interface Data {
   pagar_viagem: string;
   possui_visto: string;
   foi_para_eua: string;
+  foi_para_outro_pais: string;
   visto_per_o_rou: string;
   visto_recusado: string;
   passaporte_per_o_rou: string;

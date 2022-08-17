@@ -33,6 +33,7 @@ model data{
   pagar_viagem String? @db.Text()
   possui_visto String? @db.Text()
   foi_para_eua String? @db.Text()
+  foi_para_outro_pais String? @db.Text()
   visto_per_o_rou String? @db.Text()
   visto_recusado String? @db.Text()
   passaporte_per_o_rou String? @db.Text()

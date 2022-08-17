@@ -15,6 +15,12 @@ export const Container = styled.section`
     border-radius: 4px;
     cursor: pointer;
   }
+  tr {
+    margin-bottom: 5px;
+    td {
+      padding-left: 5px;
+    }
+  }
 
   .separar {
     display: grid;

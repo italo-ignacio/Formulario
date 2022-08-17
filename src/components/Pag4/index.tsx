@@ -14,6 +14,10 @@ interface AllProps {
   setData_deseja: Function;
   tempo_deseja: string;
   setTempo_deseja: Function;
+  Ntempo_deseja: string;
+  setNTempo_deseja: Function;
+  Ttempo_deseja: string;
+  setTTempo_deseja: Function;
   hotel: string;
   setHotel: Function;
   viajar_junto: string;
@@ -38,10 +42,10 @@ const Pag4 = (props: AllProps) => {
 
   const addPessoa = () => {
     if (viajar_junto != "" && Gviajar_junto != "") {
-      let pessoa = `${Gviajar_junto.toUpperCase().replace(
+      let pessoa = `${Gviajar_junto.toUpperCase().replaceAll(
         ",",
         " "
-      )} - ${viajar_junto.replace(",", " ")}`;
+      )} - ${viajar_junto.replaceAll(",", " ")}`;
       props.setAViajar_junto((oldArray: any) => [...oldArray, pessoa]);
       setViajar_junto("");
       setGViajar_junto("");
@@ -65,10 +69,10 @@ const Pag4 = (props: AllProps) => {
   if (props.Spagar_viagem == "nao") {
     if (props.Gpagar_viagem != "" && props.Npagar_viagem != "") {
       props.setPagar_viagem(
-        `${props.Gpagar_viagem.toUpperCase().replace(
+        `${props.Gpagar_viagem.toUpperCase().replaceAll(
           ",",
           " "
-        )} - ${props.Npagar_viagem.replace(",", " ")}`
+        )} - ${props.Npagar_viagem.replaceAll(",", " ")}`
       );
     } else {
       props.setPagar_viagem("");
@@ -81,13 +85,14 @@ const Pag4 = (props: AllProps) => {
   if (
     props.estado_deseja == "" ||
     !validator.isDate(verificarDataDeseja(props.data_deseja)) ||
-    props.tempo_deseja == "" ||
+    props.Ntempo_deseja == "" ||
     props.viajar_junto == "" ||
     props.hotel == "" ||
     props.pagar_viagem == ""
   ) {
     props.setNext(true);
   } else {
+    props.setTempo_deseja(`${props.Ntempo_deseja} ${props.Ttempo_deseja}`);
     props.setNext(false);
   }
 
@@ -104,7 +109,7 @@ const Pag4 = (props: AllProps) => {
       </Junta>
 
       <Junta>
-        {props.data_deseja.replace("_", "").length == 10 &&
+        {props.data_deseja.replaceAll("_", "").length == 10 &&
         !validator.isDate(verificarDataDeseja(props.data_deseja)) ? (
           <label>Data que pretende viajar (Data inválida)</label>
         ) : (
@@ -123,11 +128,24 @@ const Pag4 = (props: AllProps) => {
 
       <Junta>
         <label>Quanto tempo deseja ficar</label>
-        <input
-          value={props.tempo_deseja}
-          alt={"Quanto tempo deseja ficar"}
-          onChange={(e) => props.setTempo_deseja(e.target.value)}
-        />
+        <Plus className="ajsM">
+          <input
+            value={props.Ntempo_deseja}
+            type={"tel"}
+            alt={"Quanto tempo deseja ficar"}
+            onChange={(e) => props.setNTempo_deseja(e.target.value)}
+          />
+          <select
+            value={props.Ttempo_deseja}
+            onChange={(e) => {
+              props.setTTempo_deseja(e.target.value);
+            }}
+          >
+            <option value={"Dia (s)"}>Dia (s)</option>
+            <option value={"Mês (es)"}>Mês (es)</option>
+            <option value={"Ano (s)"}>Ano (s)</option>
+          </select>
+        </Plus>
         <br />
       </Junta>
 
@@ -231,6 +249,7 @@ const Pag4 = (props: AllProps) => {
             onChange={() => {
               props.setSViajar_junto("nao");
               props.setViajar_junto("");
+              props.setAViajar_junto([]);
             }}
           />{" "}
           Não

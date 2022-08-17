@@ -1,5 +1,5 @@
 export const verificarDataNascimento = (data: string) => {
-  if (data === "Não trabalha" || data === "Nunca trabalhou") {
+  if (data === "Não trabalha" || data === "Nunca trabalhou" || data === "n") {
     return "2001-05-08";
   }
   var dia = data.split("/")[0];
@@ -16,6 +16,9 @@ export const verificarDataNascimento = (data: string) => {
 };
 
 export const verificarDataTermino = (data: string) => {
+  if (data === "Não trabalha" || data === "Nunca trabalhou" || data === "n") {
+    return "2001-05-08";
+  }
   var dia = data.split("/")[0];
   var mes = data.split("/")[1];
   var ano = data.split("/")[2];

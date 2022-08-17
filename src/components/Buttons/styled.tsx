@@ -13,6 +13,10 @@ export const DivButtons = styled.div`
     padding: 0;
     margin-top: 0;
   }
+
+  .nul {
+    visibility: hidden;
+  }
 `;
 
 export const Text = styled.h3`
