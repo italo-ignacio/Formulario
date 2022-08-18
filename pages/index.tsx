@@ -13,15 +13,18 @@ import Pag6 from "../src/components/Pag6";
 import Pag7 from "../src/components/Pag7";
 import Pag8 from "../src/components/Pag8";
 import Pag9 from "../src/components/Pag9";
+import InputMask from "react-input-mask";
+import { useRouter } from "next/router";
 
 const Home: NextPage = () => {
+  const router = useRouter();
   const [nome, setNome] = useState("");
   const [data_nascimento, setData_nascimento] = useState("");
   const [cpf, setCpf] = useState("");
   const [endereco, setEndereco] = useState("");
   const [telefone, setTelefone] = useState("");
   const [email, setEmail] = useState("");
-  const [estado_civil, setEstado_civil] = useState("Solteiro (a)");
+  const [estado_civil, setEstado_civil] = useState("");
   const [nome_solteiro, setNome_solteiro] = useState("");
   const [tnome_solteiro, settNome_solteiro] = useState("");
   const [nacionalidades, setNacionalidades] = useState("");
@@ -165,22 +168,300 @@ const Home: NextPage = () => {
           ini_ter_facul_escola: ini_ter_facul_escola,
         }),
       });
-      setPag(10);
+      if (pag == 9) {
+        setPag(10);
+      }
     } catch (error) {
       alert(`Erro ao salvar`);
+    }
+    setLoading(false);
+  };
+  const searchUser = async () => {
+    setLoading(true);
+    if (cpf.replace(/[^0-9]+/g, "").length == 11) {
+      try {
+        await fetch("/api/data/" + cpf.replace(/[^0-9]+/g, ""), {
+          method: "GET",
+        })
+          .then((T) => T.json())
+          .then((data) => {
+            if (data != null) {
+              setNome(data.nome);
+              setEmail(data.email);
+              setData_nascimento(data.data_nascimento);
+              setCpf(data.cpf);
+              setTelefone(data.telefone);
+              setEstado_civil(data.estado_civil);
+              if (data.nome_solteiro == "Não possui") {
+                settNome_solteiro("nao");
+                setNome_solteiro("Não possui");
+              } else if (data.nome_solteiro == "") {
+                setNome_solteiro("");
+              } else {
+                settNome_solteiro("sim");
+                setNome_solteiro(data.nome_solteiro);
+              }
+              setCep(data.endereco.substr("0", "9"));
+              if (data.nacionalidades == "Não possui") {
+                setSNacionalidades("nao");
+                setNacionalidades("Não possui");
+              } else if (data.nacionalidades == "") {
+              } else {
+                setSNacionalidades("sim");
+                let naci = data.nacionalidades.split(",");
+                naci.pop();
+                setANacionalidades(naci);
+              }
+              if (data.idiomas == "Não fala outro idioma") {
+                setSIdiomas("nao");
+                setIdiomas("Não fala outro idioma");
+              } else if (data.idiomas == "") {
+              } else {
+                setSIdiomas("sim");
+                let idi = data.idiomas.split(",");
+                idi.pop();
+                setAIdiomas(idi);
+              }
+              if (data.serviu_exercito == "Não serviu") {
+                setServiu_exercito("Não serviu");
+                setSServiu_exercito("nao");
+                setBatalhao("n");
+                setPatente("n");
+                setEspecialidade("n");
+                setIniServiu_exercito("n");
+                setTerServiu_exercito("n");
+              } else if (data.serviu_exercito == "") {
+              } else {
+                setSServiu_exercito("sim");
+                let exe = data.serviu_exercito.split(",");
+                setBatalhao(exe[0].replace("Branch: ", "").replaceAll(" ", ""));
+                setPatente(exe[1].replace("Rank: ", "").replaceAll(" ", ""));
+                setEspecialidade(
+                  exe[2].replace("Specialty: ", "").replaceAll(" ", "")
+                );
+                setIniServiu_exercito(
+                  exe[3].replace("Inicio: ", "").replaceAll(" ", "")
+                );
+                setTerServiu_exercito(
+                  exe[4].replace("Término: ", "").replaceAll(" ", "")
+                );
+                setServiu_exercito(data.serviu_exercito);
+              }
+              setEstado_deseja(data.estado_deseja);
+              setData_deseja(data.data_deseja);
+              setNTempo_deseja(data.tempo_deseja.replace(/[^0-9]+/g, ""));
+              if (
+                data.tempo_deseja
+                  .replace(/[0-9]+/g, "")
+                  .replace(" ", "")
+                  .indexOf("D") == 0
+              ) {
+                setTTempo_deseja("Dia (s)");
+              } else if (data.tempo_deseja == "") {
+              } else {
+                setTTempo_deseja("Mês (es)");
+              }
+              setTempo_deseja(data.tempo_deseja);
+              setHotel(data.hotel);
+              if (data.pagar_viagem == "Própria pessoa") {
+                setPagar_viagem("Própria pessoa");
+                setSPagar_viagem("sim");
+              } else if (data.pagar_viagem == "") {
+              } else {
+                setSPagar_viagem("nao");
+                setPagar_viagem(data.pagar_viagem);
+                let pagar = data.pagar_viagem.split("-");
+                NetGPagar_viagem(pagar[1]);
+                setGPagar_viagem(pagar[0]);
+              }
+              if (data.viajar_junto == "Viajar sozinho") {
+                setViajar_junto("Viajar sozinho");
+                setSViajar_junto("sim");
+              } else if (data.viajar_junto == "") {
+              } else {
+                setSViajar_junto("nao");
+                let peso = data.viajar_junto.split(",");
+                peso.pop();
+                setAViajar_junto(peso);
+              }
+              setPossui_visto(data.possui_visto);
+              setFoi_para_eua(data.foi_para_eua);
+              setVisto_per_o_rou(data.visto_per_o_rou);
+              setVisto_recusado(data.visto_recusado);
+              setPassaporte_per_o_rou(data.passaporte_per_o_rou);
+              if (data.foi_para_outro_pais == "Não viajou para outro país") {
+                setSFoi_para_outro_pais("nao");
+                setFoi_para_outro_pais("Não viajou para outro país");
+              } else if (data.foi_para_outro_pais == "") {
+              } else {
+                setSFoi_para_outro_pais("sim");
+                let pais = data.foi_para_outro_pais.split(",");
+                pais.pop();
+                setAFoi_para_outro_pais(pais);
+              }
+              if (data.parentes_nos_eua == "Não possui") {
+                setParentes_nos_eua("Não possui");
+                setSParentes_nos_eua("Não");
+              } else if (data.parentes_nos_eua == "") {
+              } else {
+                setSParentes_nos_eua("Sim");
+                let parentes = data.parentes_nos_eua.split(",");
+                parentes.pop();
+                setAParentes_nos_eua(parentes);
+                setAParentes_nos_eua2(parentes);
+              }
+              setNome_pai(data.nome_pai);
+              setData_nasc_pai(data.data_nasc_pai);
+              setPai_mora_eua(data.pai_mora_eua);
+              setNome_mae(data.nome_mae);
+              setData_nasc_mae(data.data_nasc_mae);
+              setMae_mora_eua(data.mae_mora_eua);
+              setInstagram(data.instagram);
+              setFacebook(data.facebook);
+              setLinkedin(data.linkedin);
+              if (data.trabalho == "Não trabalha") {
+                setSTrabalho("nao");
+                setTrabalho("Não trabalha");
+                setNome_empresa("Não trabalha");
+                setEndereco_empresa("Não trabalha");
+                setData_inicio_empresa("Não trabalha");
+                setTelefone_empresa("Não trabalha");
+              } else if (data.trabalho == "") {
+              } else {
+                setSTrabalho("sim");
+                setTrabalho(data.trabalho);
+                setNome_empresa(data.nome_empresa);
+                setEndereco_empresa(data.endereco_empresa);
+                setData_inicio_empresa(data.data_inicio_empresa);
+                setTelefone_empresa(data.telefone_empresa);
+              }
+              if (data.trabalho_antigo == "Nunca trabalhou") {
+                setSTrabalho_antigo("nao");
+                setTrabalho_antigo("Nunca trabalhou");
+                setNome_empresa_antigo("Nunca trabalhou");
+                setEndereco_empresa_antigo("Nunca trabalhou");
+                setData_ter_empresa_antigo("Nunca trabalhou");
+                setData_ini_empresa_antigo("Nunca trabalhou");
+                setTelefone_empresa_antigo("Nunca trabalhou");
+                setData_ini_ter_empresa_antigo("Nunca trabalhou");
+              } else if (data.trabalho_antigo == "") {
+              } else {
+                setSTrabalho_antigo("sim");
+                setTrabalho_antigo(data.trabalho_antigo);
+                setNome_empresa_antigo(data.nome_empresa_antigo);
+                setEndereco_empresa_antigo(data.endereco_empresa_antigo);
+                setTelefone_empresa_antigo(data.telefone_empresa_antigo);
+                let dat = data.data_ini_ter_empresa_antigo.split("-");
+                setData_ini_empresa_antigo(
+                  dat[0].replace("Inicio: ", "").replace(" ", "")
+                );
+                setData_ter_empresa_antigo(
+                  dat[1].replace("Término: ", "").replace(" ", "")
+                );
+                setData_ini_ter_empresa_antigo(
+                  data.data_ini_ter_empresa_antigo
+                );
+              }
+              if (data.nome_facul_escola == "Não possui") {
+                setFacul("nao");
+                setCurso_facul("Não possui");
+                setNome_facul_escola("Não possui");
+                setEndereco_facul_escola("Não possui");
+                setTelefone_facul_escola("Não possui");
+                setIni_facul_escola("Não possui");
+                setTer_facul_escola("Não possui");
+                setIni_ter_facul_escola("Não possui");
+              } else if (data.nome_facul_escola == "") {
+              } else {
+                if (data.curso_facul == "Não possui") {
+                  setFacul("escola");
+                  setCurso_facul("Não possui");
+                  setNome_facul_escola(data.nome_facul_escola);
+                  setEndereco_facul_escola(data.endereco_facul_escola);
+                  setTelefone_facul_escola(data.telefone_facul_escola);
+
+                  let dat = data.ini_ter_facul_escola.split("-");
+                  setIni_facul_escola(
+                    dat[0].replace("Inicio: ", "").replace(" ", "")
+                  );
+                  setTer_facul_escola(
+                    dat[1].replace("Término: ", "").replace(" ", "")
+                  );
+                  setIni_ter_facul_escola(data.ini_ter_facul_escola);
+                } else {
+                  setFacul("facul");
+                  setCurso_facul(data.curso_facul);
+                  setNome_facul_escola(data.nome_facul_escola);
+                  setEndereco_facul_escola(data.endereco_facul_escola);
+                  setTelefone_facul_escola(data.telefone_facul_escola);
+
+                  let dat = data.ini_ter_facul_escola.split("-");
+                  setIni_facul_escola(
+                    dat[0].replace("Inicio: ", "").replace(" ", "")
+                  );
+                  setTer_facul_escola(
+                    dat[1].replace("Término: ", "").replace(" ", "")
+                  );
+                  setIni_ter_facul_escola(data.ini_ter_facul_escola);
+                }
+              }
+
+              setPag(1);
+            } else {
+              setLoading(false);
+              alert("CPF não encontrado");
+            }
+          });
+      } catch (error) {
+        setLoading(false);
+        alert("CPF não encontrado");
+      }
     }
     setLoading(false);
   };
 
   return (
     <main id={"top"}>
-      {loading ? <Loading text="Salvando" /> : <></>}
+      {loading ? <Loading text="Aguarde..." /> : <></>}
       <Container>
         {pag == 0 ? (
           <>
             <Initial>
               <h1>Formulário</h1>
+              <br />
+              <br />
               <button onClick={() => setPag(1)}>Iniciar formulário</button>
+
+              <br />
+              <br />
+              <br />
+              <br />
+              <h3>Para editar seus dados digite o cpf</h3>
+              <br />
+              <InputMask
+                mask={"999.999.999-99"}
+                value={cpf}
+                type={"tel"}
+                placeholder={"CPF"}
+                alt={"CPF"}
+                onChange={(e) => setCpf(e.target.value)}
+              />
+              <br />
+              <br />
+              <button onClick={searchUser}>Editar dados</button>
+              <br />
+              <br />
+              <br />
+              <br />
+              <button
+                onClick={() => {
+                  router.reload();
+                }}
+              >
+                Limpar dados
+              </button>
+              <br />
+              <br />
             </Initial>
           </>
         ) : (
@@ -212,6 +493,7 @@ const Home: NextPage = () => {
             <Buttons
               pag={pag}
               setPag={setPag}
+              saveOnDB={handleClick}
               text={"Etapa 1 de 9"}
               next={next}
               setNext={setNext}
@@ -248,6 +530,7 @@ const Home: NextPage = () => {
               setPag={setPag}
               text={"Etapa 2 de 9"}
               next={next}
+              saveOnDB={handleClick}
               setNext={setNext}
             />
           </>
@@ -293,6 +576,7 @@ const Home: NextPage = () => {
               text={"Etapa 3 de 9"}
               next={next}
               setNext={setNext}
+              saveOnDB={handleClick}
             />
           </>
         ) : (
@@ -337,6 +621,7 @@ const Home: NextPage = () => {
               text={"Etapa 4 de 9"}
               next={next}
               setNext={setNext}
+              saveOnDB={handleClick}
             />
           </>
         ) : (
@@ -379,6 +664,7 @@ const Home: NextPage = () => {
               text={"Etapa 5 de 9"}
               next={next}
               setNext={setNext}
+              saveOnDB={handleClick}
             />
           </>
         ) : (
@@ -409,6 +695,7 @@ const Home: NextPage = () => {
               text={"Etapa 6 de 9"}
               next={next}
               setNext={setNext}
+              saveOnDB={handleClick}
             />
           </>
         ) : (
@@ -433,6 +720,7 @@ const Home: NextPage = () => {
               text={"Etapa 7 de 9"}
               next={false}
               setNext={setNext}
+              saveOnDB={handleClick}
             />
           </>
         ) : (
@@ -479,6 +767,7 @@ const Home: NextPage = () => {
               text={"Etapa 8 de 9"}
               next={next}
               setNext={setNext}
+              saveOnDB={handleClick}
             />
           </>
         ) : (
@@ -524,6 +813,17 @@ const Home: NextPage = () => {
           <>
             <Initial>
               <h1>Formulário respondido</h1>
+              <br />
+              <br />
+              <br />
+              <br />
+              <button
+                onClick={() => {
+                  router.reload();
+                }}
+              >
+                Voltar para o inicio
+              </button>
             </Initial>
           </>
         ) : (
@@ -536,101 +836,3 @@ const Home: NextPage = () => {
 };
 
 export default Home;
-
-/*
-nome: {nome},
-<br />
-data_nascimento: {data_nascimento},
-<br />
-cpf: {cpf},
-<br />
-endereco: {endereco},
-<br />
-telefone: {telefone},
-<br />
-email: {email},
-<br />
-estado_civil: {estado_civil},
-<br />
-nome_solteiro: {nome_solteiro},
-<br />
-nacionalidades: {nacionalidades},
-<br />
-serviu_exercito: {serviu_exercito},
-<br />
-estado_deseja: {estado_deseja},
-<br />
-data_deseja: {data_deseja},
-<br />
-tempo_deseja: {tempo_deseja},
-<br />
-hotel: {hotel},
-<br />
-viajar_junto: {viajar_junto},
-<br />
-pagar_viagem: {pagar_viagem},
-<br />
-possui_visto: {possui_visto},
-<br />
-foi_para_eua: {foi_para_eua},
-<br />
-visto_per_o_rou: {visto_per_o_rou},
-<br />
-visto_recusado: {visto_recusado},
-<br />
-passaporte_per_o_rou: {passaporte_per_o_rou},
-<br />
-parentes_nos_eua: {parentes_nos_eua},
-<br />
-nome_pai: {nome_pai},
-<br />
-data_nasc_pai: {data_nasc_pai},
-<br />
-pai_mora_eua: {pai_mora_eua},
-<br />
-nome_mae: {nome_mae},
-<br />
-data_nasc_mae: {data_nasc_mae},
-<br />
-mae_mora_eua: {mae_mora_eua},
-<br />
-instagram: {instagram},
-<br />
-facebook: {facebook},
-<br />
-linkedin: {linkedin},
-<br />
-trabalho: {trabalho},
-<br />
-nome_empresa: {nome_empresa},
-<br />
-endereco_empresa: {endereco_empresa},
-<br />
-telefone_empresa: {telefone_empresa},
-<br />
-data_inicio_empresa: {data_inicio_empresa},
-<br />
-trabalho_antigo: {trabalho_antigo},
-<br />
-nome_empresa_antigo: {nome_empresa_antigo},
-<br />
-endereco_empresa_antigo: {endereco_empresa_antigo},
-<br />
-telefone_empresa_antigo: {telefone_empresa_antigo},
-<br />
-data_ini_ter_empresa_antigo: {data_ini_ter_empresa_antigo},
-<br />
-idiomas: {idiomas},
-<br />
-nome_facul_escola: {nome_facul_escola},
-<br />
-endereco_facul_escola: {endereco_facul_escola},
-<br />
-telefone_facul_escola: {telefone_facul_escola},
-<br />
-curso_facul: {curso_facul},
-<br />
-ini_ter_facul_escola: {ini_ter_facul_escola},
-<br />
-
-*/

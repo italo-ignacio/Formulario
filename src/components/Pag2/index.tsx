@@ -25,22 +25,39 @@ interface AllProps {
 }
 const Pag2 = (props: AllProps) => {
   const [loading, setLoading] = useState(false);
+  const [busca, setBusca] = useState(false);
 
   const hadleClick = async () => {
     try {
-      if (props.cep.length == 8) {
+      if (props.cep.length >= 8) {
         setLoading(true);
-        fetch(`https://viacep.com.br/ws/${props.cep}/json/`, {
-          method: "GET",
-        })
+        fetch(
+          `https://viacep.com.br/ws/${props.cep.replace(/[^0-9]+/g, "")}/json/`,
+          {
+            method: "GET",
+          }
+        )
           .then((T) => T.json())
           .then((dados) => {
-            props.setCep(dados.cep);
-            props.setRua(dados.logradouro);
-            props.setCidade(dados.localidade);
-            props.setBairro(dados.bairro);
-            props.setComplemento(dados.complemento);
-            props.setUf(dados.uf);
+            if (dados.erro != "true") {
+              console.log(dados);
+              props.setCep(dados.cep);
+              props.setRua(dados.logradouro);
+              props.setCidade(dados.localidade);
+              props.setBairro(dados.bairro);
+              props.setComplemento(dados.complemento);
+              props.setUf(dados.uf);
+              setBusca(true);
+            } else {
+              props.setRua("");
+              props.setCidade("");
+              props.setBairro("");
+              props.setComplemento("");
+              props.setUf("");
+              props.setNumero("");
+              setBusca(false);
+              alert("Cep não encontrado");
+            }
           });
       }
     } catch (error) {
@@ -50,6 +67,7 @@ const Pag2 = (props: AllProps) => {
       props.setComplemento("");
       props.setUf("");
       props.setNumero("");
+      setBusca(false);
       alert("Cep não encontrado");
     }
     setLoading(false);
@@ -98,62 +116,67 @@ const Pag2 = (props: AllProps) => {
           <br />
         </Junta>
         <Botao onClick={hadleClick}>Buscar</Botao>
-
-        <Junta>
-          <label>Rua</label>
-          <input
-            value={props.rua}
-            alt={"Rua"}
-            onChange={(e) => props.setRua(e.target.value)}
-          />
-          <br />
-        </Junta>
-        <Junta>
-          <label>Complemento</label>
-          <input
-            value={props.complemento}
-            alt={"Complemento"}
-            onChange={(e) => props.setComplemento(e.target.value)}
-          />
-          <br />
-        </Junta>
-        <Junta>
-          <label>Bairro</label>
-          <input
-            value={props.bairro}
-            alt={"Bairro"}
-            onChange={(e) => props.setBairro(e.target.value)}
-          />
-          <br />
-        </Junta>
-        <Junta>
-          <label>Cidade</label>
-          <input
-            value={props.cidade}
-            alt={"Cidade"}
-            onChange={(e) => props.setCidade(e.target.value)}
-          />
-          <br />
-        </Junta>
-        <Junta>
-          <label>UF</label>
-          <input
-            value={props.uf}
-            alt={"UF"}
-            onChange={(e) => props.setUf(e.target.value)}
-          />
-          <br />
-        </Junta>
-        <Junta>
-          <label>Numero</label>
-          <input
-            type={"tel"}
-            value={props.numero}
-            alt={"numero"}
-            onChange={(e) => props.setNumero(e.target.value)}
-          />
-          <br />
-        </Junta>
+        {busca ? (
+          <>
+            <Junta>
+              <label>Rua</label>
+              <input
+                value={props.rua}
+                alt={"Rua"}
+                onChange={(e) => props.setRua(e.target.value)}
+              />
+              <br />
+            </Junta>
+            <Junta>
+              <label>Complemento</label>
+              <input
+                value={props.complemento}
+                alt={"Complemento"}
+                onChange={(e) => props.setComplemento(e.target.value)}
+              />
+              <br />
+            </Junta>
+            <Junta>
+              <label>Bairro</label>
+              <input
+                value={props.bairro}
+                alt={"Bairro"}
+                onChange={(e) => props.setBairro(e.target.value)}
+              />
+              <br />
+            </Junta>
+            <Junta>
+              <label>Cidade</label>
+              <input
+                value={props.cidade}
+                alt={"Cidade"}
+                onChange={(e) => props.setCidade(e.target.value)}
+              />
+              <br />
+            </Junta>
+            <Junta>
+              <label>UF</label>
+              <input
+                value={props.uf}
+                alt={"UF"}
+                onChange={(e) => props.setUf(e.target.value)}
+              />
+              <br />
+            </Junta>
+            <Junta>
+              <label>Numero</label>
+              <input
+                type={"tel"}
+                value={props.numero}
+                alt={"numero"}
+                onChange={(e) => props.setNumero(e.target.value)}
+              />
+              <br />
+            </Junta>
+          </>
+        ) : (
+          <></>
+        )}
       </Container>
     </>
   );

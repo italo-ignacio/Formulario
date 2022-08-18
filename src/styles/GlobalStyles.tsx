@@ -76,9 +76,12 @@ export const Container2 = styled.section`
   padding: 30px;
   border-radius: 4px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-
+  text-align: center;
   .red {
     background-color: red;
+  }
+  @media (max-width: 900px) {
+    width: 85%;
   }
 `;
 
@@ -114,14 +117,12 @@ export const Initial = styled.div`
   position: relative;
   margin-left: auto;
   margin-right: auto;
+  text-align: center;
   margin-top: 1rem;
   h1 {
     background-color: #fff;
 
     border-radius: 4px;
-  }
-  button {
-    margin-top: 50%;
   }
 `;
 

@@ -40,9 +40,9 @@ const Pag5 = (props: AllProps) => {
   const [Enderecoparentes_nos_eua, setEnderecoParentes_nos_eua] = useState("");
   const [Emailparentes_nos_eua, setEmailParentes_nos_eua] = useState("");
   const [Telefoneparentes_nos_eua, setTelefoneParentes_nos_eua] = useState("");
-
+  const [cont, setCont] = useState(0);
+  const [cont2, setCont2] = useState(0);
   const [paises, setPaises] = useState("");
-  const [mask, setMask] = useState("(99) 99999-9999");
 
   const addPessoa = () => {
     if (
@@ -61,7 +61,6 @@ const Pag5 = (props: AllProps) => {
         ...oldArray,
         Nomeparentes_nos_eua,
       ]);
-      setMask("(99) 99999-9999");
       setNomeParentes_nos_eua("");
       setEnderecoParentes_nos_eua("");
       setTelefoneParentes_nos_eua("");
@@ -84,6 +83,8 @@ const Pag5 = (props: AllProps) => {
         props.Aparentes_nos_eua2.length
       ),
     ]);
+
+    setCont(0);
   };
 
   const addPais = () => {
@@ -104,6 +105,8 @@ const Pag5 = (props: AllProps) => {
         props.Afoi_para_outro_pais.length
       ),
     ]);
+
+    setCont2(0);
   };
 
   const handleKeyPress = (event: any) => {
@@ -121,10 +124,24 @@ const Pag5 = (props: AllProps) => {
   };
 
   if (props.Sparentes_nos_eua === "Sim") {
-    props.setParentes_nos_eua(props.Aparentes_nos_eua.toString());
+    if (props.Aparentes_nos_eua.length > 0) {
+      props.setParentes_nos_eua(props.Aparentes_nos_eua.toString() + ",");
+    } else {
+      if (cont == 0) {
+        props.setParentes_nos_eua([]);
+        setCont(1);
+      }
+    }
   }
   if (props.Sfoi_para_outro_pais == "sim") {
-    props.setFoi_para_outro_pais(props.Afoi_para_outro_pais.toString());
+    if (props.Afoi_para_outro_pais.length > 0) {
+      props.setFoi_para_outro_pais(props.Afoi_para_outro_pais.toString() + ",");
+    } else {
+      if (cont2 == 0) {
+        props.setFoi_para_outro_pais([]);
+        setCont2(1);
+      }
+    }
   }
   if (
     props.possui_visto == "" ||
@@ -269,6 +286,8 @@ const Pag5 = (props: AllProps) => {
               checked={props.Sfoi_para_outro_pais === "sim"}
               onChange={() => {
                 props.setSFoi_para_outro_pais("sim");
+                props.setAFoi_para_outro_pais([]);
+                setCont2(0);
               }}
             />{" "}
             Sim

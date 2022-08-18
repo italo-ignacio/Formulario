@@ -5,7 +5,7 @@ interface Allprops {
   pag: number;
   setPag: Function;
   save?: boolean;
-  saveOnDB?: Function;
+  saveOnDB: Function;
   text: string;
   next: boolean;
   setNext: Function;
@@ -26,21 +26,34 @@ const Buttons = (props: Allprops) => {
   return (
     <>
       <DivButtons>
-        <button onClick={handleClick}>Voltar</button>
+        <div>
+          <button onClick={handleClick}>Voltar</button>
+        </div>
 
         {props.save ? (
+          <></>
+        ) : (
+          <div>
+            <button disabled={props.next} onClick={handleClick2}>
+              Avançar
+            </button>
+          </div>
+        )}
+
+        <div className="ce">
           <button
             disabled={props.next}
             onClick={() => {
-              props.saveOnDB ? props.saveOnDB() : <></>;
+              props.saveOnDB();
             }}
           >
             Salvar
           </button>
+        </div>
+        {props.save ? (
+          <></>
         ) : (
-          <button disabled={props.next} onClick={handleClick2}>
-            Avançar
-          </button>
+          <label className="ce">Você pode salvar tudo no final</label>
         )}
       </DivButtons>
       <Text>{props.text}</Text>

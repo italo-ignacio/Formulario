@@ -58,7 +58,7 @@ const Pag8 = (props: AllProps) => {
   } else {
     if (props.data_ini_empresa_antigo != "Nunca trabalhou") {
       props.setData_ini_ter_empresa_antigo(
-        `Inicio: ${props.data_ini_empresa_antigo} // Término: ${props.data_ter_empresa_antigo}`
+        `Inicio: ${props.data_ini_empresa_antigo} - Término: ${props.data_ter_empresa_antigo}`
       );
     }
     props.setNext(false);

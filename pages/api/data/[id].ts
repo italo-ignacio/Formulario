@@ -11,18 +11,6 @@ export default async function handler(
   } = req;
 
   switch (method) {
-    case "PUT":
-      try {
-        const data = JSON.parse(req.body);
-        await updateData(Number(id), data);
-        res.status(200).json({ message: "Updated successfully" });
-      } catch (error) {
-        res.status(400).json({ error: true, msg: error });
-        break;
-      }
-
-      break;
-
     case "DELETE":
       try {
         await deleteData(Number(id));
@@ -32,15 +20,18 @@ export default async function handler(
         res.status(400).json({ error: true, msg: error });
         break;
       }
-
     case "GET":
       try {
-        const dados = await getDatas(String(id));
+        const cpf = String(id)
+          .replace(/(\d{3})(\d)/, "$1.$2")
+          .replace(/(\d{3})(\d)/, "$1.$2")
+          .replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+
+        const dados = await getDatas(String(cpf));
         res.status(200).json(dados);
       } catch (error) {
         res.status(400).json({ error: true, msg: error });
       }
-
       break;
     default:
       res.status(400).json({ error: true, msg: "URL does not exist" });

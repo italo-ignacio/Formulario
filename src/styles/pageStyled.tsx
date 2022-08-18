@@ -61,7 +61,10 @@ export const Container = styled.div`
     margin-right: auto;
     margin-top: 1rem;
   }
-
+  .separar {
+    display: grid;
+    grid-template-columns: 50% 50%;
+  }
   .des {
     display: flex;
     flex-direction: column;
@@ -78,6 +81,10 @@ export const Container = styled.div`
     margin-left: auto;
     margin-right: auto;
     text-align: center;
+  }
+
+  .jump {
+    margin-bottom: 0.9rem;
   }
 `;
 

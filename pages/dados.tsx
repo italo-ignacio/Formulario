@@ -7,7 +7,6 @@ import { AuthContext } from "../src/contexts/auth";
 import { Container2 } from "../src/styles/GlobalStyles";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  console.log(context);
   const dados = await getAllDatas();
   return {
     props: {

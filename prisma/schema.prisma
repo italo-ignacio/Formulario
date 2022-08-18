@@ -17,7 +17,7 @@ model data{
   id Int @id @default(autoincrement())
   nome String? @db.Text()  
   data_nascimento String? @db.Text()
-  cpf String? @db.Text()
+  cpf String  @db.Text()
   endereco String? @db.Text()
   telefone String? @db.Text()
   email String? @db.Text()  

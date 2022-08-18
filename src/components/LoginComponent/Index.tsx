@@ -12,10 +12,11 @@ const LoginComponent = () => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-
-    provider?.login(nome, password);
-
-    setClas(true);
+    try {
+      provider?.login(nome, password);
+    } catch (error) {
+      setClas(true);
+    }
   };
   const dados = () => {
     router.replace("/dados");

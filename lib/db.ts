@@ -57,10 +57,10 @@ export async function getAllDatas() {
   return data;
 }
 
-export async function getDatas(nome: string) {
+export async function getDatas(cpf: string) {
   const data = await prisma.data.findFirst({
     where: {
-      nome,
+      cpf,
     },
   });
   return data;

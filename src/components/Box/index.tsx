@@ -75,7 +75,7 @@ const Box = (props: AllProps) => {
         });
         setDeleted(true);
       } catch (error) {
-        alert(`Erro ao deletar\n\nErro : ${error}`);
+        alert(`Erro ao deletar\n\nErro${error}`);
       }
       setLoading(false);
     } else {
@@ -83,12 +83,10 @@ const Box = (props: AllProps) => {
     }
   };
 
-  if (loading) {
-    return <Loading text="Deletando" />;
-  }
-
   return (
     <>
+      {loading ? <Loading text="Deletando" /> : <></>}
+
       {deleted ? (
         <></>
       ) : (
@@ -118,178 +116,178 @@ const Box = (props: AllProps) => {
             <>
               <Table>
                 <tr>
-                  <th>Nome : </th>
+                  <th>Nome</th>
                   <td>{props.nome}</td>
                 </tr>
                 <tr>
-                  <th>Data de nascimento : </th>
+                  <th>Data de nascimento</th>
                   <td>{props.data_nascimento}</td>
                 </tr>
                 <tr>
-                  <th>CPF : </th>
+                  <th>CPF</th>
                   <td>{props.cpf}</td>
                 </tr>
                 <tr>
-                  <th>Endereço : </th>
+                  <th>Endereço</th>
                   <td>{props.endereco}</td>
                 </tr>
                 <tr>
-                  <th>Telefone : </th>
+                  <th>Telefone</th>
                   <td>{props.telefone}</td>
                 </tr>
                 <tr>
-                  <th>E-mail : </th>
+                  <th>E-mail</th>
                   <td>{props.email}</td>
                 </tr>
                 <tr>
-                  <th>Estado civil : </th>
+                  <th>Estado civil</th>
                   <td>{props.estado_civil}</td>
                 </tr>
                 <tr>
-                  <th>Nome de solteiro(a) : </th>
+                  <th>Nome de solteiro(a)</th>
                   <td>{props.nome_solteiro}</td>
                 </tr>
                 <tr>
-                  <th>Outras nacionalidades : </th>
+                  <th>Outras nacionalidades</th>
                   <td>{props.nacionalidades}</td>
                 </tr>
                 <tr>
-                  <th>Serviu o exército : </th>
+                  <th>Serviu o exército</th>
                   <td>{props.serviu_exercito}</td>
                 </tr>
                 <tr>
-                  <th>Estado que deseja ir : </th>
+                  <th>Estado que deseja ir</th>
                   <td>{props.estado_deseja}</td>
                 </tr>
                 <tr>
-                  <th>Data que deseja ir : </th>
+                  <th>Data que deseja ir</th>
                   <td>{props.data_deseja}</td>
                 </tr>
                 <tr>
-                  <th>Tempo que deseja ficar : </th>
+                  <th>Tempo que deseja ficar</th>
                   <td>{props.tempo_deseja}</td>
                 </tr>
                 <tr>
-                  <th>Hotel : </th>
+                  <th>Hotel</th>
                   <td>{props.hotel}</td>
                 </tr>
 
                 {props.viajar_junto.split(/\s*,\s*/).map((nome, index) => (
                   <tr key={index}>
-                    <th>Viajar junto : </th>
+                    <th>Viajar junto</th>
                     <td>{nome}</td>
                   </tr>
                 ))}
 
                 <tr>
-                  <th>Pagar a viagem : </th>
+                  <th>Pagar a viagem</th>
                   <td>{props.pagar_viagem}</td>
                 </tr>
                 <tr>
-                  <th>Possui visto : </th>
+                  <th>Possui visto</th>
                   <td>{props.possui_visto}</td>
                 </tr>
                 <tr>
-                  <th>Foi para USA : </th>
+                  <th>Foi para USA</th>
                   <td>{props.foi_para_eua}</td>
                 </tr>
                 <tr>
-                  <th>Foi para outro pais nos últimos 5 anos : </th>
+                  <th>Foi para outro pais nos últimos 5 anos</th>
                   <td>{props.foi_para_outro_pais}</td>
                 </tr>
                 <tr>
-                  <th>Visto perdido ou roubado : </th>
+                  <th>Visto perdido ou roubado</th>
                   <td>{props.visto_per_o_rou}</td>
                 </tr>
                 <tr>
-                  <th>Visto recusado : </th>
+                  <th>Visto recusado</th>
                   <td>{props.visto_recusado}</td>
                 </tr>
                 <tr>
-                  <th>Passaporte perdido ou roubado : </th>
+                  <th>Passaporte perdido ou roubado</th>
                   <td>{props.passaporte_per_o_rou}</td>
                 </tr>
 
                 {props.parentes_nos_eua.split(/\s*,\s*/).map((nome, index) => (
                   <tr key={index}>
-                    <th>Parentes nos USA : </th>
+                    <th>Parentes nos USA</th>
                     <td>{nome}</td>
                   </tr>
                 ))}
                 <tr>
-                  <th>Nome do pai : </th>
+                  <th>Nome do pai</th>
                   <td>{props.nome_pai}</td>
                 </tr>
                 <tr>
-                  <th>Data de nascimento do pai : </th>
+                  <th>Data de nascimento do pai</th>
                   <td>{props.data_nasc_pai}</td>
                 </tr>
                 <tr>
-                  <th>Pai mora nos USA : </th>
+                  <th>Pai mora nos USA</th>
                   <td>{props.pai_mora_eua}</td>
                 </tr>
                 <tr>
-                  <th>Nome da mãe : </th>
+                  <th>Nome da mãe</th>
                   <td>{props.nome_mae}</td>
                 </tr>
                 <tr>
-                  <th>Data de nascimento da mãe : </th>
+                  <th>Data de nascimento da mãe</th>
                   <td>{props.data_nasc_mae}</td>
                 </tr>
                 <tr>
-                  <th>Mãe mora USA : </th>
+                  <th>Mãe mora USA</th>
                   <td>{props.mae_mora_eua}</td>
                 </tr>
                 <tr>
-                  <th>Instagram : </th>
+                  <th>Instagram</th>
                   <td>{props.instagram}</td>
                 </tr>
                 <tr>
-                  <th>Facebook : </th>
+                  <th>Facebook</th>
                   <td>{props.facebook}</td>
                 </tr>
                 <tr>
-                  <th>Linkedin : </th>
+                  <th>Linkedin</th>
                   <td>{props.linkedin}</td>
                 </tr>
                 <tr>
-                  <th>Trabalho : </th>
+                  <th>Trabalho</th>
                   <td>{props.trabalho}</td>
                 </tr>
                 <tr>
-                  <th>Nome da empresa : </th>
+                  <th>Nome da empresa</th>
                   <td>{props.nome_empresa}</td>
                 </tr>
                 <tr>
-                  <th>Endereço da empresa : </th>
+                  <th>Endereço da empresa</th>
                   <td>{props.endereco_empresa}</td>
                 </tr>
                 <tr>
-                  <th>Telefone da empresa : </th>
+                  <th>Telefone da empresa</th>
                   <td>{props.telefone_empresa}</td>
                 </tr>
                 <tr>
-                  <th>Data de inicio na empresa : </th>
+                  <th>Data de inicio na empresa</th>
                   <td>{props.data_inicio_empresa}</td>
                 </tr>
                 <tr>
-                  <th>Trabalho antigo : </th>
+                  <th>Trabalho antigo</th>
                   <td>{props.trabalho_antigo}</td>
                 </tr>
                 <tr>
-                  <th>Nome da empresa antiga : </th>
+                  <th>Nome da empresa antiga</th>
                   <td>{props.nome_empresa_antigo}</td>
                 </tr>
                 <tr>
-                  <th>Endereço da empresa antiga : </th>
+                  <th>Endereço da empresa antiga</th>
                   <td>{props.endereco_empresa_antigo}</td>
                 </tr>
                 <tr>
-                  <th>Telefone da empresa antiga : </th>
+                  <th>Telefone da empresa antiga</th>
                   <td>{props.telefone_empresa_antigo}</td>
                 </tr>
                 <tr>
-                  <th>Período na empresa antiga : </th>
+                  <th>Período na empresa antiga</th>
                   <td>{props.data_ini_ter_empresa_antigo}</td>
                 </tr>
 
@@ -299,23 +297,23 @@ const Box = (props: AllProps) => {
                 </tr>
 
                 <tr>
-                  <th>Nome da faculdade ou escola : </th>
+                  <th>Nome da faculdade ou escola</th>
                   <td>{props.nome_facul_escola}</td>
                 </tr>
                 <tr>
-                  <th>Endereço da faculdade ou escola : </th>
+                  <th>Endereço da faculdade ou escola</th>
                   <td>{props.endereco_facul_escola}</td>
                 </tr>
                 <tr>
-                  <th>Telefone da faculdade ou escola : </th>
+                  <th>Telefone da faculdade ou escola</th>
                   <td>{props.telefone_facul_escola}</td>
                 </tr>
                 <tr>
-                  <th>Curso da faculdade : </th>
+                  <th>Curso da faculdade</th>
                   <td>{props.curso_facul}</td>
                 </tr>
                 <tr>
-                  <th>Inicio e termino faculdade ou escola : </th>
+                  <th>Inicio e termino faculdade ou escola</th>
                   <td>{props.ini_ter_facul_escola}</td>
                 </tr>
               </Table>

@@ -43,6 +43,8 @@ interface AllProps {
 const Pag3 = (props: AllProps) => {
   const [nacionalidades, setNacionalidades] = useState("");
   const [idiomas, setIdiomas] = useState("");
+  const [cont, setCont] = useState(0);
+  const [cont2, setCont2] = useState(0);
 
   const handleKeyPress = (event: any) => {
     event.preventDefault();
@@ -71,6 +73,7 @@ const Pag3 = (props: AllProps) => {
       ...props.Anacionalidades.slice(0, index),
       ...props.Anacionalidades.slice(index + 1, props.Anacionalidades.length),
     ]);
+    setCont(0);
   };
 
   const addIdioma = () => {
@@ -88,21 +91,36 @@ const Pag3 = (props: AllProps) => {
       ...props.Aidiomas.slice(0, index),
       ...props.Aidiomas.slice(index + 1, props.Aidiomas.length),
     ]);
+    setCont2(0);
   };
   if (props.Snacionalidades == "sim") {
-    props.setNacionalidades(props.Anacionalidades.toString());
+    if (props.Anacionalidades.length > 0) {
+      props.setNacionalidades(props.Anacionalidades.toString() + ",");
+    } else {
+      if (cont == 0) {
+        props.setNacionalidades([]);
+        setCont(1);
+      }
+    }
   }
   if (props.Sidiomas == "sim") {
-    props.setIdiomas(props.Aidiomas.toString());
+    if (props.Aidiomas.length > 0) {
+      props.setIdiomas(props.Aidiomas.toString() + ",");
+    } else {
+      if (cont2 == 0) {
+        props.setIdiomas([]);
+        setCont2(1);
+      }
+    }
   }
 
   if (props.Sserviu_exercito == "sim") {
     let texto = `
-    Branch: ${props.batalhao} , 
-    Rank: ${props.patente} , 
-    Specialty: ${props.especialidade} , 
-    Inicio: ${props.ini_serviu_exercito} -- 
-    Término: ${props.ter_serviu_exercito}`;
+    Branch: ${props.batalhao.replaceAll(",", " ")} , 
+    Rank: ${props.patente.replaceAll(",", " ")} , 
+    Specialty: ${props.especialidade.replaceAll(",", " ")} , 
+    Inicio: ${props.ini_serviu_exercito.replaceAll(",", " ")} , 
+    Término: ${props.ter_serviu_exercito.replaceAll(",", " ")}`;
     props.setServiu_exercito(texto);
   }
   if (
@@ -133,6 +151,7 @@ const Pag3 = (props: AllProps) => {
               onChange={() => {
                 props.setSNacionalidades("sim");
                 props.setNacionalidades("");
+                props.setANacionalidades([]);
               }}
             />{" "}
             Sim
@@ -191,7 +210,6 @@ const Pag3 = (props: AllProps) => {
                 ))}
                 <br />
               </List>
-              <br />
               <br />
             </Junta>
           </>
@@ -272,7 +290,6 @@ const Pag3 = (props: AllProps) => {
                 <br />
               </List>
               <br />
-              <br />
             </Junta>
           </div>
         ) : (
@@ -326,6 +343,7 @@ const Pag3 = (props: AllProps) => {
       {props.Sserviu_exercito === "sim" ? (
         <div className="box1">
           <Junta className="cel">
+            <br />
             <h3>Suas informações</h3>
             <DuplaG>
               <Junta>

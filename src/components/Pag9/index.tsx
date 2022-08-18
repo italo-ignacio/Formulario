@@ -41,47 +41,85 @@ const Pag9 = (props: AllProps) => {
   ) {
     props.setNext(true);
   } else {
-    props.setIni_ter_facul_escola(
-      `Inicio: ${props.ini_facul_escola} -- Término: ${props.ter_facul_escola}`
-    );
+    if (props.facul != "nao") {
+      props.setIni_ter_facul_escola(
+        `Inicio: ${props.ini_facul_escola} - Término: ${props.ter_facul_escola}`
+      );
+    }
+
     props.setNext(false);
   }
   return (
     <Container>
       <div className="box2">
         <Junta>
-          <label>Faz ou já fez faculdade ?</label>
-          <label>
+          <label>Selecione seu grau de escolaridade ?</label>
+          <br />
+          <label className="jump">
             <input
               type={"radio"}
-              value={"sim"}
-              alt={"Faz ou já fez faculdade "}
-              checked={props.facul === "sim"}
+              value={"facul"}
+              alt={"Ensino superior cursando ou completo"}
+              checked={props.facul === "facul"}
               onChange={() => {
-                props.setFacul("sim");
+                props.setFacul("facul");
                 props.setCurso_facul("");
+                props.setNome_facul_escola("");
+                props.setEndereco_facul_escola("");
+                props.setTelefone_facul_escola("");
+                props.setIni_facul_escola("");
+                props.setTer_facul_escola("");
               }}
             />{" "}
-            Sim
+            Ensino superior cursando / completo
           </label>
-          <label>
+
+          <label className="jump">
+            <input
+              type={"radio"}
+              value={"escola"}
+              alt={"Ensino medio cursando / completo"}
+              checked={props.facul === "escola"}
+              onChange={() => {
+                props.setFacul("escola");
+                props.setCurso_facul("Não possui");
+                props.setNome_facul_escola("");
+                props.setEndereco_facul_escola("");
+                props.setTelefone_facul_escola("");
+                props.setIni_facul_escola("");
+                props.setTer_facul_escola("");
+              }}
+            />{" "}
+            Ensino medio cursando / completo
+          </label>
+
+          <label className="jump">
             <input
               type={"radio"}
               value={"nao"}
-              alt={"Nunca fez faculdade "}
+              alt={"Nunca estudou"}
               checked={props.facul === "nao"}
               onChange={() => {
                 props.setFacul("nao");
                 props.setCurso_facul("Não possui");
+                props.setNome_facul_escola("Não possui");
+                props.setEndereco_facul_escola("Não possui");
+                props.setTelefone_facul_escola("Não possui");
+                props.setIni_facul_escola("Não possui");
+                props.setTer_facul_escola("Não possui");
+                props.setIni_ter_facul_escola("Não possui");
               }}
             />{" "}
-            Não
+            Nunca estudou
           </label>
           <br />
         </Junta>
-        {props.facul != "" ? (
+
+        {props.facul == "nao" || props.facul == "" ? (
+          <></>
+        ) : (
           <Junta className="cel">
-            {props.facul == "sim" ? (
+            {props.facul == "facul" ? (
               <h3>Dados da faculdade</h3>
             ) : (
               <h3>Dados da sua escolaridade</h3>
@@ -89,7 +127,7 @@ const Pag9 = (props: AllProps) => {
 
             <DuplaG>
               <Junta>
-                {props.facul == "sim" ? (
+                {props.facul == "facul" ? (
                   <label>Nome da faculdade</label>
                 ) : (
                   <label>Nome da escola</label>
@@ -97,7 +135,7 @@ const Pag9 = (props: AllProps) => {
                 <input
                   value={props.nome_facul_escola}
                   alt={
-                    props.facul == "sim"
+                    props.facul == "facul"
                       ? "Nome da faculdade"
                       : "Nome da escola"
                   }
@@ -106,7 +144,7 @@ const Pag9 = (props: AllProps) => {
                 <br />
               </Junta>
               <Junta>
-                {props.facul == "sim" ? (
+                {props.facul == "facul" ? (
                   <label>Endereço da faculdade</label>
                 ) : (
                   <label>Endereço da escola</label>
@@ -114,7 +152,7 @@ const Pag9 = (props: AllProps) => {
                 <input
                   value={props.endereco_facul_escola}
                   alt={
-                    props.facul == "sim"
+                    props.facul == "facul"
                       ? "Endereço da faculdade"
                       : "Endereço da escola"
                   }
@@ -128,7 +166,7 @@ const Pag9 = (props: AllProps) => {
 
             <DuplaG>
               <Junta>
-                {props.facul == "sim" ? (
+                {props.facul == "facul" ? (
                   <label>Telefone da faculdade</label>
                 ) : (
                   <label>Telefone da escola</label>
@@ -149,7 +187,7 @@ const Pag9 = (props: AllProps) => {
                   value={props.telefone_facul_escola}
                   type={"tel"}
                   alt={
-                    props.facul == "sim"
+                    props.facul == "facul"
                       ? "Telefone da faculdade"
                       : "Telefone da escola"
                   }
@@ -159,7 +197,7 @@ const Pag9 = (props: AllProps) => {
                 />
                 <br />
               </Junta>
-              {props.facul == "sim" ? (
+              {props.facul == "facul" ? (
                 <Junta>
                   <label>Nome do curso</label>
                   <input
@@ -219,8 +257,6 @@ const Pag9 = (props: AllProps) => {
               </Junta>
             </DuplaG>
           </Junta>
-        ) : (
-          <></>
         )}
       </div>
     </Container>

@@ -39,6 +39,7 @@ interface AllProps {
 const Pag4 = (props: AllProps) => {
   const [viajar_junto, setViajar_junto] = useState("");
   const [Gviajar_junto, setGViajar_junto] = useState("");
+  const [cont, setCont] = useState(0);
 
   const addPessoa = () => {
     if (viajar_junto != "" && Gviajar_junto != "") {
@@ -57,6 +58,7 @@ const Pag4 = (props: AllProps) => {
       ...props.Aviajar_junto.slice(0, index),
       ...props.Aviajar_junto.slice(index + 1, props.Aviajar_junto.length),
     ]);
+    setCont(0);
   };
 
   const handleKeyPress = (event: any) => {
@@ -70,16 +72,23 @@ const Pag4 = (props: AllProps) => {
     if (props.Gpagar_viagem != "" && props.Npagar_viagem != "") {
       props.setPagar_viagem(
         `${props.Gpagar_viagem.toUpperCase().replaceAll(
-          ",",
+          "-",
           " "
-        )} - ${props.Npagar_viagem.replaceAll(",", " ")}`
+        )} - ${props.Npagar_viagem.replaceAll("-", " ")}`
       );
     } else {
       props.setPagar_viagem("");
     }
   }
   if (props.Sviajar_junto == "nao") {
-    props.setViajar_junto(props.Aviajar_junto.toString());
+    if (props.Aviajar_junto.length > 0) {
+      props.setViajar_junto(props.Aviajar_junto.toString() + ",");
+    } else {
+      if (cont == 0) {
+        props.setViajar_junto([]);
+        setCont(1);
+      }
+    }
   }
 
   if (
@@ -143,7 +152,6 @@ const Pag4 = (props: AllProps) => {
           >
             <option value={"Dia (s)"}>Dia (s)</option>
             <option value={"Mês (es)"}>Mês (es)</option>
-            <option value={"Ano (s)"}>Ano (s)</option>
           </select>
         </Plus>
         <br />

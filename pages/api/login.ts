@@ -11,9 +11,12 @@ export default async function handler(
     case "POST":
       const data = JSON.parse(req.body);
       const { name, password } = data;
-      if (name == process.env.NAME && password == process.env.PASSWORD) {
+      if (
+        name.toLowerCase() == process.env.NAME &&
+        password == process.env.PASSWORD
+      ) {
         const token = jwt.sign(
-          { name, password },
+          { name: name.toLowerCase(), password },
           process.env.TOKEN_SECRET || "",
           {
             expiresIn: process.env.TOKEN_EXPIRATION,
@@ -21,7 +24,7 @@ export default async function handler(
         );
         res.status(200).json({ error: false, token: token });
       } else {
-        res.status(200).json({ name, password });
+        res.status(200).json({ error: true });
       }
 
       break;
