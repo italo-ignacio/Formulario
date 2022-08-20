@@ -221,11 +221,11 @@ const Pag9 = (props: AllProps) => {
               )}
               {props.facul == "facul" ? (
                 <Junta>
-                  <label>Caso tenha OAB, MRI, CREA ...</label>
+                  <label>Caso tenha OAB, CRM, CREA ...</label>
                   <input
                     value={props.oab}
                     placeholder="Ex: OAB 1234567"
-                    alt={"OAB-MRI-CREA-..."}
+                    alt={"OAB-CRM-CREA-..."}
                     onChange={(e) => props.setOab(e.target.value)}
                   />
                   <br />
