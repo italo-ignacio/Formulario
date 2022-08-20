@@ -24,7 +24,7 @@ const Home: NextPage = () => {
   const [endereco, setEndereco] = useState("");
   const [telefone, setTelefone] = useState("");
   const [email, setEmail] = useState("");
-  const [estado_civil, setEstado_civil] = useState("");
+  const [estado_civil, setEstado_civil] = useState("Solteiro (a)");
   const [nome_solteiro, setNome_solteiro] = useState("");
   const [tnome_solteiro, settNome_solteiro] = useState("");
   const [nacionalidades, setNacionalidades] = useState("");
@@ -94,6 +94,7 @@ const Home: NextPage = () => {
   const [endereco_facul_escola, setEndereco_facul_escola] = useState("");
   const [telefone_facul_escola, setTelefone_facul_escola] = useState("");
   const [curso_facul, setCurso_facul] = useState("");
+  const [oab, setOab] = useState("");
   const [ini_ter_facul_escola, setIni_ter_facul_escola] = useState("");
   const [ter_facul_escola, setTer_facul_escola] = useState("");
   const [ini_facul_escola, setIni_facul_escola] = useState("");
@@ -161,7 +162,7 @@ const Home: NextPage = () => {
           telefone_empresa_antigo: telefone_empresa_antigo,
           data_ini_ter_empresa_antigo: data_ini_ter_empresa_antigo,
           idiomas: idiomas,
-          nome_facul_escola: nome_facul_escola,
+          nome_facul_escola: nome_facul_escola + oab,
           endereco_facul_escola: endereco_facul_escola,
           telefone_facul_escola: telefone_facul_escola,
           curso_facul: curso_facul,
@@ -773,7 +774,7 @@ const Home: NextPage = () => {
         ) : (
           <></>
         )}
-        {pag == 9 ? (
+        {pag == 0 ? (
           <>
             <Text>Preencha todos os dados</Text>
             <Pag9
@@ -791,6 +792,8 @@ const Home: NextPage = () => {
               setNome_facul_escola={setNome_facul_escola}
               curso_facul={curso_facul}
               setCurso_facul={setCurso_facul}
+              oab={oab}
+              setOab={setOab}
               ini_facul_escola={ini_facul_escola}
               setIni_facul_escola={setIni_facul_escola}
               ter_facul_escola={ter_facul_escola}

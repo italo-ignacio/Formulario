@@ -23,6 +23,8 @@ class MyDocument extends Document {
     return (
       <Html lang="pt-BR">
         <Head>
+          <link rel="icon" href="/favicon.ico" />
+          <meta name="description" content="Formulário" />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link
             rel="preconnect"

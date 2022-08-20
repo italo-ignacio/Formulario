@@ -26,6 +26,8 @@ interface AllProps {
   setIni_facul_escola: Function;
   ter_facul_escola: string;
   setTer_facul_escola: Function;
+  oab: string;
+  setOab: Function;
 }
 
 const Pag9 = (props: AllProps) => {
@@ -64,6 +66,7 @@ const Pag9 = (props: AllProps) => {
               onChange={() => {
                 props.setFacul("facul");
                 props.setCurso_facul("");
+                props.setOab("");
                 props.setNome_facul_escola("");
                 props.setEndereco_facul_escola("");
                 props.setTelefone_facul_escola("");
@@ -83,6 +86,7 @@ const Pag9 = (props: AllProps) => {
               onChange={() => {
                 props.setFacul("escola");
                 props.setCurso_facul("Não possui");
+                props.setOab("");
                 props.setNome_facul_escola("");
                 props.setEndereco_facul_escola("");
                 props.setTelefone_facul_escola("");
@@ -101,6 +105,7 @@ const Pag9 = (props: AllProps) => {
               checked={props.facul === "nao"}
               onChange={() => {
                 props.setFacul("nao");
+                props.setOab("");
                 props.setCurso_facul("Não possui");
                 props.setNome_facul_escola("Não possui");
                 props.setEndereco_facul_escola("Não possui");
@@ -213,6 +218,20 @@ const Pag9 = (props: AllProps) => {
                   <input />
                   <br />
                 </Junta>
+              )}
+              {props.facul == "facul" ? (
+                <Junta>
+                  <label>Caso tenha OAB, MRI, CREA ...</label>
+                  <input
+                    value={props.oab}
+                    placeholder="Ex: OAB 1234567"
+                    alt={"OAB-MRI-CREA-..."}
+                    onChange={(e) => props.setOab(e.target.value)}
+                  />
+                  <br />
+                </Junta>
+              ) : (
+                <Junta className="nul"></Junta>
               )}
             </DuplaG>
             <DuplaG>
