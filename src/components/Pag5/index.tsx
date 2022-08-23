@@ -385,7 +385,7 @@ const Pag5 = (props: AllProps) => {
       </Junta>
 
       <Junta>
-        <label>Possui parentes próximos nos Estados Unidos ?</label>
+        <label>Possui parentes próximos morando nos Estados Unidos ?</label>
         <label>
           <input
             type={"radio"}

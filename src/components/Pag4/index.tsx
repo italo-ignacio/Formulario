@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { verificarDataDeseja } from "../../config/mask";
+import { telMask, verificarDataDeseja } from "../../config/mask";
 import { Junta, Container, Plus, Dupla, List } from "../../styles/pageStyled";
 import validator from "validator";
 import { TiDeleteOutline } from "react-icons/ti";
@@ -34,13 +34,17 @@ interface AllProps {
   setGPagar_viagem: Function;
   Npagar_viagem: string;
   NetGPagar_viagem: Function;
+  Tpagar_viagem: string;
+  setTPagar_viagem: Function;
+  Epagar_viagem: string;
+  NetEPagar_viagem: Function;
 }
 
 const Pag4 = (props: AllProps) => {
   const [viajar_junto, setViajar_junto] = useState("");
   const [Gviajar_junto, setGViajar_junto] = useState("");
   const [cont, setCont] = useState(0);
-
+  const [mask, setMask] = useState("(99) 99999-9999");
   const addPessoa = () => {
     if (viajar_junto != "" && Gviajar_junto != "") {
       let pessoa = `${Gviajar_junto.toUpperCase().replaceAll(
@@ -69,12 +73,23 @@ const Pag4 = (props: AllProps) => {
   };
 
   if (props.Spagar_viagem == "nao") {
-    if (props.Gpagar_viagem != "" && props.Npagar_viagem != "") {
+    if (
+      props.Gpagar_viagem != "" &&
+      props.Npagar_viagem != "" &&
+      props.Tpagar_viagem != "" &&
+      props.Epagar_viagem != "" &&
+      props.Gpagar_viagem != undefined &&
+      props.Npagar_viagem != undefined &&
+      props.Tpagar_viagem != undefined &&
+      props.Epagar_viagem != undefined
+    ) {
       props.setPagar_viagem(
-        `${props.Gpagar_viagem.toUpperCase().replaceAll(
+        `${props.Gpagar_viagem.replaceAll(
           "-",
           " "
-        )} - ${props.Npagar_viagem.replaceAll("-", " ")}`
+        )} - ${props.Npagar_viagem.replaceAll("-", " ")} - 
+        Tel: ${props.Tpagar_viagem.replaceAll("-", " ")} - 
+        E-mail: ${props.Epagar_viagem.replaceAll("-", " ")}`
       );
     } else {
       props.setPagar_viagem("");
@@ -110,6 +125,7 @@ const Pag4 = (props: AllProps) => {
       <Junta>
         <label>Estado que pretende viajar</label>
         <input
+          maxLength={148}
           value={props.estado_deseja}
           alt={"Estado que pretende viajar"}
           onChange={(e) => props.setEstado_deseja(e.target.value)}
@@ -141,6 +157,7 @@ const Pag4 = (props: AllProps) => {
           <input
             value={props.Ntempo_deseja}
             type={"tel"}
+            maxLength={35}
             alt={"Quanto tempo deseja ficar"}
             onChange={(e) => props.setNTempo_deseja(e.target.value)}
           />
@@ -161,6 +178,7 @@ const Pag4 = (props: AllProps) => {
         <label>Hotel que pretende ficar</label>
         <input
           value={props.hotel}
+          maxLength={148}
           alt={"Hotel que pretende ficar"}
           onChange={(e) => props.setHotel(e.target.value)}
         />
@@ -193,6 +211,8 @@ const Pag4 = (props: AllProps) => {
               props.setPagar_viagem("");
               props.NetGPagar_viagem("");
               props.setGPagar_viagem("");
+              props.NetEPagar_viagem("");
+              props.setTPagar_viagem("");
             }}
           />{" "}
           Não
@@ -204,22 +224,59 @@ const Pag4 = (props: AllProps) => {
           <Junta className="cel">
             <h3>Quem irá pagar ?</h3>
             <Dupla>
-              <Junta>
+              <Junta className="jum">
                 <label>Grau de parentesco</label>
                 <input
+                  maxLength={98}
                   value={props.Gpagar_viagem}
                   alt={"Grau de parentesco"}
                   placeholder="Grau de parentesco"
                   onChange={(e) => props.setGPagar_viagem(e.target.value)}
                 />
               </Junta>
-              <Junta>
+              <Junta className="jum">
                 <label>Nome completo</label>
                 <input
                   value={props.Npagar_viagem}
+                  maxLength={198}
                   alt={"Nome completo"}
                   placeholder="Nome completo"
                   onChange={(e) => props.NetGPagar_viagem(e.target.value)}
+                />
+              </Junta>
+            </Dupla>
+            <Dupla>
+              <Junta className="jum">
+                <label>Telefone</label>
+                <InputMask
+                  mask={mask}
+                  onBlur={(e) => {
+                    if (e.target.value.replaceAll("_", "").length === 14) {
+                      setMask("(99) 9999-9999");
+                      props.setTPagar_viagem(telMask(e.target.value));
+                    }
+                  }}
+                  onFocus={(e) => {
+                    if (e.target.value.replaceAll("_", "").length === 14) {
+                      setMask("(99) 99999-9999");
+                    }
+                  }}
+                  type={"tel"}
+                  alt={"Telefone"}
+                  value={props.Tpagar_viagem}
+                  placeholder="Telefone"
+                  onChange={(e) => props.setTPagar_viagem(e.target.value)}
+                />
+              </Junta>
+              <Junta>
+                <label>E-mail</label>
+                <input
+                  value={props.Epagar_viagem}
+                  maxLength={198}
+                  type={"email"}
+                  alt={"E-mail"}
+                  placeholder="E-mail"
+                  onChange={(e) => props.NetEPagar_viagem(e.target.value)}
                 />
               </Junta>
             </Dupla>

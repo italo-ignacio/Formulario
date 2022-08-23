@@ -50,6 +50,8 @@ const Home: NextPage = () => {
   const [Spagar_viagem, setSPagar_viagem] = useState("");
   const [Gpagar_viagem, setGPagar_viagem] = useState("");
   const [Npagar_viagem, NetGPagar_viagem] = useState("");
+  const [Tpagar_viagem, setTPagar_viagem] = useState("");
+  const [Epagar_viagem, NetEPagar_viagem] = useState("");
   const [possui_visto, setPossui_visto] = useState("");
   const [foi_para_eua, setFoi_para_eua] = useState("");
   const [foi_para_outro_pais, setFoi_para_outro_pais] = useState("");
@@ -65,9 +67,11 @@ const Home: NextPage = () => {
   const [nome_pai, setNome_pai] = useState("");
   const [data_nasc_pai, setData_nasc_pai] = useState("");
   const [pai_mora_eua, setPai_mora_eua] = useState("");
+  const [Spai_mora_eua, setSPai_mora_eua] = useState("");
   const [nome_mae, setNome_mae] = useState("");
   const [data_nasc_mae, setData_nasc_mae] = useState("");
   const [mae_mora_eua, setMae_mora_eua] = useState("");
+  const [Smae_mora_eua, setSMae_mora_eua] = useState("");
   const [instagram, setInstagram] = useState("");
   const [facebook, setFacebook] = useState("");
   const [linkedin, setLinkedin] = useState("");
@@ -98,6 +102,11 @@ const Home: NextPage = () => {
   const [ini_ter_facul_escola, setIni_ter_facul_escola] = useState("");
   const [ter_facul_escola, setTer_facul_escola] = useState("");
   const [ini_facul_escola, setIni_facul_escola] = useState("");
+
+  const [data_conjuge, setData_conjuge] = useState("Não possui");
+  const [local_conjuge, setLocal_conjuge] = useState("Não possui");
+  const [salario, setSalario] = useState("");
+  const [supervisor, setSupervisor] = useState("");
 
   //////////////////////////////
   const [cep, setCep] = useState("");
@@ -162,11 +171,16 @@ const Home: NextPage = () => {
           telefone_empresa_antigo: telefone_empresa_antigo,
           data_ini_ter_empresa_antigo: data_ini_ter_empresa_antigo,
           idiomas: idiomas,
-          nome_facul_escola: nome_facul_escola + oab,
+          nome_facul_escola: nome_facul_escola,
           endereco_facul_escola: endereco_facul_escola,
           telefone_facul_escola: telefone_facul_escola,
           curso_facul: curso_facul,
           ini_ter_facul_escola: ini_ter_facul_escola,
+          oab: oab,
+          data_conjuge: data_conjuge,
+          local_conjuge: local_conjuge,
+          salario: salario,
+          supervisor: supervisor,
         }),
       });
       if (pag == 9) {
@@ -193,6 +207,7 @@ const Home: NextPage = () => {
               setCpf(data.cpf);
               setTelefone(data.telefone);
               setEstado_civil(data.estado_civil);
+
               if (data.nome_solteiro == "Não possui") {
                 settNome_solteiro("nao");
                 setNome_solteiro("Não possui");
@@ -274,6 +289,8 @@ const Home: NextPage = () => {
                 let pagar = data.pagar_viagem.split("-");
                 NetGPagar_viagem(pagar[1]);
                 setGPagar_viagem(pagar[0]);
+                NetEPagar_viagem(pagar[3]);
+                setTPagar_viagem(pagar[2]);
               }
               if (data.viajar_junto == "Viajar sozinho") {
                 setViajar_junto("Viajar sozinho");
@@ -313,10 +330,20 @@ const Home: NextPage = () => {
               }
               setNome_pai(data.nome_pai);
               setData_nasc_pai(data.data_nasc_pai);
+              if (data.pai_mora_eua == "Não") {
+                setSPai_mora_eua("Não");
+              } else {
+                setSPai_mora_eua("Sim");
+              }
               setPai_mora_eua(data.pai_mora_eua);
               setNome_mae(data.nome_mae);
               setData_nasc_mae(data.data_nasc_mae);
               setMae_mora_eua(data.mae_mora_eua);
+              if (data.mae_mora_eua == "Não") {
+                setSMae_mora_eua("Não");
+              } else {
+                setSMae_mora_eua("Sim");
+              }
               setInstagram(data.instagram);
               setFacebook(data.facebook);
               setLinkedin(data.linkedin);
@@ -407,6 +434,12 @@ const Home: NextPage = () => {
                 }
               }
 
+              /////////////////
+              setOab(data.oab);
+              setData_conjuge(data.data_conjuge);
+              setLocal_conjuge(data.local_conjuge);
+              setSupervisor(data.supervisor);
+              setSalario(data.salario);
               setPag(1);
             } else {
               setLoading(false);
@@ -488,6 +521,10 @@ const Home: NextPage = () => {
               setNome_solteiro={setNome_solteiro}
               tnome_solteiro={tnome_solteiro}
               settNome_solteiro={settNome_solteiro}
+              data_conjuge={data_conjuge}
+              setData_conjuge={setData_conjuge}
+              local_conjuge={local_conjuge}
+              setLocal_conjuge={setLocal_conjuge}
               next={next}
               setNext={setNext}
             />
@@ -615,6 +652,10 @@ const Home: NextPage = () => {
               setGPagar_viagem={setGPagar_viagem}
               Npagar_viagem={Npagar_viagem}
               NetGPagar_viagem={NetGPagar_viagem}
+              Tpagar_viagem={Tpagar_viagem}
+              setTPagar_viagem={setTPagar_viagem}
+              Epagar_viagem={Epagar_viagem}
+              NetEPagar_viagem={NetEPagar_viagem}
             />
             <Buttons
               pag={pag}
@@ -683,13 +724,18 @@ const Home: NextPage = () => {
               setData_nasc_pai={setData_nasc_pai}
               pai_mora_eua={pai_mora_eua}
               setPai_mora_eua={setPai_mora_eua}
+              Spai_mora_eua={Spai_mora_eua}
+              setSPai_mora_eua={setSPai_mora_eua}
               nome_mae={nome_mae}
               setNome_mae={setNome_mae}
               data_nasc_mae={data_nasc_mae}
               setData_nasc_mae={setData_nasc_mae}
               mae_mora_eua={mae_mora_eua}
               setMae_mora_eua={setMae_mora_eua}
+              Smae_mora_eua={Smae_mora_eua}
+              setSMae_mora_eua={setSMae_mora_eua}
             />
+
             <Buttons
               pag={pag}
               setPag={setPag}
@@ -761,6 +807,10 @@ const Home: NextPage = () => {
               setData_ini_empresa_antigo={setData_ini_empresa_antigo}
               data_ter_empresa_antigo={data_ter_empresa_antigo}
               setData_ter_empresa_antigo={setData_ter_empresa_antigo}
+              salario={salario}
+              setSalario={setSalario}
+              supervisor={supervisor}
+              setSupervisor={setSupervisor}
             />
             <Buttons
               pag={pag}
@@ -774,7 +824,7 @@ const Home: NextPage = () => {
         ) : (
           <></>
         )}
-        {pag == 0 ? (
+        {pag == 9 ? (
           <>
             <Text>Preencha todos os dados</Text>
             <Pag9

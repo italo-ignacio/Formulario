@@ -55,6 +55,18 @@ export const Container = styled.div`
       margin-bottom: 1rem;
     }
   }
+  .box3 {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin-bottom: 1rem;
+    h3 {
+      margin-bottom: 1rem;
+    }
+  }
   .centralizar {
     position: relative;
     margin-left: auto;
@@ -110,11 +122,17 @@ export const Dupla = styled.div`
   display: grid;
   grid-template-columns: 25% 70%;
   column-gap: 1rem;
-
+  margin-bottom: 1rem;
   @media (max-width: 1008px) {
     display: flex;
     flex-direction: column;
     column-gap: 0.5rem;
+    margin-bottom: 0;
+  }
+  .jum {
+    @media (max-width: 1008px) {
+      margin-bottom: 0.8rem;
+    }
   }
 `;
 

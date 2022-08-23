@@ -18,6 +18,7 @@ const Pag7 = (props: AllProps) => {
       <Junta>
         <label>Instagram</label>
         <input
+          maxLength={198}
           value={props.instagram}
           alt={"Instagram"}
           onChange={(e) => props.setInstagram(e.target.value)}
@@ -26,6 +27,7 @@ const Pag7 = (props: AllProps) => {
 
         <label>Facebook</label>
         <input
+          maxLength={198}
           value={props.facebook}
           alt={"Facebook"}
           onChange={(e) => props.setFacebook(e.target.value)}
@@ -33,6 +35,7 @@ const Pag7 = (props: AllProps) => {
         <br />
         <label>Linkedin</label>
         <input
+          maxLength={198}
           value={props.linkedin}
           alt={"Linkedin"}
           onChange={(e) => props.setLinkedin(e.target.value)}

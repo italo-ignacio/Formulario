@@ -40,7 +40,6 @@ const Pag2 = (props: AllProps) => {
           .then((T) => T.json())
           .then((dados) => {
             if (dados.erro != "true") {
-              console.log(dados);
               props.setCep(dados.cep);
               props.setRua(dados.logradouro);
               props.setCidade(dados.localidade);

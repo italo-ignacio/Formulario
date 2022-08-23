@@ -12,6 +12,7 @@ export default async function handler(
       const data = JSON.parse(req.body);
       const { cpf } = data;
       const dados = await getDatas(String(cpf));
+
       if (dados == null) {
         try {
           await createData(data);

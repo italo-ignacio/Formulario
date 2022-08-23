@@ -21,6 +21,10 @@ interface AllProps {
   setNome_solteiro: Function;
   tnome_solteiro: string;
   settNome_solteiro: Function;
+  data_conjuge: string;
+  setData_conjuge: Function;
+  local_conjuge: string;
+  setLocal_conjuge: Function;
   next: boolean;
   setNext: Function;
 }
@@ -32,9 +36,10 @@ const Pag1 = (props: AllProps) => {
     props.nome == "" ||
     !validator.isEmail(props.email) ||
     !validator.isDate(verificarDataNascimento(props.data_nascimento)) ||
+    !validator.isDate(verificarDataNascimento(props.data_conjuge)) ||
     props.cpf.replace(/[^0-9]+/g, "").length != 11 ||
     props.telefone.replace(/[^0-9]+/g, "").length <= 9 ||
-    props.estado_civil == "" ||
+    props.local_conjuge == "" ||
     props.nome_solteiro == ""
   ) {
     props.setNext(true);
@@ -46,6 +51,7 @@ const Pag1 = (props: AllProps) => {
       <Junta>
         <label>Nome completo</label>
         <input
+          maxLength={198}
           value={props.nome}
           alt={"Nome completo"}
           onChange={(e) => props.setNome(e.target.value)}
@@ -56,6 +62,7 @@ const Pag1 = (props: AllProps) => {
       <Junta>
         <label>E-mail</label>
         <input
+          maxLength={198}
           type={"email"}
           alt={"Email"}
           value={props.email}
@@ -116,11 +123,24 @@ const Pag1 = (props: AllProps) => {
         />
         <br />
       </Junta>
+
       <Junta>
         <label>Estado civil</label>
         <select
           value={props.estado_civil}
-          onChange={(e) => props.setEstado_civil(e.target.value)}
+          onChange={(e) => {
+            props.setEstado_civil(e.target.value);
+            if (
+              e.target.value == "Casado (a)" ||
+              e.target.value == "Viúvo (a)"
+            ) {
+              props.setData_conjuge("");
+              props.setLocal_conjuge("");
+            } else {
+              props.setData_conjuge("Não possui");
+              props.setLocal_conjuge("Não possui");
+            }
+          }}
         >
           <option value={"Solteiro (a)"}>Solteiro (a)</option>
           <option value={"Casado (a)"}>Casado (a)</option>
@@ -131,6 +151,40 @@ const Pag1 = (props: AllProps) => {
         <br />
         <br />
       </Junta>
+      {props.estado_civil == "Casado (a)" ||
+      props.estado_civil == "Viúvo (a)" ? (
+        <div className="box3">
+          <h3>Dados do marido/esposa</h3>
+          <Junta>
+            {props.data_conjuge.replaceAll("_", "").length == 10 &&
+            !validator.isDate(verificarDataNascimento(props.data_conjuge)) ? (
+              <label>Data de nacimento (Data inválida)</label>
+            ) : (
+              <label>Data de nacimento</label>
+            )}
+            <InputMask
+              mask={"99/99/9999"}
+              alt={"Data de nacimento"}
+              type={"tel"}
+              value={props.data_conjuge}
+              onChange={(e) => props.setData_conjuge(e.target.value)}
+            />
+            <br />
+          </Junta>
+          <Junta>
+            <label>Local de nascimento</label>
+            <input
+              maxLength={198}
+              value={props.local_conjuge}
+              alt={"Local de nascimento"}
+              onChange={(e) => props.setLocal_conjuge(e.target.value)}
+            />
+            <br />
+          </Junta>
+        </div>
+      ) : (
+        <></>
+      )}
       <Junta>
         <label>Possui nome de solteiro (a) ?</label>
         <label>
@@ -165,6 +219,7 @@ const Pag1 = (props: AllProps) => {
           <Junta className="cel">
             <label className="space">Nome de solteiro (a)</label>
             <input
+              maxLength={198}
               value={props.nome_solteiro}
               alt={"Nome de solteiro (a)"}
               onChange={(e) => props.setNome_solteiro(e.target.value)}

@@ -36,6 +36,10 @@ interface AllProps {
   setData_ini_empresa_antigo: Function;
   data_ter_empresa_antigo: string;
   setData_ter_empresa_antigo: Function;
+  salario: string;
+  setSalario: Function;
+  supervisor: string;
+  setSupervisor: Function;
 }
 
 const Pag8 = (props: AllProps) => {
@@ -112,6 +116,7 @@ const Pag8 = (props: AllProps) => {
               <Junta>
                 <label>Função na empresa</label>
                 <input
+                  maxLength={198}
                   value={props.trabalho}
                   alt={"Função na empresa"}
                   onChange={(e) => props.setTrabalho(e.target.value)}
@@ -121,6 +126,7 @@ const Pag8 = (props: AllProps) => {
               <Junta>
                 <label>Nome da empresa</label>
                 <input
+                  maxLength={198}
                   value={props.nome_empresa}
                   alt={"Nome da empresa"}
                   onChange={(e) => props.setNome_empresa(e.target.value)}
@@ -164,6 +170,25 @@ const Pag8 = (props: AllProps) => {
             </DuplaG>
             <DuplaG>
               <Junta>
+                <label>Salário atual</label>
+                <input
+                  value={props.salario}
+                  onBlur={() => {
+                    props.setSalario(
+                      Intl.NumberFormat("pt-br", {
+                        style: "currency",
+                        currency: "BRL",
+                      }).format(Number(props.salario.replaceAll("R$", "")))
+                    );
+                  }}
+                  alt={"Salário atual"}
+                  onChange={(e) => {
+                    props.setSalario(e.target.value);
+                  }}
+                />
+                <br />
+              </Junta>
+              <Junta>
                 {props.data_inicio_empresa.replaceAll("_", "").length == 10 &&
                 !validator.isDate(
                   verificarDataNascimento(props.data_inicio_empresa)
@@ -180,11 +205,6 @@ const Pag8 = (props: AllProps) => {
                   alt={"Data de inicio na empresa"}
                   onChange={(e) => props.setData_inicio_empresa(e.target.value)}
                 />
-                <br />
-              </Junta>
-              <Junta className="nul">
-                <label>Data de saída da empresa (Data inválida)</label>
-                <input />
                 <br />
               </Junta>
             </DuplaG>
@@ -244,6 +264,7 @@ const Pag8 = (props: AllProps) => {
               <Junta>
                 <label>Função na empresa</label>
                 <input
+                  maxLength={198}
                   value={props.trabalho_antigo}
                   alt={"Função na empresa"}
                   onChange={(e) => props.setTrabalho_antigo(e.target.value)}
@@ -253,6 +274,7 @@ const Pag8 = (props: AllProps) => {
               <Junta>
                 <label>Nome da empresa</label>
                 <input
+                  maxLength={198}
                   value={props.nome_empresa_antigo}
                   alt={"Nome da empresa"}
                   onChange={(e) => props.setNome_empresa_antigo(e.target.value)}
@@ -342,6 +364,16 @@ const Pag8 = (props: AllProps) => {
                 <br />
               </Junta>
             </DuplaG>
+            <Junta>
+              <label>Nome completo do seu supervisor</label>
+              <input
+                maxLength={198}
+                value={props.supervisor}
+                alt={"Nome completo do seu supervisor"}
+                onChange={(e) => props.setSupervisor(e.target.value)}
+              />
+              <br />
+            </Junta>
           </Junta>
         ) : (
           <>

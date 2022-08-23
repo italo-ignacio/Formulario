@@ -7,16 +7,20 @@ export const verificarDataNascimento = (data: string) => {
   ) {
     return "2001-05-08";
   }
-  var dia = data.split("/")[0];
-  var mes = data.split("/")[1];
-  var ano = data.split("/")[2];
-  const dataAtual = new Date();
-  const anoAtual = dataAtual.getFullYear();
+  if (data != undefined) {
+    var dia = data.split("/")[0];
+    var mes = data.split("/")[1];
+    var ano = data.split("/")[2];
+    const dataAtual = new Date();
+    const anoAtual = dataAtual.getFullYear();
 
-  if (parseInt(ano) >= 1900 && parseInt(ano) <= anoAtual) {
-    return ano + "-" + ("0" + mes).slice(-2) + "-" + ("0" + dia).slice(-2);
+    if (parseInt(ano) >= 1900 && parseInt(ano) <= anoAtual) {
+      return ano + "-" + ("0" + mes).slice(-2) + "-" + ("0" + dia).slice(-2);
+    } else {
+      return "-" + ("0" + mes).slice(-2) + "-" + ("0" + dia).slice(-2);
+    }
   } else {
-    return "-" + ("0" + mes).slice(-2) + "-" + ("0" + dia).slice(-2);
+    return "-";
   }
 };
 

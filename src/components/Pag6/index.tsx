@@ -13,12 +13,16 @@ interface AllProps {
   setData_nasc_pai: Function;
   pai_mora_eua: string;
   setPai_mora_eua: Function;
+  Spai_mora_eua: string;
+  setSPai_mora_eua: Function;
   nome_mae: string;
   setNome_mae: Function;
   data_nasc_mae: string;
   setData_nasc_mae: Function;
   mae_mora_eua: string;
   setMae_mora_eua: Function;
+  Smae_mora_eua: string;
+  setSMae_mora_eua: Function;
 }
 
 const Pag6 = (props: AllProps) => {
@@ -40,6 +44,7 @@ const Pag6 = (props: AllProps) => {
       <Junta>
         <label>Nome completo do pai</label>
         <input
+          maxLength={198}
           value={props.nome_pai}
           alt={"Nome completo do pai"}
           onChange={(e) => props.setNome_pai(e.target.value)}
@@ -66,9 +71,10 @@ const Pag6 = (props: AllProps) => {
             type={"radio"}
             value={"sim"}
             alt={"Seu pai mora nos Estados Unidos"}
-            checked={props.pai_mora_eua === "Sim"}
+            checked={props.Spai_mora_eua === "Sim"}
             onChange={() => {
-              props.setPai_mora_eua("Sim");
+              props.setSPai_mora_eua("Sim");
+              props.setPai_mora_eua("");
             }}
           />{" "}
           Sim
@@ -78,19 +84,66 @@ const Pag6 = (props: AllProps) => {
             type={"radio"}
             value={"nao"}
             alt={"Seu pai não mora nos Estados Unidos"}
-            checked={props.pai_mora_eua === "Não"}
+            checked={props.Spai_mora_eua === "Não"}
             onChange={() => {
+              props.setSPai_mora_eua("Não");
               props.setPai_mora_eua("Não");
             }}
           />{" "}
           Não
         </label>
         <br />
+        {props.Spai_mora_eua == "Sim" ? (
+          <>
+            Qual a situação dele ?
+            <label>
+              <input
+                type={"radio"}
+                value={"Cidadão americano"}
+                alt={"Cidadão americano"}
+                checked={props.pai_mora_eua === "Cidadão americano"}
+                onChange={() => {
+                  props.setPai_mora_eua("Cidadão americano");
+                }}
+              />{" "}
+              Cidadão americano
+            </label>
+            <label>
+              <input
+                type={"radio"}
+                value={"Residente legal permanente"}
+                alt={"Residente legal permanente"}
+                checked={props.pai_mora_eua === "Residente legal permanente"}
+                onChange={() => {
+                  props.setPai_mora_eua("Residente legal permanente");
+                }}
+              />{" "}
+              Residente legal permanente
+            </label>
+            <label>
+              <input
+                type={"radio"}
+                value={"Não imigrante"}
+                alt={"Não imigrante"}
+                checked={props.pai_mora_eua === "Não imigrante"}
+                onChange={() => {
+                  props.setPai_mora_eua("Não imigrante");
+                }}
+              />{" "}
+              Não imigrante
+            </label>
+            <br />
+            <br />
+          </>
+        ) : (
+          <></>
+        )}
       </Junta>
 
       <Junta>
         <label>Nome completo da mãe</label>
         <input
+          maxLength={198}
           value={props.nome_mae}
           alt={"Nome completo da mãe"}
           onChange={(e) => props.setNome_mae(e.target.value)}
@@ -116,9 +169,10 @@ const Pag6 = (props: AllProps) => {
             type={"radio"}
             value={"sim"}
             alt={"Sua mãe mora nos Estados Unidos"}
-            checked={props.mae_mora_eua === "Sim"}
+            checked={props.Smae_mora_eua === "Sim"}
             onChange={() => {
-              props.setMae_mora_eua("Sim");
+              props.setSMae_mora_eua("Sim");
+              props.setMae_mora_eua("");
             }}
           />{" "}
           Sim
@@ -128,14 +182,60 @@ const Pag6 = (props: AllProps) => {
             type={"radio"}
             value={"nao"}
             alt={"Sua mãe não mora nos Estados Unidos"}
-            checked={props.mae_mora_eua === "Não"}
+            checked={props.Smae_mora_eua === "Não"}
             onChange={() => {
+              props.setSMae_mora_eua("Não");
               props.setMae_mora_eua("Não");
             }}
           />{" "}
           Não
         </label>
         <br />
+        {props.Smae_mora_eua == "Sim" ? (
+          <>
+            Qual a situação dela ?
+            <label>
+              <input
+                type={"radio"}
+                value={"Cidadã americana"}
+                alt={"Cidadã americana"}
+                checked={props.mae_mora_eua === "Cidadã americana"}
+                onChange={() => {
+                  props.setMae_mora_eua("Cidadã americana");
+                }}
+              />{" "}
+              Cidadã americana
+            </label>
+            <label>
+              <input
+                type={"radio"}
+                value={"Residente legal permanente"}
+                alt={"Residente legal permanente"}
+                checked={props.mae_mora_eua === "Residente legal permanente"}
+                onChange={() => {
+                  props.setMae_mora_eua("Residente legal permanente");
+                }}
+              />{" "}
+              Residente legal permanente
+            </label>
+            <label>
+              <input
+                type={"radio"}
+                value={"Não imigrante"}
+                alt={"Não imigrante"}
+                checked={props.mae_mora_eua === "Não imigrante"}
+                onChange={() => {
+                  props.setMae_mora_eua("Não imigrante");
+                }}
+              />{" "}
+              Não imigrante
+            </label>
+            <br />
+            <br />
+          </>
+        ) : (
+          <></>
+        )}
       </Junta>
     </Container>
   );

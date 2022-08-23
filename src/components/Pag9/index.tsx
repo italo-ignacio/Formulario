@@ -138,6 +138,7 @@ const Pag9 = (props: AllProps) => {
                   <label>Nome da escola</label>
                 )}
                 <input
+                  maxLength={198}
                   value={props.nome_facul_escola}
                   alt={
                     props.facul == "facul"
@@ -206,6 +207,7 @@ const Pag9 = (props: AllProps) => {
                 <Junta>
                   <label>Nome do curso</label>
                   <input
+                    maxLength={198}
                     value={props.curso_facul}
                     alt={"Nome do curso"}
                     onChange={(e) => props.setCurso_facul(e.target.value)}
@@ -223,6 +225,7 @@ const Pag9 = (props: AllProps) => {
                 <Junta>
                   <label>Caso tenha OAB, CRM, CREA ...</label>
                   <input
+                    maxLength={198}
                     value={props.oab}
                     placeholder="Ex: OAB 1234567"
                     alt={"OAB-CRM-CREA-..."}

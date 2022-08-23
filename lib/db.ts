@@ -50,6 +50,11 @@ export interface Data {
   telefone_facul_escola: string;
   curso_facul: string;
   ini_ter_facul_escola: string;
+  oab: string;
+  data_conjuge: string;
+  local_conjuge: string;
+  salario: string;
+  supervisor: string;
 }
 
 export async function getAllDatas() {
