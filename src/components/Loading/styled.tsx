@@ -2,10 +2,9 @@ import styled from "styled-components";
 import { primaryColor } from "../../config/colors";
 
 export const Container = styled.div`
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 100%;
-  top: 0;
   left: 0;
   z-index: 1;
   display: flex;
@@ -31,7 +30,9 @@ export const Container = styled.div`
   div {
     position: absolute;
     width: 100%;
-    height: 200%;
+    bottom: 0;
+
+    height: 110%;
     z-index: 1;
     background: rgba(0, 0, 0, 0.4);
   }

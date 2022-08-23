@@ -456,6 +456,7 @@ const Home: NextPage = () => {
 
   return (
     <main id={"top"}>
+      <Loading text="Aguarde..." />
       {loading ? <Loading text="Aguarde..." /> : <></>}
       <Container>
         {pag == 0 ? (
@@ -501,7 +502,7 @@ const Home: NextPage = () => {
         ) : (
           <></>
         )}
-        {pag == 1 ? (
+        {pag == 0 ? (
           <>
             <Text>Preencha todos os dados</Text>
             <Pag1
