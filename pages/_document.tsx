@@ -39,12 +39,12 @@ class MyDocument extends Document {
         </Head>
 
         <body>
-          <Script
-            src="https://polyfill.io/v3/polyfill.min.js?features=IntersectionObserver"
-            strategy="beforeInteractive"
-          />
           <Main />
           <NextScript />
+          <Script
+            src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"
+            strategy="beforeInteractive"
+          ></Script>
         </body>
       </Html>
     );
