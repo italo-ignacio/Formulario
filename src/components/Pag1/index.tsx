@@ -72,7 +72,7 @@ const Pag1 = (props: AllProps) => {
       </Junta>
 
       <Junta>
-        {props.data_nascimento.replaceAll("_", "").length == 10 &&
+        {props.data_nascimento.replace("_", "").length == 10 &&
         !validator.isDate(verificarDataNascimento(props.data_nascimento)) ? (
           <label>Data de nacimento (Data inválida)</label>
         ) : (
@@ -106,13 +106,13 @@ const Pag1 = (props: AllProps) => {
         <InputMask
           mask={mask}
           onBlur={(e) => {
-            if (e.target.value.replaceAll("_", "").length === 14) {
+            if (e.target.value.replace("_", "").length === 14) {
               setMask("(99) 9999-9999");
               props.setTelefone(telMask(e.target.value));
             }
           }}
           onFocus={(e) => {
-            if (e.target.value.replaceAll("_", "").length === 14) {
+            if (e.target.value.replace("_", "").length === 14) {
               setMask("(99) 99999-9999");
             }
           }}
@@ -156,7 +156,7 @@ const Pag1 = (props: AllProps) => {
         <div className="box3">
           <h3>Dados do marido/esposa</h3>
           <Junta>
-            {props.data_conjuge.replaceAll("_", "").length == 10 &&
+            {props.data_conjuge.replace("_", "").length == 10 &&
             !validator.isDate(verificarDataNascimento(props.data_conjuge)) ? (
               <label>Data de nacimento (Data inválida)</label>
             ) : (
