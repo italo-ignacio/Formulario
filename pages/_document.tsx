@@ -1,4 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
+import Script from "next/script";
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: any) {
@@ -22,6 +23,10 @@ class MyDocument extends Document {
   render() {
     return (
       <Html lang="pt-BR">
+        <Script
+          src="https://polyfill.io/v3/polyfill.min.js?features=IntersectionObserver"
+          strategy="beforeInteractive"
+        />
         <Head>
           <link rel="icon" href="/favicon.ico" />
           <meta name="description" content="Formulário" />
