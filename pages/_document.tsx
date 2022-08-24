@@ -23,10 +23,6 @@ class MyDocument extends Document {
   render() {
     return (
       <Html lang="pt-BR">
-        <Script
-          src="https://polyfill.io/v3/polyfill.min.js?features=IntersectionObserver"
-          strategy="beforeInteractive"
-        />
         <Head>
           <link rel="icon" href="/favicon.ico" />
           <meta name="description" content="Formulário" />
@@ -43,6 +39,10 @@ class MyDocument extends Document {
         </Head>
 
         <body>
+          <Script
+            src="https://polyfill.io/v3/polyfill.min.js?features=IntersectionObserver"
+            strategy="beforeInteractive"
+          />
           <Main />
           <NextScript />
         </body>
