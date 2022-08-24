@@ -180,13 +180,13 @@ const Pag9 = (props: AllProps) => {
                 <InputMask
                   mask={mask}
                   onBlur={(e) => {
-                    if (e.target.value.replaceAll("_", "").length === 14) {
+                    if (e.target.value.replace("_", "").length === 14) {
                       setMask("(99) 9999-9999");
                       props.setTelefone_facul_escola(telMask(e.target.value));
                     }
                   }}
                   onFocus={(e) => {
-                    if (e.target.value.replaceAll("_", "").length === 14) {
+                    if (e.target.value.replace("_", "").length === 14) {
                       setMask("(99) 99999-9999");
                     }
                   }}
@@ -239,7 +239,7 @@ const Pag9 = (props: AllProps) => {
             </DuplaG>
             <DuplaG>
               <Junta>
-                {props.ini_facul_escola.replaceAll("_", "").length == 10 &&
+                {props.ini_facul_escola.replace("_", "").length == 10 &&
                 !validator.isDate(
                   verificarDataNascimento(props.ini_facul_escola)
                 ) ? (
@@ -258,7 +258,7 @@ const Pag9 = (props: AllProps) => {
                 <br />
               </Junta>
               <Junta>
-                {props.ter_facul_escola.replaceAll("_", "").length == 10 &&
+                {props.ter_facul_escola.replace("_", "").length == 10 &&
                 !validator.isDate(
                   verificarDataTermino(props.ter_facul_escola)
                 ) ? (

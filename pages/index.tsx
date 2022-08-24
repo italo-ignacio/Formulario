@@ -107,7 +107,7 @@ const Home: NextPage = () => {
   const [local_conjuge, setLocal_conjuge] = useState("Não possui");
   const [salario, setSalario] = useState("");
   const [supervisor, setSupervisor] = useState("");
-
+  const [busca, setBusca] = useState(false);
   //////////////////////////////
   const [cep, setCep] = useState("");
   const [rua, setRua] = useState("");
@@ -250,16 +250,16 @@ const Home: NextPage = () => {
               } else {
                 setSServiu_exercito("sim");
                 let exe = data.serviu_exercito.split(",");
-                setBatalhao(exe[0].replace("Branch: ", "").replaceAll(" ", ""));
-                setPatente(exe[1].replace("Rank: ", "").replaceAll(" ", ""));
+                setBatalhao(exe[0].replace("Branch: ", "").replace(/ /g, ""));
+                setPatente(exe[1].replace("Rank: ", "").replace(/ /g, ""));
                 setEspecialidade(
-                  exe[2].replace("Specialty: ", "").replaceAll(" ", "")
+                  exe[2].replace("Specialty: ", "").replace(/ /g, "")
                 );
                 setIniServiu_exercito(
-                  exe[3].replace("Inicio: ", "").replaceAll(" ", "")
+                  exe[3].replace("Inicio: ", "").replace(/ /g, "")
                 );
                 setTerServiu_exercito(
-                  exe[4].replace("Término: ", "").replaceAll(" ", "")
+                  exe[4].replace("Término: ", "").replace(/ /g, "")
                 );
                 setServiu_exercito(data.serviu_exercito);
               }
@@ -455,7 +455,7 @@ const Home: NextPage = () => {
   };
 
   return (
-    <main id={"top"}>
+    <div id={"top"}>
       {loading ? <Loading text="Aguarde..." /> : <></>}
       <Container>
         {pag == 0 ? (
@@ -562,6 +562,8 @@ const Home: NextPage = () => {
               setUf={setUf}
               numero={numero}
               setNumero={setNumero}
+              busca={busca}
+              setBusca={setBusca}
             />
             <Buttons
               pag={pag}
@@ -608,6 +610,7 @@ const Home: NextPage = () => {
               ter_serviu_exercito={ter_serviu_exercito}
               setTerServiu_exercito={setTerServiu_exercito}
             />
+
             <Buttons
               pag={pag}
               setPag={setPag}
@@ -884,7 +887,7 @@ const Home: NextPage = () => {
         )}
       </Container>
       <br />
-    </main>
+    </div>
   );
 };
 

@@ -47,10 +47,8 @@ const Pag4 = (props: AllProps) => {
   const [mask, setMask] = useState("(99) 99999-9999");
   const addPessoa = () => {
     if (viajar_junto != "" && Gviajar_junto != "") {
-      let pessoa = `${Gviajar_junto.toUpperCase().replaceAll(
-        ",",
-        " "
-      )} - ${viajar_junto.replaceAll(",", " ")}`;
+      let pessoa = `${Gviajar_junto.replace(/,/g, " ")} - 
+      ${viajar_junto.replace(/,/g, " ")}`;
       props.setAViajar_junto((oldArray: any) => [...oldArray, pessoa]);
       setViajar_junto("");
       setGViajar_junto("");
@@ -84,12 +82,10 @@ const Pag4 = (props: AllProps) => {
       props.Epagar_viagem != undefined
     ) {
       props.setPagar_viagem(
-        `${props.Gpagar_viagem.replaceAll(
-          "-",
-          " "
-        )} - ${props.Npagar_viagem.replaceAll("-", " ")} - 
-        Tel: ${props.Tpagar_viagem.replaceAll("-", " ")} - 
-        E-mail: ${props.Epagar_viagem.replaceAll("-", " ")}`
+        `${props.Gpagar_viagem.replace(/-/g, " ")} - 
+        ${props.Npagar_viagem.replace(/-/g, " ")} - 
+        Tel: ${props.Tpagar_viagem.replace(/-/g, " ")} - 
+        E-mail: ${props.Epagar_viagem.replace(/-/g, " ")}`
       );
     } else {
       props.setPagar_viagem("");
@@ -134,7 +130,7 @@ const Pag4 = (props: AllProps) => {
       </Junta>
 
       <Junta>
-        {props.data_deseja.replaceAll("_", "").length == 10 &&
+        {props.data_deseja.replace("_", "").length == 10 &&
         !validator.isDate(verificarDataDeseja(props.data_deseja)) ? (
           <label>Data que pretende viajar (Data inválida)</label>
         ) : (
@@ -251,13 +247,13 @@ const Pag4 = (props: AllProps) => {
                 <InputMask
                   mask={mask}
                   onBlur={(e) => {
-                    if (e.target.value.replaceAll("_", "").length === 14) {
+                    if (e.target.value.replace("_", "").length === 14) {
                       setMask("(99) 9999-9999");
                       props.setTPagar_viagem(telMask(e.target.value));
                     }
                   }}
                   onFocus={(e) => {
-                    if (e.target.value.replaceAll("_", "").length === 14) {
+                    if (e.target.value.replace("_", "").length === 14) {
                       setMask("(99) 99999-9999");
                     }
                   }}

@@ -62,7 +62,7 @@ const Pag3 = (props: AllProps) => {
     if (nacionalidades != "") {
       props.setANacionalidades((oldArray: any) => [
         ...oldArray,
-        nacionalidades.replaceAll(",", " "),
+        nacionalidades.replace(/,/g, " "),
       ]);
       setNacionalidades("");
     }
@@ -80,7 +80,7 @@ const Pag3 = (props: AllProps) => {
     if (idiomas != "") {
       props.setAIdiomas((oldArray: any) => [
         ...oldArray,
-        idiomas.replaceAll(",", " "),
+        idiomas.replace(/,/g, " "),
       ]);
       setIdiomas("");
     }
@@ -116,11 +116,11 @@ const Pag3 = (props: AllProps) => {
 
   if (props.Sserviu_exercito == "sim") {
     let texto = `
-    Branch: ${props.batalhao.replaceAll(",", " ")} , 
-    Rank: ${props.patente.replaceAll(",", " ")} , 
-    Specialty: ${props.especialidade.replaceAll(",", " ")} , 
-    Inicio: ${props.ini_serviu_exercito.replaceAll(",", " ")} , 
-    Término: ${props.ter_serviu_exercito.replaceAll(",", " ")}`;
+    Branch: ${props.batalhao.replace(/,/g, " ")} , 
+    Rank: ${props.patente.replace(/,/g, " ")} , 
+    Specialty: ${props.especialidade.replace(/,/g, " ")} , 
+    Inicio: ${props.ini_serviu_exercito.replace(/,/g, " ")} , 
+    Término: ${props.ter_serviu_exercito.replace(/,/g, " ")}`;
     props.setServiu_exercito(texto);
   }
   if (
@@ -383,7 +383,7 @@ const Pag3 = (props: AllProps) => {
             </DuplaG>
             <DuplaG>
               <Junta>
-                {props.ini_serviu_exercito.replaceAll("_", "").length == 10 &&
+                {props.ini_serviu_exercito.replace("_", "").length == 10 &&
                 !validator.isDate(
                   verificarDataNascimento(props.ini_serviu_exercito)
                 ) ? (
@@ -401,7 +401,7 @@ const Pag3 = (props: AllProps) => {
                 <br />
               </Junta>
               <Junta>
-                {props.ter_serviu_exercito.replaceAll("_", "").length == 10 &&
+                {props.ter_serviu_exercito.replace("_", "").length == 10 &&
                 !validator.isDate(
                   verificarDataTermino(props.ter_serviu_exercito)
                 ) ? (

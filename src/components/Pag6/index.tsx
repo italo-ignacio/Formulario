@@ -50,7 +50,7 @@ const Pag6 = (props: AllProps) => {
           onChange={(e) => props.setNome_pai(e.target.value)}
         />
         <br />
-        {props.data_nasc_pai.replaceAll("_", "").length == 10 &&
+        {props.data_nasc_pai.replace("_", "").length == 10 &&
         !validator.isDate(verificarDataNascimento(props.data_nasc_pai)) ? (
           <label>Data de nascimento do pai (Data inválida)</label>
         ) : (
@@ -149,7 +149,7 @@ const Pag6 = (props: AllProps) => {
           onChange={(e) => props.setNome_mae(e.target.value)}
         />
         <br />
-        {props.data_nasc_mae.replaceAll("_", "").length == 10 &&
+        {props.data_nasc_mae.replace("_", "").length == 10 &&
         !validator.isDate(verificarDataNascimento(props.data_nasc_mae)) ? (
           <label>Data de nascimento da mãe (Data inválida)</label>
         ) : (

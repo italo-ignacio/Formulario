@@ -150,13 +150,13 @@ const Pag8 = (props: AllProps) => {
                 <InputMask
                   mask={mask}
                   onBlur={(e) => {
-                    if (e.target.value.replaceAll("_", "").length === 14) {
+                    if (e.target.value.replace("_", "").length === 14) {
                       setMask("(99) 9999-9999");
                       props.setTelefone_empresa(telMask(e.target.value));
                     }
                   }}
                   onFocus={(e) => {
-                    if (e.target.value.replaceAll("_", "").length === 14) {
+                    if (e.target.value.replace("_", "").length === 14) {
                       setMask("(99) 99999-9999");
                     }
                   }}
@@ -178,7 +178,7 @@ const Pag8 = (props: AllProps) => {
                       Intl.NumberFormat("pt-br", {
                         style: "currency",
                         currency: "BRL",
-                      }).format(Number(props.salario.replaceAll("R$", "")))
+                      }).format(Number(props.salario.replace("R$", "")))
                     );
                   }}
                   alt={"Salário atual"}
@@ -189,7 +189,7 @@ const Pag8 = (props: AllProps) => {
                 <br />
               </Junta>
               <Junta>
-                {props.data_inicio_empresa.replaceAll("_", "").length == 10 &&
+                {props.data_inicio_empresa.replace("_", "").length == 10 &&
                 !validator.isDate(
                   verificarDataNascimento(props.data_inicio_empresa)
                 ) ? (
@@ -300,13 +300,13 @@ const Pag8 = (props: AllProps) => {
                 <InputMask
                   mask={mask}
                   onBlur={(e) => {
-                    if (e.target.value.replaceAll("_", "").length === 14) {
+                    if (e.target.value.replace("_", "").length === 14) {
                       setMask("(99) 9999-9999");
                       props.setTelefone_empresa_antigo(telMask(e.target.value));
                     }
                   }}
                   onFocus={(e) => {
-                    if (e.target.value.replaceAll("_", "").length === 14) {
+                    if (e.target.value.replace("_", "").length === 14) {
                       setMask("(99) 99999-9999");
                     }
                   }}
@@ -322,8 +322,7 @@ const Pag8 = (props: AllProps) => {
             </DuplaG>
             <DuplaG>
               <Junta>
-                {props.data_ini_empresa_antigo.replaceAll("_", "").length ==
-                  10 &&
+                {props.data_ini_empresa_antigo.replace("_", "").length == 10 &&
                 !validator.isDate(
                   verificarDataNascimento(props.data_ini_empresa_antigo)
                 ) ? (
@@ -343,8 +342,7 @@ const Pag8 = (props: AllProps) => {
                 <br />
               </Junta>
               <Junta>
-                {props.data_ter_empresa_antigo.replaceAll("_", "").length ==
-                  10 &&
+                {props.data_ter_empresa_antigo.replace("_", "").length == 10 &&
                 !validator.isDate(
                   verificarDataNascimento(props.data_ter_empresa_antigo)
                 ) ? (

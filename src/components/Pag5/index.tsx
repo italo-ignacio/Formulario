@@ -52,10 +52,10 @@ const Pag5 = (props: AllProps) => {
       Telefoneparentes_nos_eua != ""
     ) {
       let pessoa = `
-      Nome: ${Nomeparentes_nos_eua.replaceAll(",", " ")} - 
-      E-mail: ${Emailparentes_nos_eua.replaceAll(",", " ")} - 
+      Nome: ${Nomeparentes_nos_eua.replace(/,/g, " ")} - 
+      E-mail: ${Emailparentes_nos_eua.replace(/,/g, " ")} - 
       Tel: ${Telefoneparentes_nos_eua} - 
-      Endereço: ${Enderecoparentes_nos_eua.replaceAll(",", " ")}`;
+      Endereço: ${Enderecoparentes_nos_eua.replace(/,/g, " ")}`;
       props.setAParentes_nos_eua((oldArray: any) => [...oldArray, pessoa]);
       props.setAParentes_nos_eua2((oldArray: any) => [
         ...oldArray,
@@ -91,7 +91,7 @@ const Pag5 = (props: AllProps) => {
     if (paises != "") {
       props.setAFoi_para_outro_pais((oldArray: any) => [
         ...oldArray,
-        paises.replaceAll(",", " "),
+        paises.replace(/,/g, " "),
       ]);
       setPaises("");
     }

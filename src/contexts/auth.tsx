@@ -32,7 +32,6 @@ export const AuthProvider = ({ children }: any) => {
       })
         .then((T) => T.json())
         .then((data) => {
-          console.log(data.token);
           if (data.token != undefined) {
             setToken(data.token);
             localStorage.setItem("token", data.token);

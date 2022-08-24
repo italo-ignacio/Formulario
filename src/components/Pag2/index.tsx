@@ -22,10 +22,11 @@ interface AllProps {
   setUf: Function;
   numero: string;
   setNumero: Function;
+  busca: boolean;
+  setBusca: Function;
 }
 const Pag2 = (props: AllProps) => {
   const [loading, setLoading] = useState(false);
-  const [busca, setBusca] = useState(false);
 
   const hadleClick = async () => {
     try {
@@ -46,7 +47,7 @@ const Pag2 = (props: AllProps) => {
               props.setBairro(dados.bairro);
               props.setComplemento(dados.complemento);
               props.setUf(dados.uf);
-              setBusca(true);
+              props.setBusca(true);
             } else {
               props.setRua("");
               props.setCidade("");
@@ -54,7 +55,7 @@ const Pag2 = (props: AllProps) => {
               props.setComplemento("");
               props.setUf("");
               props.setNumero("");
-              setBusca(false);
+              props.setBusca(false);
               alert("Cep não encontrado");
             }
           });
@@ -66,7 +67,7 @@ const Pag2 = (props: AllProps) => {
       props.setComplemento("");
       props.setUf("");
       props.setNumero("");
-      setBusca(false);
+      props.setBusca(false);
       alert("Cep não encontrado");
     }
     setLoading(false);
@@ -115,7 +116,7 @@ const Pag2 = (props: AllProps) => {
           <br />
         </Junta>
         <Botao onClick={hadleClick}>Buscar</Botao>
-        {busca ? (
+        {props.busca ? (
           <>
             <Junta>
               <label>Rua</label>
