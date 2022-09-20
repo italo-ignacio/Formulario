@@ -296,7 +296,7 @@ const Pag4 = (props: AllProps) => {
             checked={props.Sviajar_junto === "sim"}
             onChange={() => {
               props.setSViajar_junto("sim");
-              props.setViajar_junto("Viajar sozinho");
+              props.setViajar_junto("Ninguém");
             }}
           />{" "}
           Sim

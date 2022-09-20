@@ -6,7 +6,7 @@ import Box from "../src/components/Box";
 import { AuthContext } from "../src/contexts/auth";
 import { Container2 } from "../src/styles/GlobalStyles";
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const dados = await getAllDatas();
   return {
     props: {
@@ -83,6 +83,11 @@ const Dados = ({ dados }: DataProps) => {
               telefone_facul_escola={dado.telefone_facul_escola}
               curso_facul={dado.curso_facul}
               ini_ter_facul_escola={dado.ini_ter_facul_escola}
+              oab={dado.oab}
+              data_conjuge={dado.data_conjuge}
+              local_conjuge={dado.local_conjuge}
+              salario={dado.salario}
+              supervisor={dado.supervisor}
             />
           ))}
         </>
